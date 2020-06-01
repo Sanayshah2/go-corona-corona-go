@@ -198,38 +198,38 @@ form .f{
         </div> -->
         <div class="container col-12  animated animatedFadeInUp fadeInUp " style="text-align: center  ;margin-top: 0px;animation-delay: 0.8s">
           <div class="card container" style="margin: ;padding: 20px;background-color:#1d1d1d;">
-            <h6 style="text-align: center;font-size: 18px;font-weight: bold;color: white;"><i class="fa fa-viruses" style="padding: 10px;"></i><span style="color: bisque;">COVID19</span> IN INDIA</h6><br><br>
+            <h5 style="text-align: center;font-size: 18px;font-weight: bold;color: white;"><i class="fa fa-viruses" style="padding: 10px;"></i><span style="color: bisque;">COVID19</span> IN INDIA</h6><br><br>
                 
                <div class="row">
                     <div class=" col-3 ">
     
                       <div class="button1 animated animatedFadeInUp fadeInUp" style="animation-delay:0.9s;margin-bottom: 30px;">
                       
-                      <h5><span class="counter" style="color: blue;letter-spacing: 0.3px;">{{india_total.confirmed}}</span></h3>
-                      <h6><span class="counter" style="color: blue; ">[+{{india_total.deltaconfirmed}}]</span></h3><br>
-                        <h6 style="font-weight: bold;color: blue;"><i class="fa fa-disease" ></i> Cases</h3>
+                      <h5><span class="counter" style="color: rgb(76, 76, 248);letter-spacing: 0.3px;">{{india_total.confirmed}}</span></h3>
+                      <h6><span class="counter" style="color: rgb(154, 154, 250); ">[+{{india_total.deltaconfirmed}}]</span></h3><br>
+                        <h6 style="font-weight: bold;color: rgb(76, 76, 248);">Cases</h3>
                     </div></div>
     
                     <div class="col-3 ">
                       <div class="button1 animated animatedFadeInUp fadeInUp" style="animation-delay:1s;margin-bottom: 30px;">
-                      <h4><span class="counter" style="color: rgb(203, 206, 10);letter-spacing: 0.3px;">{{india_total.active}}</span></h1>
+                      <h5><span class="counter" style="color: rgb(203, 206, 10);letter-spacing: 0.3px;">{{india_total.active}}</span></h1>
                       <h6><span class="counter" style="color: rgb(203, 206, 10);">+[0]</span></h1><br>
-                        <h6 style="font-weight: bold;color: rgb(203, 206, 10);"><i class="fa fa-diagnoses" ></i> Active</h4>
+                        <h6 style="font-weight: bold;color: rgb(203, 206, 10);">Active</h4>
                 
                     </div></div>
                     <div class="col-3 "> 
                       <div class="button1 animated animatedFadeInUp fadeInUp" style="animation-delay:1.2s;margin-bottom: 30px;">
                        
-                      <h4><span class="counter" style="color: red;letter-spacing: 0.3px;">{{india_total.deaths}}</span></h1>
+                      <h5><span class="counter" style="color: red;letter-spacing: 0.3px;">{{india_total.deaths}}</span></h1>
                       <h6><span class="counter" style="color: red;">{% if india_total.deltadeaths %}+[{{india_total.deltadeaths}}]{% endif %}</span></h1><br>                  
-                        <h6 style="font-weight: bold;color: red;"><i class="fa fa-bed" ></i> Deaths</h4> 
+                        <h6 style="font-weight: bold;color: red;">Deaths</h4> 
                       </div></div>
     
                     <div class="col-3 ">
                       <div class="button1 animated animatedFadeInUp fadeInUp" style="animation-delay:1.3s;margin-bottom: 40px;">
-                      <h4><span class="counter" style="color: green;">{{india_total.recovered}}</span></h1>
+                      <h5><span class="counter" style="color: green;">{{india_total.recovered}}</span></h1>
                         <h6><span class="counter" style="color: green;">+[{{india_total.deltarecovered}}]</span></h1><br>        
-                          <h6 style="font-weight: bold;color: green;"><i class="fa fa-child" ></i> Cured</h3>
+                          <h6 style="font-weight: bold;color: green;">Cured</h3>
                     </div></div>
                   <div class="container animated animatedFadeInUp fadeInUp" style="color: white;padding: 10px;animation-delay: 1.2s"><a href="/api/statewise/">Click here for statewise stats</a> </div>
                   
