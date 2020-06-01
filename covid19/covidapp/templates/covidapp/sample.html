@@ -1,0 +1,175 @@
+{% extends 'covidapp/base.html' %}
+{% block content %}
+
+
+
+<div class="container">
+<p class="animated animatedFadeInUp fadeInUp " style="font-weight: bold;font-size: 15px;padding: 15px;animation-delay: 0.3s;text-align: center;"><i class="fa fa-calendar" style="padding: 10px;"></i>{{d}}</p>
+
+<div  style="border-radius: 15px;text-align: center;background-color: #1d1d1d;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;padding: 30px;margin: 0px;">
+  
+    <h5 style="color: white;animation-delay: 0.6s;" class="animated animatedFadeInUp fadeInUp"><i class="fa fa-viruses" style="padding: 10px;color: rgb(194, 52, 52);" ></i>COVID19 IN <span style="color: blue;font-weight: bold;">INDIA</span></h4><br><br>
+    <div class="row">
+        <div class="col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:0.9s;">
+             <h5 style="font-weight: bold;color: blue;">{{india_total.confirmed}}</h4>
+             <h6><span class="counter" style="color: rgb(134, 134, 252); ">{% if india_total.deltaconfirmed %}+[{{india_total.deltaconfirmed}}]{% endif %}</span></h5><br>
+             <h7 style="font-weight: bold;color: blue;"><i class="fa fa-disease" style="padding-right: 5px;" ></i>Cases</h5>
+        </div>
+        <div class="col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:1.2s;">
+            <h5  style="font-weight: bold;color:yellow ;">{{india_total.active}}</h5>
+            <h6><span  style="color: #1d1d1d; ">1</span></h6><br>
+            <h7 style="font-weight: bold;color: yellow;"><i class="fa fa-diagnoses" style="padding-right: 5px;" ></i>Active</h7>
+        </div>
+
+        <div class="col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:1.5s;">
+            <h5  style="font-weight: bold;color:red ;">{{india_total.deaths}}</h5>
+            <h6><span  style="color: rgb(255, 77, 77); ">{% if india_total.deltadeaths %}+[{{india_total.deltadeaths}}]{% endif %}</span></h6><br>
+            <h7 style="font-weight: bold;color: red;"><i class="fa fa-bed" style="padding-right: 3px;" ></i>Deaths</h5>
+        </div>
+
+        <div class="col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:1.8s;">
+            <h5  style="font-weight: bold;color:green ;">{{india_total.recovered}}</h5>
+            <h6><span  style="color: rgb(113, 252, 113); ">{% if india_total.deltarecovered %}+[{{india_total.deltarecovered}}]{% endif %}</span></h6><br>
+            <h7 style="font-weight: bold;color: green;"><i class="fa fa-child" style="padding: 5px;" ></i>Cured</h5>
+        </div>
+    </div>
+
+</div><br><br><div class="row">
+<div class="container col-12 col-md-offset-3 col-md-4"><canvas class='card' height="350px" id="line-chart-total" style="margin-bottom: 40px;"></canvas></div>
+<div class="container col-12 col-md-offset-3 col-md-4"><canvas class='card' height="350px" id="line-chart-cured" style="margin-bottom: 40px;" ></canvas></div>
+<div class="container col-12 col-md-offset-3 col-md-4"><canvas class="card" height="350px"  id="line-chart-deaths" style="margin-bottom: 40px;" ></canvas></div><br><br>
+</div>
+<script> 
+  new Chart(document.getElementById("line-chart-total"), {
+    type: 'line',
+    data: {
+      labels: [{% for key,value in daywise.items %}
+                  
+                  "{{key}}",
+                  
+                  {% endfor %}       ],
+      datasets: [{ 
+          data: [{% for key,value in daywise.items %}
+                  "{{value.totalconfirmed}}",
+                {% endfor %}                      ],
+          label: "Total cases",
+          borderColor: "blue",
+          fill: false
+        },{ 
+          data: [{% for key,value in daywise.items %}
+                  "{{value.totalrecovered}}",
+                {% endfor %}                      ],
+          label: "Total Cured",
+          borderColor: "green",
+          fill: false
+        },{ 
+          data: [{% for key,value in daywise.items %}
+                  "{{value.totaldeceased}}",
+                {% endfor %}                      ],
+          label: "Total Deaths",
+          borderColor: "red",
+          fill: false
+        }
+        ],
+        
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Rise in Total cases in India'
+      }
+    }
+  });
+
+  new Chart(document.getElementById("line-chart-cured"), {
+    type: 'line',
+    data: {
+      labels: [{% for key,value in timeline.items %}
+                  
+                  "{{key}}",
+                  
+                  {% endfor %}       ],
+      datasets: [{ 
+          data: [{% for key,value in timeline.items %}
+                  "{{value.new_daily_cases}}",
+                {% endfor %}                      ],
+          label: "Daily cases",
+          borderColor: "blue",
+          fill: false
+        }] 
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Daily cases in India'
+      }
+    }
+  });
+
+
+  new Chart(document.getElementById("line-chart-deaths"), {
+    type: 'line',
+    data: {
+      labels: [{% for key,value in timeline.items %}
+                  
+                  "{{key}}",
+                  
+                  {% endfor %}       ],
+      datasets: [{ 
+          data: [{% for key,value in timeline.items %}
+                  "{{value.new_daily_deaths}}",
+                {% endfor %}                      ],
+          label: "Daily Deaths",
+          borderColor: "red",
+          fill: false
+        }] 
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Rise in Deaths in India'
+      }
+    }
+  });
+
+  
+  </script>
+
+
+
+      
+       
+
+
+<div>
+<div class="" style="margin-top: 50px;">
+  <h5 class="animated animatedFadeInUp fadeInUp"  style="font-weight: bold;animation-delay: 1.2s;">States</h5>
+         <!--<h3 style="padding-left: 10px;margin-top: 50px;margin-bottom: 50px;font-weight: bold;font-size: 30px;">Corona virus status in various countries</h3> -->   
+       
+  <table class="animated animatedFadeInUp fadeInUp" style="animation-delay: 1.4s;">
+            <tr style="color: white;background-color: royalblue;">
+              <th style="text-align: left;" class='sticky-top'>State</th>
+              <th class='sticky-top'>Confirmed</th>
+              <th class='sticky-top'>Deaths</th>
+              <th class='sticky-top'>Recovered</th>
+              
+            </tr>
+             
+            {% for i in india %}
+            
+            <tr>
+              <td><a href="/api/statewise/state/{{i.state}}/"><p style="text-align: left;">{{i.state}}</p></a></td>
+              <td><p ><span style='color: blue;'>{% if i.deltaconfirmed != '0' %}+ {{i.deltaconfirmed}}{% endif %}</span> {{i.confirmed}}</p></td>
+              <td><p ><span style="color: red;">{% if i.deltadeaths != '0' %}+ {{i.deltadeaths}}{% endif %}</span> {{i.deaths}}</p></td>
+              <td><p><span style="color: green;">{% if i.deltarecovered != '0' %}+ {{i.deltarecovered}}{% endif %}</span> {{i.recovered}}</p></td>
+            </tr>
+            
+            {% endfor %}
+  </table>
+        
+</div>
+</div>
+        
+
+    </div>
+{% endblock content %}

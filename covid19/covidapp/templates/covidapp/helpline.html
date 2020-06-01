@@ -1,0 +1,25 @@
+{% extends 'covidapp/base.html' %}
+{% block content %}
+
+
+<br><br>
+<div class="container">
+    <table class="">
+        <tr>
+          <th class='sticky-top' style='text-align: left;font-size: 18px;color: blue;'>State</th>
+          <th class='sticky-top' style='font-weight:1000;text-align: left;font-size: 18px;color: blue;'>Helpline No.</th>
+          
+          
+        </tr>
+         
+        {% for h in helpline1 %}
+        <tr>
+          <td><p style='text-align: left;'>{{h.loc}}</p></td>
+          <td><p style='text-align: left;'>{{h.number}}</p></td>
+         
+        </tr>
+        {% endfor %}
+      </table>
+      </div>
+   
+{% endblock content %}

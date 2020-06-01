@@ -1,0 +1,454 @@
+{% extends 'covidapp/base.html' %}
+{% block content %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+<style>
+  .ta{
+    margin-bottom: 30px;
+  }
+.my-custom-scrollbar {
+position: relative;
+height: 900px;
+overflow: auto;
+}
+.table-wrapper-scroll-y {
+display: block;
+}
+
+
+  body {
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    width: 100%;
+    background: #121212;
+}
+
+form{
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    transition: all 1s;
+    width: 50px;
+    height: 50px;
+    background: #1d1d1d;
+    box-sizing: border-box;
+    border-radius: 25px;
+    border: 4px solid #1d1d1d;
+    padding: 5px;
+}
+
+input{
+    position: absolute;
+    color: whitesmoke;
+    background-color: #121212;
+    top: 0;
+    left: 0;
+    width: 100%;;
+    height: 42.5px;
+    line-height: 30px;
+    outline: 0;
+    border: 0;
+    display: none;
+    font-size: 1em;
+    border-radius: 20px;
+    padding: 0 20px;
+}
+
+.f{
+    box-sizing: border-box;
+    padding: 10px;
+    width: 42.5px;
+    height: 42.5px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 50%;
+    color: #07051a;
+    text-align: center;
+    font-size: 1.2em;
+    transition: all 1s;
+}
+
+form{
+    width: 225px;
+    cursor: pointer;
+}
+
+form input{
+    display: block;
+}
+
+form .f{
+    background: #07051a;
+    color: white;
+}
+</style>
+  <div class='card' style="background-color:rgb(31, 31, 31);margin:10px;padding: 10px;">
+    <strong style="letter-spacing: 1px;font-size: 12px;"><marquee onmouseover="stop()" onmouseout="start()">
+      Top 3 countries with highest number of cases.&ensp;&ensp;1. {{1.title}} : {{1.total_cases}}&ensp;&ensp;2. {{2.title}} : {{2.total_cases}}&ensp;&ensp;3. {{3.title}} : {{3.total_cases}}
+    </marquee>
+    </strong>
+  </div>
+ <br><br>
+<div class="container">       
+
+<form method='post' action='/api/statewise/search/'>
+  {% csrf_token %}
+  
+  <input  class=""  list="browsers" onfocus="this.value=''"  placeholder="Enter state , country " type="search"  style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;animation-delay: 0.2s;" name="searchstate">
+  <center><button type="submit" ><i class="f fa fa-search animated animatedFadeInUp fadeInUp" style="" type="submit"></i></button></center>
+  
+  <datalist id="browsers"  style="background-color: #121212;">
+    {% for s in statelist %}
+    <option value='{{s}}' style="background-color: #121212;">
+    {% endfor %}
+    {% for x in all_country %}
+    <option value='{{x.code}}'>{{x.title}}</option>
+    {% endfor %}
+  </datalist>
+</form>
+
+</div>
+
+
+        <div class="container col-12 animated animatedFadeInUp fadeInUp " style="text-align: center  ; padding-bottom: 0px;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;margin-bottom: 40px;animation-delay: 0.3s">
+          <div class='container'>
+            <p style="text-align: center;font-size: 18px;font-weight: bold;margin-top:15px;color:white"><i class='fas fa-globe-americas' style="font-size: 18px;padding: 10px;color: skyblue;"></i>GLOBAL <span style="color: bisque;">COVID19</span> STATS </p><br>
+            <div class="row" style="margin-top: 20px;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+                <div class="col-3">
+                  <div class="button1 animated animatedFadeInUp fadeInUp" style="animation-delay:0.4s; ">
+                <h5 ><span class="count" style="color: blue;letter-spacing: 1.5px;">{{global.total_cases}}</span></h2>
+                <h6><span class="count" style="color: rgb(134, 134, 252);">[+{{global.total_new_cases_today}}]</span></h4><br>
+                <h6 style="font-weight: bold;color: blue;"><i class="fa fa-disease"></i> Cases</h3>
+                
+                </div> </div>
+
+                <div class=" col-3">
+                  <div class="button1 animated animatedFadeInUp fadeInUp" style="animation-delay:0.5s">
+                  <h5 ><span class="count" style="color: yellow;letter-spacing: 1.5px;">{{global.total_active_cases}}</span></h2>
+                  <h6><span class="count" style="color: #121212;">[+{{global.NewRecovered}}]</span></h4><br>
+                  <h6 style="font-weight: bold;color: yellow;"><i class="fa fa-diagnoses"></i> Active</h3><br>
+                 
+                 
+                </div></div>
+
+                <div class=" col-3">
+                  <div class="button1 animated animatedFadeInUp fadeInUp" style="animation-delay:0.6s; ">
+                  <h5><span class="count" style="color: red;letter-spacing: 1.5px;">{{global.total_deaths}}</span></h2>
+                  <h6><span class="count" style="color: rgb(240, 133, 133);">[+{{global.total_new_deaths_today}}]</span></h4><br>
+                  <h6 style="font-weight: bold;color: red;"><i class="fa fa-bed"></i> Deaths</h3>
+                </div></div>
+
+                <div class=" col-3">
+                  <div class="button1 animated animatedFadeInUp fadeInUp" style="animation-delay:0.7s;">
+                  <h5 ><span class="count" style="color: green;letter-spacing: 1.5px;">{{global.total_recovered}}</span></h2>
+                  <h6><span class="count" style="color: #121212;">[+{{global.NewRecovered}}]</span></h4><br>
+                  <h6 style="font-weight: bold;color: green;"><i class="fa fa-child"></i> Cured</h3><br>
+                 
+                </div></div>
+                
+               
+              </div>
+             
+              </div>
+        </div>
+
+
+       <!-- <div class="col-md-offset-3 col-md-6 col-xs-12  card animated animatedFadeInUp fadeInUp"  style="text-align: center;padding-top: 3%;padding-bottom: 20px;font-family:Arial, Helvetica, sans-serif;">
+            <h2 style="text-align: center;font-weight: bold;">Corona Status In India</h1>
+            
+            <div class="row " style="margin-top: 40px;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+                <div class="col-xs-4 col-xs-offset-1 animated animatedFadeInUp fadeInUp" style=" animation-delay: 0.8s;background-color: rgb(245, 245, 255);border-radius: 15px;padding: 23px; height: 150px;">
+                  <h5 style="font-weight: bold;color: blue;">Cases</h3>
+                  <h3><span class="counter" style="color: blue; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">{{india_total.confirmed}}</span></h3>
+                  <h4><span class="counter" style="color: blue; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">[+{{india_total.deltaconfirmed}}]</span></h3>
+                  <i class="fa fa-users"></i>
+                </div>
+
+                <div class="col-xs-4 col-xs-offset-2 animated animatedFadeInUp fadeInUp" style=" animation-delay: 1s;background-color:rgb(255, 255, 219);border-radius: 15px;padding: 30px;height: 150px;">
+                  <h5 style="font-weight: bold;color: rgb(203, 206, 10);">Active</h3>
+                  <h3><span class="counter" style="color: rgb(203, 206, 10);">{{india_total.active}}</span></h1>
+                  <h4><span class="counter" style="color: rgb(203, 206, 10);">{% if india_total.deltaactive %}+[{{india_total.deltaactive}}]{% endif %}</span></h1>
+                  <i class="fa fa-users"></i>
+                </div>
+
+              </div>
+            <br><br><br>
+
+              <div class="row  " style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; ">
+
+                <div class="col-xs-4 col-xs-offset-1 animated animatedFadeInUp fadeInUp" style="animation-delay: 1.2s;padding: 23px; background-color: rgb(255, 242, 242);border-radius: 15px;height: 150px;"> 
+                  <h5 style="font-weight: bold;color: red;">Deaths</h3>  
+                  <h3><span class="counter" style="color: red;">{{india_total.deaths}}</span></h1>
+                  <h4><span class="counter" style="color: red;">{% if india_total.deltadeaths %}+[{{india_total.deltadeaths}}]{% endif %}</span></h1>                  <i class="fa fa-desktop"></i>
+                </div>
+                <div class="col-xs-4 col-xs-offset-2 animated animatedFadeInUp fadeInUp" style="animation-delay: 1.4s;margin-bottom: 60px;padding: 23px; background-color: rgb(225, 255, 225);border-radius: 15px;height: 150px;">
+                  <h5 style="font-weight: bold;color: green;">Recovered</h3>
+                  <h3><span class="counter" style="color: green;">{{india_total.recovered}}</span></h1>
+                    <h4><span class="counter" style="color: green;">+[{{india_total.deltarecovered}}]</span></h1>        
+                  <i class="fa fa-coffee"></i>
+                </div>
+
+            </div>
+            
+              
+              <div style="text-align: right; font-size: 20px;" class='text-muted'>Last Updated : {{india_total.lastupdatedtime}}</div>
+        </div> -->
+        <div class="container col-12  animated animatedFadeInUp fadeInUp " style="text-align: center  ;margin-top: 0px;animation-delay: 0.8s">
+          <div class="card container" style="margin: ;padding: 20px;background-color:#1d1d1d;">
+            <h6 style="text-align: center;font-size: 18px;font-weight: bold;color: white;"><i class="fa fa-viruses" style="padding: 10px;"></i><span style="color: bisque;">COVID19</span> IN INDIA</h6><br><br>
+                
+               <div class="row">
+                    <div class=" col-3 ">
+    
+                      <div class="button1 animated animatedFadeInUp fadeInUp" style="animation-delay:0.9s;margin-bottom: 30px;">
+                      
+                      <h4><span class="counter" style="color: blue;letter-spacing: 0.3px;">{{india_total.confirmed}}</span></h3>
+                      <h6><span class="counter" style="color: blue; ">[+{{india_total.deltaconfirmed}}]</span></h3><br>
+                        <h6 style="font-weight: bold;color: blue;"><i class="fa fa-disease" ></i> Cases</h3>
+                    </div></div>
+    
+                    <div class="col-3 ">
+                      <div class="button1 animated animatedFadeInUp fadeInUp" style="animation-delay:1s;margin-bottom: 30px;">
+                      <h4><span class="counter" style="color: rgb(203, 206, 10);letter-spacing: 0.3px;">{{india_total.active}}</span></h1>
+                      <h6><span class="counter" style="color: rgb(203, 206, 10);">+[0]</span></h1><br>
+                        <h6 style="font-weight: bold;color: rgb(203, 206, 10);"><i class="fa fa-diagnoses" ></i> Active</h4>
+                
+                    </div></div>
+                    <div class="col-3 "> 
+                      <div class="button1 animated animatedFadeInUp fadeInUp" style="animation-delay:1.2s;margin-bottom: 30px;">
+                       
+                      <h4><span class="counter" style="color: red;letter-spacing: 0.3px;">{{india_total.deaths}}</span></h1>
+                      <h6><span class="counter" style="color: red;">{% if india_total.deltadeaths %}+[{{india_total.deltadeaths}}]{% endif %}</span></h1><br>                  
+                        <h6 style="font-weight: bold;color: red;"><i class="fa fa-bed" ></i> Deaths</h4> 
+                      </div></div>
+    
+                    <div class="col-3 ">
+                      <div class="button1 animated animatedFadeInUp fadeInUp" style="animation-delay:1.3s;margin-bottom: 40px;">
+                      <h4><span class="counter" style="color: green;">{{india_total.recovered}}</span></h1>
+                        <h6><span class="counter" style="color: green;">+[{{india_total.deltarecovered}}]</span></h1><br>        
+                          <h6 style="font-weight: bold;color: green;"><i class="fa fa-child" ></i> Cured</h3>
+                    </div></div>
+                  <div class="container animated animatedFadeInUp fadeInUp" style="color: white;padding: 10px;animation-delay: 1.2s"><a href="/api/statewise/">Click here for statewise stats</a> </div>
+                  
+                  </div></div>
+          </div><br><br><br>
+        <div class="  col-12 animated animatedFadeInUp fadeInUp " style="animation-delay: 1.4s;">
+
+
+                <div class="container card">
+                
+          <h3 style="font-weight: 600;">World</h2><br>
+            <center>
+            <div class="table-wrapper-scroll-y my-custom-scrollbar">
+            <table class="">
+                <tr>
+                  <th class='sticky-top' style='text-align: left;'>Country</th>
+                  <th class='sticky-top' style='color:blue;font-weight:1000'>Confirmed</th>
+                  <th class='sticky-top' style="color: red;">Deaths</th>
+                  <th class='sticky-top' style="color: green;">Recovered</th>
+                  
+                </tr>
+                 
+                {% for value in all_country %}
+                <tr>
+                  <td><p style='text-align: left;'><a href='/api/countrywise/country/{{value.code}}/' style="text-decoration: none;">{{value.title}}</a></p></td>
+                  <td><p ><span style='color: blue;'>{% if value.total_new_cases_today != 0 %}+{{value.total_new_cases_today}}{% endif %}</span> {{value.total_cases}}</p></td>
+                  <td><p ><span style="color: red;">{% if value.total_new_deaths_today != 0 %}+ {{value.total_new_deaths_today}}{% endif %}</span> {{value.total_deaths}}</p></td>
+                  <td><p ><span style="color: green;">{% if value.NewRecovered %}+ {{value.NewRecovered}}{% endif %}</span> {{value.total_recovered}}</p></td>
+                </tr>
+                {% endfor %}
+              </table>
+              </div>
+            </center>
+            </div></div>
+
+
+    <!--  <div class='ta container' id='Asia'>
+          <h3 style="font-weight: 600;">Asia</h2><br>
+          <center>   
+       
+        <table>
+            <tr style="color: white;background-color: royalblue;">
+              <th style="text-align: left;">Country</th>
+              <th >Confirmed</th>
+              <th >Deaths</th>
+              <th >Recovered</th>
+              
+            </tr>
+             
+            {% for i in countries1 %}
+            {% if i.Continent == 'Asia' %}
+            <tr>
+              <td><p style="text-align: left;">{{i.id}}{{i.Country}}</p></td>
+              <td><p ><span style='color: blue;'>{% if i.NewConfirmed %}+ {{i.NewConfirmed}}{% endif %}</span> {{i.TotalConfirmed}}</p></td>
+              <td><p ><span style="color: red;">{% if i.NewDeaths %}+ {{i.NewDeaths}}{% endif %}</span> {{i.TotalDeaths}}</p></td>
+              <td><p><span style="color: green;">{% if i.NewRecovered %}+ {{i.NewRecovered}}{% endif %}</span> {{i.TotalRecovered}}</p></td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+          </table>
+        </center>
+        </div>
+        <div class='container'>
+          <h3 style="font-weight: 600;">Africa</h2><br>
+            <center>
+            <table>
+                <tr >
+                  <th style='text-align: left;'>Country</th>
+                  <th style='color:blue;font-weight:1000'>Confirmed</th>
+                  <th style="color: red;">Deaths</th>
+                  <th style="color: green;">Recovered</th>
+                  
+                </tr>
+                 
+                {% for i in countries1 %}
+                {% if i.Continent == 'Africa' %}
+                <tr>
+                  <td><p style='text-align: left;'>{{i.id}}{{i.Country}}</p></td>
+                  <td><p ><span style='color: blue;'>{% if i.NewConfirmed %}+ {{i.NewConfirmed}}{% endif %}</span> {{i.TotalConfirmed}}</p></td>
+                  <td><p ><span style="color: red;">{% if i.NewDeaths %}+ {{i.NewDeaths}}{% endif %}</span> {{i.TotalDeaths}}</p></td>
+                  <td><p ><span style="color: green;">{% if i.NewRecovered %}+ {{i.NewRecovered}}{% endif %}</span> {{i.TotalRecovered}}</p></td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+              </table>
+            </center>
+            </div>
+            <div class='container'>
+              <h3 style="font-weight: 600;">Europe</h2><br>
+                <center>
+                <table class="button1">
+                    <tr style="color: white;background-color: royalblue;">
+                      <th style="text-align: left;">Country</th>
+                      <th >Confirmed</th>
+                      <th >Deaths</th>
+                      <th >Recovered</th>
+                      
+                    </tr>
+                     
+                    {% for i in countries1 %}
+                    {% if i.Continent == 'Europe' %}
+                    <tr>
+                      <td style="text-align: left;"><p >{{i.id}}{{i.Country}}</p></td>
+                      <td><p ><span style='color: blue;'>{% if i.NewConfirmed %}+ {{i.NewConfirmed}}{% endif %}</span> {{i.TotalConfirmed}}</p></td>
+                      <td><p ><span style="color: red;">{% if i.NewDeaths %}+ {{i.NewDeaths}}{% endif %}</span> {{i.TotalDeaths}}</p></td>
+                      <td><p ><span style="color: green;">{% if i.NewRecovered %}+ {{i.NewRecovered}}{% endif %}</span> {{i.TotalRecovered}}</p></td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                  </table>
+                </center>
+              </div>
+              <div class='container'>
+                  <h3 style="font-weight: 600;">North America</h2><br>
+                    <center>
+                    <table class="button1">
+                        <tr style="color: white;background-color: royalblue;">
+                          <th style="text-align: left;">Country</th>
+                          <th >Confirmed</th>
+                          <th >Deaths</th>
+                          <th >Recovered</th>
+                          
+                        </tr>
+                         
+                        {% for i in countries1 %}
+                        {% if i.Continent == 'North America' %}
+                        <tr>
+                          <td style="text-align: left;"><p >{{i.id}}{{i.Country}}</p></td>
+                          <td><p ><span style='color: blue;'>{% if i.NewConfirmed %}+ {{i.NewConfirmed}}{% endif %}</span> {{i.TotalConfirmed}}</p></td>
+                          <td><p ><span style="color: red;">{% if i.NewDeaths %}+ {{i.NewDeaths}}{% endif %}</span> {{i.TotalDeaths}}</p></td>
+                          <td><p ><span style="color: green;">{% if i.NewRecovered %}+ {{i.NewRecovered}}{% endif %}</span> {{i.TotalRecovered}}</p></td>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+                      </table>
+                    </center>
+                  </div>
+                  <div class='container'>
+                      <h3 style="font-weight: 600;">South America</h2><br>
+            <center>
+                        <table class="button1">
+                            <tr style="color: white;background-color: royalblue;">
+                              <th style="text-align: left;">Country</th>
+                              <th >Confirmed</th>
+                              <th >Deaths</th>
+                              <th >Recovered</th>
+                              
+                            </tr>
+                             
+                            {% for i in countries1 %}
+                            {% if i.Continent == 'South America' %}
+                            <tr>
+                              <td ><p style="text-align: left;">{{i.id}}{{i.Country}}</p></td>
+                              <td><p ><span style='color: blue;'>{% if i.NewConfirmed %}+ {{i.NewConfirmed}}{% endif %}</span> {{i.TotalConfirmed}}</p></td>
+                              <td><p ><span style="color: red;">{% if i.NewDeaths %}+ {{i.NewDeaths}}{% endif %}</span> {{i.TotalDeaths}}</p></td>
+                              <td><p ><span style="color: green;">{% if i.NewRecovered %}+ {{i.NewRecovered}}{% endif %}</span> {{i.TotalRecovered}}</p></td>
+                            </tr>
+                            {% endif %}
+                            {% endfor %}
+                          </table>
+                        </center>
+                      </div>
+                        <div class='container'>
+                          <h3 style="font-weight: 600;">Oceania</h2><br>
+                            <center>
+                            <table class="button1">
+                                <tr style="color: white;background-color: royalblue;">
+                                  <th style="text-align: left;">Country</th>
+                                  <th >Confirmed</th>
+                                  <th >Deaths</th>
+                                  <th >Recovered</th>
+                                  
+                                </tr>
+                                 
+                                {% for i in countries1 %}
+                                {% if i.Continent == 'Oceania' %}
+                                <tr>
+                                  <td style="text-align: left;"><p >{{i.id}}{{i.Country}}</p></td>
+                                  <td><p ><span style='color: blue;'>{% if i.NewConfirmed %}+ {{i.NewConfirmed}}{% endif %}</span> {{i.TotalConfirmed}}</p></td>
+                                  <td><p ><span style="color: red;">{% if i.NewDeaths %}+ {{i.NewDeaths}}{% endif %}</span> {{i.TotalDeaths}}</p></td>
+                                  <td><p ><span style="color: green;">{% if i.NewRecovered %}+ {{i.NewRecovered}}{% endif %}</span> {{i.TotalRecovered}}</p></td>
+                                </tr>
+                                {% endif %}
+                                {% endfor %}
+                              </table>
+                            </center>
+                          </div>                            
+        </div>
+      </div><br> -->
+     
+<!--<div class="container col-12 col-md-6"><canvas id="line-chart"  ></canvas></div>
+<script> 
+new Chart(document.getElementById("line-chart"), {
+  type: 'line',
+  data: {
+    labels: [{% for key,value in daywise.items %}
+                
+                "{{key}}",
+                
+                {% endfor %}       ],
+    datasets: [{ 
+        data: [{% for key,value in daywise.items %}
+                "{{value.totalconfirmed}}",
+              {% endfor %}                      ],
+        label: "Africa",
+        borderColor: "red",
+        fill: false
+      }] 
+  },
+  options: {
+    title: {
+      display: true,
+      text: 'World population per region (in millions)'
+    }
+  }
+});
+</script>
+{{daywise}}
+<br>
+{{a}}-->
+    {% endblock content %}
+
