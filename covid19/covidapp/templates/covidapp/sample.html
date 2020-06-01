@@ -13,24 +13,24 @@
         <div class="col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:0.9s;">
              <h5 style="font-weight: bold;color: blue;">{{india_total.confirmed}}</h4>
              <h6><span class="counter" style="color: rgb(134, 134, 252); ">{% if india_total.deltaconfirmed %}+[{{india_total.deltaconfirmed}}]{% endif %}</span></h5><br>
-             <h7 style="font-weight: bold;color: blue;"><i class="fa fa-disease" style="padding-right: 5px;" ></i>Cases</h5>
+             <h7 style="font-weight: bold;color: blue;">Cases</h5>
         </div>
         <div class="col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:1.2s;">
             <h5  style="font-weight: bold;color:yellow ;">{{india_total.active}}</h5>
             <h6><span  style="color: #1d1d1d; ">1</span></h6><br>
-            <h7 style="font-weight: bold;color: yellow;"><i class="fa fa-diagnoses" style="padding-right: 5px;" ></i>Active</h7>
+            <h7 style="font-weight: bold;color: yellow;">Active</h7>
         </div>
 
         <div class="col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:1.5s;">
             <h5  style="font-weight: bold;color:red ;">{{india_total.deaths}}</h5>
             <h6><span  style="color: rgb(255, 77, 77); ">{% if india_total.deltadeaths %}+[{{india_total.deltadeaths}}]{% endif %}</span></h6><br>
-            <h7 style="font-weight: bold;color: red;"><i class="fa fa-bed" style="padding-right: 3px;" ></i>Deaths</h5>
+            <h7 style="font-weight: bold;color: red;">Deaths</h5>
         </div>
 
         <div class="col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:1.8s;">
             <h5  style="font-weight: bold;color:green ;">{{india_total.recovered}}</h5>
             <h6><span  style="color: rgb(113, 252, 113); ">{% if india_total.deltarecovered %}+[{{india_total.deltarecovered}}]{% endif %}</span></h6><br>
-            <h7 style="font-weight: bold;color: green;"><i class="fa fa-child" style="padding: 5px;" ></i>Cured</h5>
+            <h7 style="font-weight: bold;color: green;">Cured</h5>
         </div>
     </div>
 
