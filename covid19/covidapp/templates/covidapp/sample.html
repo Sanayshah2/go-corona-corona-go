@@ -40,7 +40,7 @@
 <div>
 <div class="" style="margin-top: 50px;">
   <h5 class="animated animatedFadeInUp fadeInUp"  style="font-weight: bold;animation-delay: 1.2s;">States</h5>
-  <div class="table-wrapper-scroll-y my-custom-scrollbar animated animatedFadeInUp fadeInUp">
+  
   <table class="animated animatedFadeInUp fadeInUp" style="animation-delay: 1.4s;">
             <tr style="color: white;background-color: royalblue;">
               <th style="text-align: left;" class='sticky-top'>State</th>
@@ -61,7 +61,6 @@
             
             {% endfor %}
   </table>
-  </div>
 </div>
 </div>
         
@@ -170,16 +169,3 @@
 {% endblock script %}
 
 
-{% block style %}
-<style>
-.my-custom-scrollbar {
-  position: relative;
-  height: 1810px;
-  overflow: auto;
-  animation-delay: 1.4s
-  }
-  .table-wrapper-scroll-y {
-  display: block;
-  }
-</style> 
-{% endblock style %}
