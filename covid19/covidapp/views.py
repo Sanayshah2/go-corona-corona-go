@@ -13,7 +13,6 @@ import copy
 
 
 def api(request):
-    d=datetime.today()
 
     global_stats = requests.get('https://api.thevirustracker.com/free-api?global=stats')
     global_stats = global_stats.json()
@@ -80,7 +79,6 @@ def api(request):
         'india_total':india['statewise'][0],
         'statelist':statelist,
         'india':india,
-        'd':d,
         #'daywise':daywise2,
         
     }
@@ -212,7 +210,13 @@ def statesearch(request):
 
 
 def dev(request):
-    return render(request,'covidapp/dev.html')
+    from datetime import date
+    from datetime import datetime
+    x = datetime.now()
+    today = date.today()
+
+    d2 = today.strftime("%B %d, %Y")
+    return render(request,'covidapp/dev.html', {'d':d2, 'x':x})
 
 def countryview(request,code):
     if code == 'IN':
