@@ -139,10 +139,13 @@ footer a.text-light:hover { color: #fed136!important; text-decoration: none; }
 footer .cizgi { border-right: 1px solid #535e67; }
 @media (max-width: 992px) { footer .cizgi { border-right: none; } }
   </style>
+  {% block style %}
+  {% endblock style %}
   <title>Go Corona | Corona Go</title>
     </head>
-    <body>
-      
+
+
+    <body>  
       <nav class="navbar navbar-expand-lg navbar-dark sticky-top static-top" style="background-color: #1d1d1d;">
         <div class="container">
           <a class="navbar-brand" href={% url 'api' %}>
@@ -172,8 +175,10 @@ footer .cizgi { border-right: 1px solid #535e67; }
         </div>
       </nav> 
       
-     
       {% block content %}
       {% endblock content %}
-      </body>
-      </html>
+
+      {% block script %}
+      {% endblock script %}
+    </body>
+</html>

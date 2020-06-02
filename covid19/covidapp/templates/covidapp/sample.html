@@ -1,8 +1,5 @@
 {% extends 'covidapp/base.html' %}
 {% block content %}
-
-
-
 <div class="container">
 <p class="animated animatedFadeInUp fadeInUp " style="font-weight: bold;font-size: 15px;padding: 15px;animation-delay: 0.3s;text-align: center;"><i class="fa fa-calendar" style="padding: 10px;"></i>{{d}}</p>
 
@@ -35,10 +32,46 @@
     </div>
 
 </div><br><br><div class="row">
-<div class="container col-12 col-md-offset-3 col-md-4"><canvas class='card' height="350px" id="line-chart-total" style="margin-bottom: 40px;"></canvas></div>
-<div class="container col-12 col-md-offset-3 col-md-4"><canvas class='card' height="350px" id="line-chart-cured" style="margin-bottom: 40px;" ></canvas></div>
-<div class="container col-12 col-md-offset-3 col-md-4"><canvas class="card" height="350px"  id="line-chart-deaths" style="margin-bottom: 40px;" ></canvas></div><br><br>
+<div class="container col-12 col-md-offset-3 col-md-4"><canvas class='card' height="320px" id="line-chart-total" style="margin-bottom: 40px;"></canvas></div>
+<div class="container col-12 col-md-offset-3 col-md-4"><canvas class='card' height="320px" id="line-chart-cured" style="margin-bottom: 40px;" ></canvas></div>
+<div class="container col-12 col-md-offset-3 col-md-4"><canvas class="card" height="320px"  id="line-chart-deaths" style="margin-bottom: 40px;" ></canvas></div><br><br>
 </div>
+
+<div>
+<div class="" style="margin-top: 50px;">
+  <h5 class="animated animatedFadeInUp fadeInUp"  style="font-weight: bold;animation-delay: 1.2s;">States</h5>
+  <div class="table-wrapper-scroll-y my-custom-scrollbar animated animatedFadeInUp fadeInUp">
+  <table class="animated animatedFadeInUp fadeInUp" style="animation-delay: 1.4s;">
+            <tr style="color: white;background-color: royalblue;">
+              <th style="text-align: left;" class='sticky-top'>State</th>
+              <th class='sticky-top'>Confirmed</th>
+              <th class='sticky-top'>Deaths</th>
+              <th class='sticky-top'>Recovered</th>
+              
+            </tr>
+             
+            {% for i in india %}
+            
+            <tr>
+              <td><a href="/api/statewise/state/{{i.state}}/"><p style="text-align: left;">{{i.state}}</p></a></td>
+              <td><p ><span style='color: blue;'>{% if i.deltaconfirmed != '0' %}+ {{i.deltaconfirmed}}{% endif %}</span> {{i.confirmed}}</p></td>
+              <td><p ><span style="color: red;">{% if i.deltadeaths != '0' %}+ {{i.deltadeaths}}{% endif %}</span> {{i.deaths}}</p></td>
+              <td><p><span style="color: green;">{% if i.deltarecovered != '0' %}+ {{i.deltarecovered}}{% endif %}</span> {{i.recovered}}</p></td>
+            </tr>
+            
+            {% endfor %}
+  </table>
+  </div>
+</div>
+</div>
+        
+
+</div>
+{% endblock content %}
+
+
+
+{% block script %}
 <script> 
   new Chart(document.getElementById("line-chart-total"), {
     type: 'line',
@@ -133,43 +166,20 @@
   });
 
   
-  </script>
+</script>
+{% endblock script %}
 
 
-
-      
-       
-
-
-<div>
-<div class="" style="margin-top: 50px;">
-  <h5 class="animated animatedFadeInUp fadeInUp"  style="font-weight: bold;animation-delay: 1.2s;">States</h5>
-         <!--<h3 style="padding-left: 10px;margin-top: 50px;margin-bottom: 50px;font-weight: bold;font-size: 30px;">Corona virus status in various countries</h3> -->   
-       
-  <table class="animated animatedFadeInUp fadeInUp" style="animation-delay: 1.4s;">
-            <tr style="color: white;background-color: royalblue;">
-              <th style="text-align: left;" class='sticky-top'>State</th>
-              <th class='sticky-top'>Confirmed</th>
-              <th class='sticky-top'>Deaths</th>
-              <th class='sticky-top'>Recovered</th>
-              
-            </tr>
-             
-            {% for i in india %}
-            
-            <tr>
-              <td><a href="/api/statewise/state/{{i.state}}/"><p style="text-align: left;">{{i.state}}</p></a></td>
-              <td><p ><span style='color: blue;'>{% if i.deltaconfirmed != '0' %}+ {{i.deltaconfirmed}}{% endif %}</span> {{i.confirmed}}</p></td>
-              <td><p ><span style="color: red;">{% if i.deltadeaths != '0' %}+ {{i.deltadeaths}}{% endif %}</span> {{i.deaths}}</p></td>
-              <td><p><span style="color: green;">{% if i.deltarecovered != '0' %}+ {{i.deltarecovered}}{% endif %}</span> {{i.recovered}}</p></td>
-            </tr>
-            
-            {% endfor %}
-  </table>
-        
-</div>
-</div>
-        
-
-    </div>
-{% endblock content %}
+{% block style %}
+<style>
+.my-custom-scrollbar {
+  position: relative;
+  height: 1810px;
+  overflow: auto;
+  animation-delay: 1.4s
+  }
+  .table-wrapper-scroll-y {
+  display: block;
+  }
+</style> 
+{% endblock style %}
