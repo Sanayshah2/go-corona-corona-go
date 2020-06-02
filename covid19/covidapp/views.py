@@ -33,7 +33,7 @@ def api(request):
     for key,value in all_country.items():
         country_data.append(value)
     country_data.remove('ok')
-     
+
     country_data = sorted(country_data, key=itemgetter('total_cases'),reverse=True)
     
     #response = requests.get('https://api.covid19api.com/summary')
