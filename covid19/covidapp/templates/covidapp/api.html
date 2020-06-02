@@ -139,7 +139,7 @@ font-size: calc(30% + 0vw + 1.4vh);
     <div class="row" style="margin-top: 20px;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
         <div class="col-4" style="margin-bottom: 20px;">
           <div class="button1 animated animatedFadeInUp fadeInUp" style="animation-delay:0.4s; ">
-        <h4 class='text-responsive'><span class="count" style="color: rgb(104, 104, 255);letter-spacing: 1.5px;font-weight: 700;">{{global.total_cases}}</span></h4>
+        <h1 class="text-responsive"><span class="count" style="color: rgb(104, 104, 255);letter-spacing: 1.5px;font-weight: bold;">{{global.total_cases}}</span></h1>
         <p class='text-responsive' style="font-size: 15px;"><span class="count" style="color: rgb(134, 134, 252);">[+{{global.total_new_cases_today}}]</span></p><br>
         <p class='text-responsive' style="font-size: 15px;font-weight: bold;color: rgb(104, 104, 255);">Cases</p><br>
         
@@ -156,14 +156,14 @@ font-size: calc(30% + 0vw + 1.4vh);
 
         <div class=" col-4" style="margin-bottom: 20px;">
           <div class="button1 animated animatedFadeInUp fadeInUp" style="animation-delay:0.6s; ">
-          <h4 class='text-responsive'><span class="count" style="color: red;letter-spacing: 1.5px; font-weight: 700;">{{global.total_deaths}}</span></h4>
+          <h1 class='text-responsive'><span class="count" style="color: red;letter-spacing: 1.5px; font-weight: bold;">{{global.total_deaths}}</span></h4>
           <p class='text-responsive' style="font-size: 15px;"><span class="count" style="color: rgb(240, 133, 133);">[+{{global.total_new_deaths_today}}]</span></p><br>
           <p class='text-responsive' style="font-size: 15px;font-weight: bold;color: red;"> Deaths</p><br>
         </div></div>
 
         <div class=" col-4" style="margin-bottom: 20px;">
           <div class="button1 animated animatedFadeInUp fadeInUp" style="animation-delay:0.7s;">
-          <h4 class='text-responsive'><span class="count" style="color: green;letter-spacing: 1.5px;">{{global.total_recovered}}</span></h4>
+          <h1 class='text-responsive'><span class="count" style="color: green;letter-spacing: 1.5px;">{{global.total_recovered}}</span></h1>
           <p class='text-responsive' style="font-size: 15px;"><span class="count" style="color: #121212;">1</span></p><br>
           <p class='text-responsive' style="font-size: 15px;font-weight: bold;color: green;"> Cured</h8><br>
         
@@ -185,31 +185,31 @@ font-size: calc(30% + 0vw + 1.4vh);
 
             <div class="button1 animated animatedFadeInUp fadeInUp" style="animation-delay:0.9s;margin-bottom: 30px;">
             
-            <h5 class='text-responsive-india'><span class="counter " style="color: rgb(76, 76, 248);letter-spacing: 0.3px;">{{india_total.confirmed}}</span></h3>
-            <p class='text-responsive-india'><span class="counter" style="font-size: 15px;color: rgb(154, 154, 250); ">[+{{india_total.deltaconfirmed}}]</span></h3><br>
-              <p class='text-responsive-india' style="font-size: 15px;font-weight: bold;color: rgb(76, 76, 248);">Cases</h3>
+            <h1 class='text-responsive'><span class="counter " style="color: rgb(76, 76, 248);letter-spacing: 0.3px;">{{india_total.confirmed}}</span></h3>
+            <p class='text-responsive'><span class="counter" style="font-size: 15px;color: rgb(154, 154, 250); ">[+{{india_total.deltaconfirmed}}]</span></h3><br>
+              <p class='text-responsive' style="font-size: 15px;font-weight: bold;color: rgb(76, 76, 248);">Cases</h3>
           </div></div>
 
           <div class="col-3 ">
             <div class="button1 animated animatedFadeInUp fadeInUp" style="animation-delay:1s;margin-bottom: 30px;">
-            <h5 class='text-responsive-india'><span class="counter" style="color: rgb(203, 206, 10);letter-spacing: 0.3px;">{{india_total.active}}</span></h1>
-            <p class='text-responsive-india'><span class="counter" style="font-size: 15px;color: rgb(203, 206, 10);">+[0]</span></h1><br>
-              <p class='text-responsive-india' style="font-size: 15px;font-weight: bold;color: rgb(203, 206, 10);">Active</h4>
+            <h1 class='text-responsive'><span class="counter" style="color: rgb(203, 206, 10);letter-spacing: 0.3px;">{{india_total.active}}</span></h1>
+            <p class='text-responsive'><span class="counter" style="font-size: 15px;color: rgb(203, 206, 10);">+[0]</span></h1><br>
+              <p class='text-responsive' style="font-size: 15px;font-weight: bold;color: rgb(203, 206, 10);">Active</h4>
       
           </div></div>
           <div class="col-3 "> 
             <div class="button1 animated animatedFadeInUp fadeInUp" style="animation-delay:1.2s;margin-bottom: 30px;">
               
-            <h4 class='text-responsive-india'><span class="counter" style="color: red;letter-spacing: 0.3px;">{{india_total.deaths}}</span></h1>
-            <h6 class='text-responsive-india'><span class="counter" style="color: red;">{% if india_total.deltadeaths %}+[{{india_total.deltadeaths}}]{% endif %}</span></h1><br>                  
-              <h6 class='text-responsive-india' style="font-weight: bold;color: red;">Deaths</h4> 
+            <h1 class='text-responsive'><span class="counter" style="color: red;letter-spacing: 0.3px;">{{india_total.deaths}}</span></h1>
+            <p class='text-responsive'><span class="counter" style="color: red;font-size: 15px;">{% if india_total.deltadeaths %}+[{{india_total.deltadeaths}}]{% endif %}</span></h1><br>                  
+              <p class='text-responsive' style="font-weight: bold;font-size: 15px;color: red;">Deaths</h4> 
             </div></div>
 
           <div class="col-3 ">
             <div class="button1 animated animatedFadeInUp fadeInUp" style="animation-delay:1.3s;margin-bottom: 40px;">
-            <h5 class='text-responsive-india'><span class="counter" style="color: green;">{{india_total.recovered}}</span></h1>
-              <p class='text-responsive-india' style="font-size: 15px;"><span class="counter" style="color: green;">+[{{india_total.deltarecovered}}]</span></h1><br>        
-                <p class='text-responsive-india' style="font-size: 15px;font-weight: bold;color: green;">Cured</h3>
+            <h1 class='text-responsive'><span class="counter" style="color: green;">{{india_total.recovered}}</span></h1>
+              <p class='text-responsive' style="font-size: 15px;"><span class="counter" style="color: green;">+[{{india_total.deltarecovered}}]</span></h1><br>        
+                <p class='text-responsive' style="font-size: 15px;font-weight: bold;color: green;">Cured</h3>
           </div></div>
         <div class="container animated animatedFadeInUp fadeInUp" style="color: white;padding: 10px;animation-delay: 1.2s"><a href="/api/statewise/">Click here for statewise stats</a> </div>
         
