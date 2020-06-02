@@ -2,9 +2,10 @@ from django.shortcuts import render,redirect,reverse,HttpResponse
 
 from django.contrib import messages
 
-from datetime import datetime
+import datetime
 from datetime import date
 import calendar
+import pytz
 import requests
 from operator import itemgetter
 import json
@@ -88,7 +89,7 @@ def api(request):
 
 
 def statewise(request):
-    d=datetime.today()
+    d=datetime.datetime.now(pytz.timezone('Asia/Kolkata'))
     response_india = requests.get('https://api.covid19india.org/data.json')
 
     india = response_india.json()
@@ -138,7 +139,7 @@ def stateview(request,sname):
     if sname == 'Total':
         return redirect('statewise')
     else:    
-        d=datetime.today()
+        d=datetime.datetime.now(pytz.timezone('Asia/Kolkata'))
 
         zones = requests.get('https://api.covid19india.org/zones.json')
         zones = zones.json()
@@ -212,7 +213,7 @@ def statesearch(request):
 def dev(request):
     from datetime import date
     from datetime import datetime
-    x = datetime.now()
+    x = datetime.now(pytz.timezone('Asia/Kolkata'))
     today = date.today()
 
     d2 = today.strftime("%B %d, %Y")
@@ -222,7 +223,7 @@ def countryview(request,code):
     if code == 'IN':
         return redirect('statewise')
     else:    
-        d=datetime.today()
+        d=datetime.datetime.now(pytz.timezone('Asia/Kolkata'))
         url = 'https://api.thevirustracker.com/free-api?countryTotal={}'
         url1 = 'https://api.thevirustracker.com/free-api?countryTimeline={}'
         info = requests.get(url.format(code)).json()
@@ -310,3 +311,5 @@ def Helpline(request):
 
 
 
+def about(request):
+    return render(request, 'covidapp/about.html')

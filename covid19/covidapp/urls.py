@@ -12,5 +12,6 @@ urlpatterns = [
     path('api/countrywise/country/<code>/',views.countryview,name='countryview'),
     path('api/statewise/search/',views.statesearch,name='statesearch'),
     path('api/helpline/',views.Helpline,name='Helpline'),
+    path('api/about', views.about, name='about')
     
 ]

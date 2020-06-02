@@ -85,6 +85,10 @@ form .f{
     background: #07051a;
     color: white;
 }
+
+.text-responsive{
+font-size: calc(30% + 1vw + 1vh);
+}
 </style>
 {% endblock style %}
 
@@ -129,9 +133,9 @@ form .f{
     <div class="row" style="margin-top: 20px;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
         <div class="col-4" style="margin-bottom: 20px;">
           <div class="button1 animated animatedFadeInUp fadeInUp" style="animation-delay:0.4s; ">
-        <h4 ><span class="count" style="color: blue;letter-spacing: 1.5px;font-weight: 700;">{{global.total_cases}}</span></h4>
-        <h7 style="margin-bottom: 10px;"><span class="count" style="color: rgb(134, 134, 252);">[+{{global.total_new_cases_today}}]</span></h7><br><br>
-        <h8 style="font-weight: bold;color: blue;"> Cases</h8><br>
+        <h4 class='text-responsive'><span class="count" style="color: blue;letter-spacing: 1.5px;font-weight: 700;">{{global.total_cases}}</span></h4>
+        <h7 class='text-responsive' style="margin-bottom: 10px;"><span class="count" style="color: rgb(134, 134, 252);">[+{{global.total_new_cases_today}}]</span></h7><br><br>
+        <h8 class='text-responsive' style="font-weight: bold;color: blue;"> Cases</h8><br>
         
         </div> </div>
 
@@ -146,16 +150,16 @@ form .f{
 
         <div class=" col-4" style="margin-bottom: 20px;">
           <div class="button1 animated animatedFadeInUp fadeInUp" style="animation-delay:0.6s; ">
-          <h4><span class="count" style="color: red;letter-spacing: 1.5px; font-weight: 700;">{{global.total_deaths}}</span></h4>
-          <h7 style="margin-bottom: 10px;"><span class="count" style="color: rgb(240, 133, 133);">[+{{global.total_new_deaths_today}}]</span></h7><br><br>
-          <h8 style="font-weight: bold;color: red;"> Deaths</h8><br>
+          <h4 class='text-responsive'><span class="count" style="color: red;letter-spacing: 1.5px; font-weight: 700;">{{global.total_deaths}}</span></h4>
+          <h7 class='text-responsive' style="margin-bottom: 10px;"><span class="count" style="color: rgb(240, 133, 133);">[+{{global.total_new_deaths_today}}]</span></h7><br><br>
+          <h8 class='text-responsive' style="font-weight: bold;color: red;"> Deaths</h8><br>
         </div></div>
 
         <div class=" col-4" style="margin-bottom: 20px;">
           <div class="button1 animated animatedFadeInUp fadeInUp" style="animation-delay:0.7s;">
-          <h4 ><span class="count" style="color: green;letter-spacing: 1.5px;">{{global.total_recovered}}</span></h4>
-          <h7 style="margin-bottom: 10px;"><span class="count" style="color: #121212;">hii</span></h7><br><br>
-          <h8 style="font-weight: bold;color: green;"> Cured</h8><br>
+          <h4 class='text-responsive'><span class="count" style="color: green;letter-spacing: 1.5px;">{{global.total_recovered}}</span></h4>
+          <h7 class='text-responsive' style="margin-bottom: 10px;"><span class="count" style="color: #121212;">hii</span></h7><br><br>
+          <h8 class='text-responsive' style="font-weight: bold;color: green;"> Cured</h8><br>
         
         </div></div>
         
