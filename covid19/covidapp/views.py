@@ -24,7 +24,7 @@ def api(request):
     for x in global_stats:
         a = global_stats[x]
         b = format_currency(a, 'INR', locale='en_IN')
-        c = b[1:len(b)-4]
+        c = b[1:len(b)-3]
         global_stats[x] = c
     all_country = requests.get('https://api.thevirustracker.com/free-api?countryTotals=ALL')
     all_country = all_country.json()

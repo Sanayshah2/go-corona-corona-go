@@ -134,7 +134,7 @@ font-size: calc(30% + 0vw + 1.4vh);
   <h5 class='kit' style="text-align: center;font-weight: bold;margin:25px;color:white"><i class='fas fa-globe-americas' style="padding: 10px;color: skyblue;"></i>GLOBAL <span style="color: bisque;">COVID19</span> STATS </h4><br>
   <div class=" row" style="text-align: center;">
     <div class=" col-3">
-      <h5 id="confirm" class="kit" style="color: rgb(71, 71, 255);font-weight: bold;"></h5><br>
+      <h5 id="confirm" class="kit" style="color: rgb(71, 71, 255);font-weight: bold;">{{global.total_cases}}</h5><br>
       <h8 class="kit" style="color: rgb(71, 71, 255);">Confirmed</h8>
     </div>
     <div class="col-3">
@@ -207,42 +207,24 @@ font-size: calc(30% + 0vw + 1.4vh);
 
             <div class="button1 animated animatedFadeInUp fadeInUp" style="animation-delay:0.9s;margin-bottom: 30px;">
             
-<<<<<<< HEAD
             <h2 class='text-responsive-india'><span class="counter " style="color: rgb(76, 76, 248);letter-spacing: 0.3px;">{{india_total.confirmed}}</span></h3>
             <p class='text-responsive-india'><span class="counter" style="font-size: 15px;color: rgb(154, 154, 250); ">[+{{india_total.deltaconfirmed}}]</span></h3><br>
               <p class='text-responsive-india' style="font-size: 15px;font-weight: bold;color: rgb(76, 76, 248);">Cases</h3>
-=======
-            <h5 class='text-responsive-india'><span class="counter " style="color: rgb(76, 76, 248);letter-spacing: 0.3px;">{{india_total.confirmed}}</span></h3>
-            <h6 class='text-responsive-india'><span class="counter" style="color: rgb(154, 154, 250);font-size: 10px; ">[+{{india_total.deltaconfirmed}}]</span></h3><br>
-              <h6 class='text-responsive-india' style="font-weight: bold;color: rgb(76, 76, 248);font-size: 10px;">Cases</h3>
->>>>>>> 4757d0c095ec2497f578c1de92f6e2e8203d608e
           </div></div>
 
           <div class="col-3 ">
             <div class="button1 animated animatedFadeInUp fadeInUp" style="animation-delay:1s;margin-bottom: 30px;">
-<<<<<<< HEAD
             <h2 class='text-responsive-india'><span class="counter" style="color: rgb(203, 206, 10);letter-spacing: 0.3px;">{{india_total.active}}</span></h1>
             <p class='text-responsive-india'><span class="counter" style="font-size: 15px;color: rgb(203, 206, 10);">+[0]</span></h1><br>
               <p class='text-responsive-india' style="font-size: 15px;font-weight: bold;color: rgb(203, 206, 10);">Active</h4>
-=======
-            <h5 class='text-responsive-india'><span class="counter" style="color: rgb(203, 206, 10);letter-spacing: 0.3px;">{{india_total.active}}</span></h1>
-            <h6 class='text-responsive-india'><span class="counter" style="color: rgb(203, 206, 10);font-size: 10px;">+[0]</span></h1><br>
-              <h6 class='text-responsive-india' style="font-weight: bold;color: rgb(203, 206, 10);font-size: 10px;">Active</h4>
->>>>>>> 4757d0c095ec2497f578c1de92f6e2e8203d608e
       
           </div></div>
           <div class="col-3 "> 
             <div class="button1 animated animatedFadeInUp fadeInUp" style="animation-delay:1.2s;margin-bottom: 30px;">
               
-<<<<<<< HEAD
             <h2 class='text-responsive-india'><span class="counter" style="color: red;letter-spacing: 0.3px;">{{india_total.deaths}}</span></h1>
             <p class='text-responsive-india'><span class="counter" style="color: red;font-size: 15px;">{% if india_total.deltadeaths %}+[{{india_total.deltadeaths}}]{% endif %}</span></h1><br>                  
               <p class='text-responsive-india' style="font-weight: bold;font-size: 15px;color: red;">Deaths</h4> 
-=======
-            <h5 class='text-responsive-india'><span class="counter" style="color: red;letter-spacing: 0.3px;">{{india_total.deaths}}</span></h1>
-            <h6 class='text-responsive-india'><span class="counter" style="color: red;font-size: 10px;">{% if india_total.deltadeaths %}+[{{india_total.deltadeaths}}]{% endif %}</span></h1><br>                  
-              <h6 class='text-responsive-india' style="font-weight: bold;color: red;font-size: 10px;">Deaths</h4> 
->>>>>>> 4757d0c095ec2497f578c1de92f6e2e8203d608e
             </div></div>
 
           <div class="col-3 ">
