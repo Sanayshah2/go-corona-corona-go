@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect,reverse,HttpResponse
-
+from .models import Suggestion
+from .forms import SuggestionForm
 from django.contrib import messages
 
 import datetime
@@ -9,7 +10,7 @@ import pytz
 import requests
 from operator import itemgetter
 import json
-from .models import jsonfiles
+from .models import Suggestion
 import copy
 
 
@@ -312,4 +313,10 @@ def Helpline(request):
 
 
 def about(request):
-    return render(request, 'covidapp/about.html')
+    if request.method == 'POST':
+        form = SuggestionForm(request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        form = SuggestionForm()
+    return render(request, 'covidapp/about.html', {'form':form})

@@ -1,4 +1,4 @@
 from django.contrib import admin
-from .models import jsonfiles
+from .models import Suggestion
 # Register your models here.
-admin.site.register(jsonfiles)
+admin.site.register(Suggestion)
