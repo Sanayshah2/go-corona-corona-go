@@ -321,10 +321,11 @@ def Helpline(request):
 
 
 def about(request):
+    count = Suggestion.objects.all().count()
     if request.method == 'POST':
         form = SuggestionForm(request.POST)
         if form.is_valid():
             form.save()
     else:
         form = SuggestionForm()
-    return render(request, 'covidapp/about.html', {'form':form})
+    return render(request, 'covidapp/about.html', {'form':form, 'count':count})

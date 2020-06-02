@@ -12,12 +12,15 @@
         <li><a class='btn btn-linkedin' href='https://www.linkedin.com/in/sanay-shah-45b973194/'><i class="fab fa-linkedin-in"></i> @Sanay Shah</a>&ensp; <a class='btn btn-linkedin' href='https://www.linkedin.com/in/shivesh-jha-b74b46198/'><i class="fab fa-linkedin-in" aria-hidden="true"></i> @Shivesh Jha</a></li><br>
         <li>If you have any cool ideas to add to the website, fill in the suggestion form below or connect on LinkedIn.</li>
         </ul>
+        <div class='text-muted' style='text-align: right;font-weight: 630;'><i class="fa fa-info-circle" aria-hidden="true"></i> {{count}} {% if count == 1 %}person has {% else %}people have {% endif %}rated this site so far.</div>
     </div>
     <br>
      <div class='card col-12'>
         <center><form method="POST">
             {% csrf_token %}
                 {{form|crispy}}
+                <br>
+                <button class='btn-secondary' type='submit'>Submit</button>
         </form></center>
     </div>
     </div>
