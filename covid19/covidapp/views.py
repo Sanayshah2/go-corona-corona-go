@@ -12,6 +12,7 @@ from operator import itemgetter
 import json
 from .models import Suggestion
 import copy
+from babel.numbers import format_currency
 
 
 def api(request):
@@ -19,6 +20,12 @@ def api(request):
     global_stats = requests.get('https://api.thevirustracker.com/free-api?global=stats')
     global_stats = global_stats.json()
     global_stats = global_stats['results'][0]
+    del global_stats['source']
+    for x in global_stats:
+        a = global_stats[x]
+        b = format_currency(a, 'INR', locale='en_IN')
+        c = b[1:len(b)-4]
+        global_stats[x] = c
     all_country = requests.get('https://api.thevirustracker.com/free-api?countryTotals=ALL')
     all_country = all_country.json()
     all_country = all_country['countryitems'][0]
