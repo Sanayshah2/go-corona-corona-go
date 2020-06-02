@@ -134,19 +134,19 @@ font-size: calc(30% + 0vw + 1.4vh);
   <h5 class='kit' style="text-align: center;font-weight: bold;margin:25px;color:white"><i class='fas fa-globe-americas' style="padding: 10px;color: skyblue;"></i>GLOBAL <span style="color: bisque;">COVID19</span> STATS </h4><br>
   <div class=" row" style="text-align: center;">
     <div class=" col-3">
-      <h5 class="kit" style="color: rgb(71, 71, 255);">{{global.total_cases}}</h5><br>
+      <h5 id="confirm" class="kit" style="color: rgb(71, 71, 255);font-weight: bold;"></h5><br>
       <h8 class="kit" style="color: rgb(71, 71, 255);">Confirmed</h8>
     </div>
     <div class="col-3">
-      <h5 class="kit" style="color: red;">{{global.total_deaths}}</h5><br>
+      <h5 class="kit" style="color: red;font-weight: bold;">{{global.total_deaths}}</h5><br>
       <h8 class="kit" style="color: red;">Deaths</h8>
     </div>
     <div class="col-3">
-      <h5 class="kit" style="color: green;">{{global.total_recovered}}</h5><br>
+      <h5 class="kit" style="color: green;font-weight: bold;">{{global.total_recovered}}</h5><br>
       <h8 class="kit" style="color: green;">Cured</h8>
     </div>
     <div class="col-3">
-      <h5 class="kit" style="color: yellowgreen;">{{global.total_active_cases}}</h5><br>
+      <h5 class="kit" style="color: yellowgreen;font-weight: bold;">{{global.total_active_cases}}</h5><br>
       <h8 class="kit" style="color: yellowgreen;">Active</h8>
     </div>    
 
@@ -263,7 +263,14 @@ font-size: calc(30% + 0vw + 1.4vh);
   </table>
   </div>
 </center>
-</div></div>
+</div></div> 
+<script>
+  var n = {{global.total_cases}};
+  n1=n.toLocaleString();
+  console.log(n1);
+  document.getElementById("confirm").innerHTML=n1;
+
+</script>
 
 
 <!--  <div class='ta container' id='Asia'>
