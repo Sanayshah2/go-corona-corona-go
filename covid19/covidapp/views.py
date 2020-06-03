@@ -102,8 +102,8 @@ def statewise(request):
     response_india = requests.get('https://api.covid19india.org/data.json')
 
     india = response_india.json()
-    graph=requests.get('https://api.thevirustracker.com/free-api?countryTimeline=IN')
-    timeline=graph.json()
+    url1='https://api.thevirustracker.com/free-api?countryTimeline={}'
+    timeline=requests.get(url1.format('IN')).json()
     timeline = timeline['timelineitems'][0]
     m=len(timeline)
     m=m-2
