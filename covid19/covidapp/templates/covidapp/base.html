@@ -1,3 +1,4 @@
+{% load static %}
 <html>
     <head>
 
@@ -94,7 +95,7 @@ html { font-size: 1rem; }
 
 
 body{
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: Archia Regular;
   background-color: #121212;
   color:lightgray
   
@@ -164,6 +165,13 @@ display: block;
 footer a.text-light:hover { color: #fed136!important; text-decoration: none; }
 footer .cizgi { border-right: 1px solid #535e67; }
 
+
+@font-face {
+font-family: 'Archia Regular';
+font-style: normal;
+font-weight: normal;
+src: local('Archia Regular'), url('{% static "/covidapp/archia-medium-webfont.woff2" %}') format('woff2');
+}
   </style>
   {% block style %}
   {% endblock style %}
