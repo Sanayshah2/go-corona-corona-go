@@ -1,40 +1,47 @@
 {% extends 'covidapp/base.html' %}
+{% block style %}
+<style>
+  .new_card{
+    border-radius: 15px;
+    background-color: #1d1d1d;
+  }
+</style>
+{% endblock style %}
 {% block content %}
 <div class="container">
 <p class="animated animatedFadeInUp fadeInUp " style="font-weight: bold;font-size: 15px;padding: 15px;animation-delay: 0.3s;text-align: center;"><i class="fa fa-calendar" style="padding: 10px;"></i>{{d}}</p>
-
-<div  style="border-radius: 15px;text-align: center;background-color: #1d1d1d;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;padding: 30px;margin: 0px;">
-  
-    <h4 style="color: white;animation-delay: 0.6s;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;" class="animated animatedFadeInUp fadeInUp"><i class="fa fa-viruses" style="padding: 10px;color: rgb(194, 52, 52);" ></i>COVID19 IN <span style="color: rgb(67, 67, 255);font-weight: bold;">INDIA</span></h4><br><br>
+  <div style="text-align: center;">
+    <h4 style="color: white;animation-delay: 0.6s;" class="animated animatedFadeInUp fadeInUp"><i class="fa fa-viruses" style="padding: 10px;color: rgb(194, 52, 52);" ></i>COVID19 IN <span style="color: rgb(67, 67, 255);font-weight: bold;">INDIA</span></h4><br><br>
     <div class="row">
         <div class="col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:0.9s;">
-             <h5 style="font-weight: bold;color: rgb(67, 67, 255);">{{india_total.confirmed}}</h4>
-             <h6><span class="counter" style="color: rgb(134, 134, 252); ">{% if india_total.deltaconfirmed %}+[{{india_total.deltaconfirmed}}]{% endif %}</span></h5><br>
-             <h7 style="font-weight: bold;color: rgb(67, 67, 255);">Cases</h5>
+             <h5 class="kit" style="font-weight: bold;color: rgb(67, 67, 255);">{{india_total.confirmed}}</h5>
+             <p><span class="counter" style="font-size: 15px;color: rgb(134, 134, 252); ">{% if india_total.deltaconfirmed %}+[{{india_total.deltaconfirmed}}]{% endif %}</span></p><br>
+             <p style="font-weight: bold;color: rgb(67, 67, 255);font-size: 15px;">Cases</p>
         </div>
         <div class="col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:1.2s;">
-            <h5  style="font-weight: bold;color:yellow ;">{{india_total.active}}</h5>
-            <h6><span  style="color: #1d1d1d; ">1</span></h6><br>
-            <h7 style="font-weight: bold;color: yellow;">Active</h7>
+            <h5 class="kit" style="font-weight: bold;color:yellow ;">{{india_total.active}}</h5>
+            <p><span  style="color: #1d1d1d;font-size: 15px; ">1</span></p><br>
+            <p style="font-weight: bold;color: yellow;font-size: 15px;">Active</p>
         </div>
 
         <div class="col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:1.5s;">
-            <h5  style="font-weight: bold;color:red ;">{{india_total.deaths}}</h5>
-            <h6><span  style="color: rgb(255, 77, 77); ">{% if india_total.deltadeaths %}+[{{india_total.deltadeaths}}]{% endif %}</span></h6><br>
-            <h7 style="font-weight: bold;color: red;">Deaths</h5>
+            <h5 class="kit" style="font-weight: bold;color:red ;">{{india_total.deaths}}</h5>
+            <p><span  style="color: rgb(255, 77, 77);font-size: 15px; ">{% if india_total.deltadeaths %}+[{{india_total.deltadeaths}}]{% endif %}</span></p><br>
+            <p style="font-weight: bold;color: red;font-size: 15px;">Deaths</p>
         </div>
 
         <div class="col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:1.8s;">
-            <h5  style="font-weight: bold;color:green ;">{{india_total.recovered}}</h5>
-            <h6><span  style="color: rgb(113, 252, 113); ">{% if india_total.deltarecovered %}+[{{india_total.deltarecovered}}]{% endif %}</span></h6><br>
-            <h7 style="font-weight: bold;color: green;">Cured</h5>
+            <h5 class="kit"  style="font-weight: bold;color:green ;">{{india_total.recovered}}</h5>
+            <p><span  style="color: rgb(113, 252, 113);font-size: 15px; ">{% if india_total.deltarecovered %}+[{{india_total.deltarecovered}}]{% endif %}</span></p><br>
+            <p style="font-weight: bold;color: green;font-size: 15px;">Cured</p>
         </div>
     </div>
 
+
 </div><br><br><div class="row">
-<div class="container col-12 col-md-offset-3 col-md-4"><canvas class='card' height="320px" id="line-chart-total" style="margin-bottom: 40px;"></canvas></div>
-<div class="container col-12 col-md-offset-3 col-md-4"><canvas class='card' height="320px" id="line-chart-cured" style="margin-bottom: 40px;" ></canvas></div>
-<div class="container col-12 col-md-offset-3 col-md-4"><canvas class="card" height="320px"  id="line-chart-deaths" style="margin-bottom: 40px;" ></canvas></div><br><br>
+<div class="container col-12 col-md-offset-3 col-md-4"><canvas class=' new_card' height="320px" id="line-chart-total" style="margin-bottom: 40px;padding: 15px;"></canvas></div>
+<div class="container col-12 col-md-offset-3 col-md-4"><canvas class='new_card' height="320px" id="line-chart-cured" style="margin-bottom: 40px;padding: 15px;" ></canvas></div>
+<div class="container col-12 col-md-offset-3 col-md-4"><canvas class="new_card" height="320px"  id="line-chart-deaths" style="margin-bottom: 40px;padding: 15px;" ></canvas></div><br><br>
 </div>
 
 <div>
@@ -167,5 +174,4 @@
   
 </script>
 {% endblock script %}
-
 
