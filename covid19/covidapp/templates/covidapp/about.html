@@ -16,12 +16,19 @@
     </div>
     <br>
      <div class='card col-12'>
-        <center><form method="POST">
+         {% if messages %}
+         {% for x in messages %}
+         <div class='alert alert-custom' style="background-color: #121212;"><center><strong>{{x}}</strong></center></div>
+         {% endfor %}
+        {% endif %}
+        <form method="POST">
             {% csrf_token %}
+            <div class='col-12'>
                 {{form|crispy}}
+             </div>   
                 <br>
                 <button class='btn-secondary' type='submit'>Submit</button>
-        </form></center>
+        </form>
     </div>
     </div>
 {% endblock content %}
