@@ -8,24 +8,19 @@
   
     <h5 style="color: white;animation-delay: 0.6s;" class="animated animatedFadeInUp fadeInUp"><i class="fa fa-viruses" style="padding: 10px;color: rgb(194, 52, 52);" ></i>COVID19 IN <span style="color: blue;font-weight: bold;text-transform: uppercase;">{{name}}</span></h4><br><br>
     <div class="row">
-        <div class="col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:0.9s;">
+        <div class="col-4 animated animatedFadeInUp fadeInUp" style="animation-delay:0.9s;">
              <h5 style="font-weight: bold;color: blue;">{{info.total_cases}}</h4>
              <h6><span class="counter" style="color: rgb(134, 134, 252); ">{% if info.total_new_cases_today > -1 %}+[{{info.total_new_cases_today}}]{% endif %}</span></h5><br>
              <h7 style="font-weight: bold;color: blue;"><i class="fa fa-disease" style="padding-right: 5px;" ></i>Cases</h5>
         </div>
-        <div class="col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:1.2s;">
-            <h5  style="font-weight: bold;color:yellow ;">{{info.total_active_cases}}</h5>
-            <h6><span  style="color: #1d1d1d; ">1</span></h6><br>
-            <h7 style="font-weight: bold;color: yellow;"><i class="fa fa-diagnoses" style="padding-right: 5px;" ></i>Active</h7>
-        </div>
-
-        <div class="col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:1.5s;">
+        
+        <div class="col-4 animated animatedFadeInUp fadeInUp" style="animation-delay:1.5s;">
             <h5  style="font-weight: bold;color:red ;">{{info.total_deaths}}</h5>
             <h6><span  style="color: rgb(255, 77, 77); ">{% if info.total_new_deaths_today > -1 %}+[{{info.total_new_deaths_today}}]{% endif %}</span></h6><br>
             <h7 style="font-weight: bold;color: red;"><i class="fa fa-bed" style="padding-right: 3px;" ></i>Deaths</h5>
         </div>
 
-        <div class="col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:1.8s;">
+        <div class="col-4 animated animatedFadeInUp fadeInUp" style="animation-delay:1.8s;">
             <h5  style="font-weight: bold;color:green ;">{{info.total_recovered}}</h5>
             <h6><span  style="color: #1d1d1d; ">1</span></h6><br>
             <h7 style="font-weight: bold;color: green;"><i class="fa fa-child" style="padding: 5px;" ></i>Cured</h5>
