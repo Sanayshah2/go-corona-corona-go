@@ -100,10 +100,10 @@ def api(request):
 def statewise(request):
     d=datetime.datetime.now(pytz.timezone('Asia/Kolkata'))
     response_india = requests.get('https://api.covid19india.org/data.json')
-
+    code='IN'
     india = response_india.json()
     url1='https://api.thevirustracker.com/free-api?countryTimeline={}'
-    timeline=requests.get(url1.format('IN')).json()
+    timeline=requests.get(url1.format(code)).json()
     timeline = timeline['timelineitems'][0]
     m=len(timeline)
     m=m-2

@@ -2,41 +2,41 @@
 {% block content %}
 <div class="container">
 <p class="animated animatedFadeInUp fadeInUp " style="font-weight: bold;padding: 15px;animation-delay: 0.3s;text-align: center;font-size: 15px;"><i class="fa fa-calendar" style="padding: 10px;"></i>{{d}}</p>
-<div  style="border-radius: 15px;text-align: center;background-color: #1d1d1d;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;padding: 30px;margin-bottom: 30px;">
+<div  style="text-align: center;margin-bottom: 30px;">
   
-    <h5 style="color: white;animation-delay: 0.6s;" class="animated animatedFadeInUp fadeInUp"><i class="fa fa-viruses" style="padding: 10px;color: rgb(194, 52, 52);" ></i>COVID19 IN <span style="color: palegreen;font-weight: bold;text-transform: uppercase;">{{sname}}</span></h4><br><br>
+    <h5 class="kit" style="color: white;animation-delay: 0.6s;" class="kit animated animatedFadeInUp fadeInUp"><i class="fa fa-viruses" style="padding: 10px;color: rgb(194, 52, 52);" ></i>COVID19 IN <span style="color: palegreen;font-weight: bold;text-transform: uppercase;">{{sname}}</span></h4><br><br>
     <div class="row">
         <div class="col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:0.9s;">
-             <h5 style="font-weight: bold;color: blue;">{{s.confirmed}}</h4>
-             <h6><span class="counter" style="color: rgb(134, 134, 252); ">[+{{s.deltaconfirmed}}]</span></h5><br>
-             <h7 style="font-weight: bold;color: blue;"><i class="fa fa-disease" style="padding-right: 5px;" ></i>Cases</h5>
+             <h5 class="kit" class="kit" style="font-weight: bold;color: blue;">{{s.confirmed}}</h4>
+             <p><span class="counter" style="color: rgb(134, 134, 252);font-size: 15px; ">[+{{s.deltaconfirmed}}]</span></p><br>
+             <p style="font-weight: bold;font-size: 15px;color: blue;">Cases</p>
         </div>
         <div class="col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:1.2s;">
-            <h5  style="font-weight: bold;color:yellow ;">{{s.active}}</h5>
-            <h6><span  style="color: #161616; ">1</span></h6><br>
-            <h7 style="font-weight: bold;color: yellow;"><i class="fa fa-diagnoses" style="padding-right: 5px;" ></i>Active</h7>
+            <h5 class="kit"  style="font-weight: bold;color:yellow ;">{{s.active}}</h5>
+            <p><span  style="color: #161616;font-size: 15px; ">1</span></p><br>
+            <p style="font-weight: bold;color: yellow;font-size: 15px;">Active</p>
         </div>
 
         <div class="col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:1.5s;">
-            <h5  style="font-weight: bold;color:red ;">{{s.deaths}}</h5>
-            <h6><span  style="color: rgb(255, 77, 77); ">{% if s.deltadeaths %}+[{{s.deltadeaths}}]{% endif %}</span></h6><br>
-            <h7 style="font-weight: bold;color: red;"><i class="fa fa-bed" style="padding-right: 3px;" ></i>Deaths</h5>
+            <h5 class="kit"  style="font-weight: bold;color:red ;">{{s.deaths}}</h5 >
+            <p><span  style="color: rgb(255, 77, 77);font-size: 15px; ">{% if s.deltadeaths %}+[{{s.deltadeaths}}]{% endif %}</span></p><br>
+            <p style="font-weight: bold;color: red;font-size: 15px;">Deaths</p>
         </div>
 
         <div class="col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:1.8s;">
-            <h5  style="font-weight: bold;color:green ;">{{s.recovered}}</h5>
-            <h6><span  style="color: rgb(113, 252, 113); ">{% if s.deltarecovered %}+[{{s.deltarecovered}}]{% endif %}</span></h6><br>
-            <h7 style="font-weight: bold;color: green;"><i class="fa fa-child" style="padding: 5px;" ></i>Cured</h5>
+            <h5 class="kit"  style="font-weight: bold;color:green ;">{{s.recovered}}</h5>
+            <p><span  style="color: rgb(113, 252, 113);font-size: 15px; ">{% if s.deltarecovered %}+[{{s.deltarecovered}}]{% endif %}</span></p><br>
+            <p style="font-weight: bold;color: green;font-size: 15px;">Cured</p>
         </div>
 </div><br><br>
     <p class="animated animatedFadeInUp fadeInUp " style="text-align: center;animation-delay: 2.1s;">Last Updated : {{s.lastupdatedtime}}</p>
 
 </div>
-</div>
+</div><br><br>
 
 <div>
     <div class="container" style="margin-top: 50px;">
-      <h5 class="animated animatedFadeInUp fadeInUp"  style="font-weight: bold;animation-delay: 1.2s;">District</h5>   
+      <h5 class="kit" class="animated animatedFadeInUp fadeInUp"  style="font-weight: bold;animation-delay: 1.2s;">District</h5 class="kit">   
       <div class="table-wrapper-scroll-y my-custom-scrollbar animated animatedFadeInUp fadeInUp">        
       <table class="animated animatedFadeInUp fadeInUp" style="animation-delay: 1.4s;">
                 <tr>
