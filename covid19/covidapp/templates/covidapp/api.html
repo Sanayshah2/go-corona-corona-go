@@ -66,7 +66,7 @@ input{
     top: 0;
     right: 0;
     border-radius: 50%;
-    color: #07051a;
+    color: #575757;
     text-align: center;
     font-size: 1.2em;
     transition: all 1s;
@@ -82,8 +82,14 @@ form input{
 }
 
 form .f{
-    background: #07051a;
+    background: #2c2c2c;
     color: white;
+}
+
+form .f:hover{
+    background: white;
+    color: black;
+    transition-delay: 0.05s;
 }
 
 .text-responsive{
@@ -145,7 +151,7 @@ font-size: calc(30% + 0vw + 1.4vh);
     </div>
     <div class="col-4  animated animatedFadeInUp fadeInUp" style="animation-delay: 0.5s;">
       <h5 class="kit" style="color: green;font-weight: bold;">{{global.total_recovered}}</h5>
-      <p  style="font-size: 15px;"><span class="count" style="color: #121212;">1</span></p><br>
+      <p  style="font-size: 15px;"><span class="count" style="color: yellowgreen;"><i class="fa fa-heart" aria-hidden="true" style="padding: 5px;"></i></span></p><br>
       <p  style="color: green;font-size: 15px;font-weight: bold;">Cured</h8>
     </div>
     
