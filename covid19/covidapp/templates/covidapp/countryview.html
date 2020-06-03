@@ -6,7 +6,7 @@
 
   <div  style="text-align: center;">
   
-    <h5 class="kit animated animatedFadeInUp fadeInUp" style="color: white;animation-delay: 0.6s;" ><i class="fa fa-viruses" style="padding: 10px;color: rgb(194, 52, 52);" ></i>COVID19 IN <span style="color: rgb(100, 100, 255);font-weight: bold;text-transform: uppercase;">{{name}}</span></h4><br><br>
+    <h5 class="kit animated animatedFadeInUp fadeInUp" style="color: white;animation-delay: 0.6s;" ><i class="fa fa-viruses" style="padding: 10px;color: rgb(194, 52, 52);" ></i>COVID19 IN <span style="color:lightsalmon;font-weight: bold;text-transform: uppercase;">{{name}}</span></h4><br><br>
     <div class="row">
         <div class="col-4 animated animatedFadeInUp fadeInUp" style="animation-delay:0.9s;">
              <h5 class="kit" c style="font-weight: bold;color:rgb(100, 100, 255);">{{info.total_cases}}</h4>
@@ -58,7 +58,7 @@
                   "{{value.total_cases}}",
                 {% endfor %}                      ],
           label: "Total cases",
-          borderColor: "blue",
+          borderColor: "rgba(93, 93, 255, 0.801)",
           fill: false
         },{ 
           data: [{% for key,value in timeline.items %}
@@ -122,7 +122,7 @@
                   "{{value.new_daily_cases}}",
                 {% endfor %}                      ],
           label: "Daily cases",
-          borderColor: "blue",
+          borderColor: "rgba(93, 93, 255, 0.801)",
           fill: false
         }] 
     },

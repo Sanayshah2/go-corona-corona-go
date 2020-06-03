@@ -9,7 +9,7 @@
   }
 .my-custom-scrollbar {
 position: relative;
-height: 900px;
+height: 500px;
 overflow: auto;
 }
 .table-wrapper-scroll-y {
@@ -91,14 +91,6 @@ form .f:hover{
     color: black;
     transition-delay: 0.05s;
 }
-
-.text-responsive{
-font-size: calc(30% + 1vw + 1.4vh);
-}
-
-.text-responsive-india{
-font-size: calc(30% + 0vw + 1.4vh);
-}
 </style>
 {% endblock style %}
 
@@ -167,25 +159,25 @@ font-size: calc(30% + 0vw + 1.4vh);
       <div class="row" style="border-bottom: 1px solid rgb(97, 97, 97);padding-bottom:30px;margin: 3px;">
           <div class=" col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:0.9s;margin-bottom: 30px;">
             <h5 class='kit'><span class="counter " style="color: rgb(76, 76, 248);font-weight: bold;">{{india_total.confirmed}}</span></h3>
-            <p ><span class="counter" style="font-size: 12px;color: rgb(154, 154, 250); ">[+{{india_total.deltaconfirmed}}]</span></p><br><br>         
+            <p ><span class="counter" style="font-size: 12px;color: rgb(154, 154, 250); ">[+{{india_total.deltaconfirmed}}]</span></p><br>         
               <p style="font-size: 12px;font-weight: bold;color: rgb(76, 76, 248);">Cases</p>
           </div>
 
           <div class="col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:1s;margin-bottom: 30px;">
             <h5 class='kit'><span class="counter" style="color: rgb(203, 206, 10);font-weight: bold;">{{india_total.active}}</span></h1>
-            <p ><span class="counter" style="font-size: 12px;color: rgb(203, 206, 10);"><i class="fa fa-heart" aria-hidden="true" style="padding-top: 5px;"></i></span></p><br><br>
+            <p ><span class="counter" style="font-size: 12px;color: rgb(203, 206, 10);"><i class="fa fa-heart" aria-hidden="true" style="padding-top: 5px;"></i></span></p><br>
               <p style="font-size: 12px;font-weight: bold;color: rgb(203, 206, 10);">Active</p>
           </div>
 
           <div class="col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:1.2s;margin-bottom: 30px;"> 
             <h5 class='kit'><span class="counter" style="color: red;font-weight: bold;">{{india_total.deaths}}</span></h1>
-            <p ><span class="counter" style="color: red;font-size: 12px;">+[{{india_total.deltadeaths}}]</span></p><br><br>                 
+            <p ><span class="counter" style="color: red;font-size: 12px;">+[{{india_total.deltadeaths}}]</span></p><br>                 
               <p   style="font-weight: bold;font-size: 12px;color: red;">Deaths</p> 
             </div>
 
           <div class="col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:1.3s;margin-bottom: 40px;">
             <h5 class='kit'><span class="counter" style="color: green;font-weight: bold;">{{india_total.recovered}}</span></h1>
-              <p style="font-size: 12px;"><span class="counter" style="color: green;">+[{{india_total.deltarecovered}}]</span></p><br><br>        
+              <p style="font-size: 12px;"><span class="counter" style="color: green;">+[{{india_total.deltarecovered}}]</span></p><br>        
                 <p style="font-size: 12px;font-weight: bold;color: green;">Cured</p>
           </div>
         <div class="container animated animatedFadeInUp fadeInUp" style="color: white;padding: 12px;animation-delay: 1.2s"><a href="/api/statewise/">Click here for statewise stats</a> </div>
@@ -209,7 +201,7 @@ font-size: calc(30% + 0vw + 1.4vh);
       
     {% for value in all_country %}
     <tr>
-      <td><p style='text-align: left;'><a href='/api/countrywise/country/{{value.code}}/' style="text-decoration: none;">{{value.title}}</a></p></td>
+      <td><p style='text-align: left;'><a href='/api/countrywise/country/{{value.code}}/'>{{value.title}}</a></p></td>
       <td><p ><span style='color: rgba(93, 93, 255, 0.801);'>{% if value.total_new_cases_today != 0 %}+{{value.total_new_cases_today}}{% endif %}</span> {{value.total_cases}}</p></td>
       <td><p ><span style="color: red;">{% if value.total_new_deaths_today != 0 %}+ {{value.total_new_deaths_today}}{% endif %}</span> {{value.total_deaths}}</p></td>
       <td><p ><span style="color: green;">{% if value.NewRecovered %}+ {{value.NewRecovered}}{% endif %}</span> {{value.total_recovered}}</p></td>

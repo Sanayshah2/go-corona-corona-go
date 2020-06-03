@@ -42,9 +42,9 @@
                 <tr>
                   <th style="text-align: left;" class='sticky-top'>District</th>
                   <th class='sticky-top'>Zone</th>
-                  <th class='sticky-top'>Confirmed</th>
-                  <th class='sticky-top'>Deaths</th>
-                  <th class='sticky-top'>Recovered</th>
+                  <th class='sticky-top' style='color:rgba(93, 93, 255, 0.801)'>Confirmed</th>
+                  <th class='sticky-top' style='color:red'>Deaths</th>
+                  <th class='sticky-top' style='color:green'>Recovered</th>
                   
                 </tr>
                  
@@ -55,7 +55,7 @@
                   </p>
                   </td>
                   <td><p style='color:{{value.zone}}'>{{value.zone}}</p></td>
-                  <td><p ><span style='color:blue'>{% if value.delta.confirmed != 0 %}+{{value.delta.confirmed}}{% endif %}</span> {{value.confirmed}}</p></td>
+                  <td><p ><span style='color:rgba(93, 93, 255, 0.801)'>{% if value.delta.confirmed != 0 %}+{{value.delta.confirmed}}{% endif %}</span> {{value.confirmed}}</p></td>
                   <td><p ><span style='color:red'>{% if value.delta.deceased != 0 %}+{{value.delta.deceased}}{% endif %}</span> {{value.deceased}}</p></td>
                   <td><p><span style='color:green'>{% if value.delta.recovered != 0 %}+{{value.delta.recovered}}{% endif %}</span> {{value.recovered}}</p></td>
                 </tr>
@@ -71,7 +71,7 @@
 <style>
 .my-custom-scrollbar {
   position: relative;
-  height: 500px;
+  height: 440px;
   overflow: auto;
   animation-delay: 1.4s
   }
