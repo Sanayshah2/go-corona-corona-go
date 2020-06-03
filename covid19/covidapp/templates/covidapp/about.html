@@ -1,37 +1,5 @@
 {% extends 'covidapp/base.html' %}
 {% load crispy_forms_tags %}
-{% block content %}
-<div class='container'>
-    <br>
-    <div class='card col-12'>
-    <center><h2>Who made this website?</h2></center>
-    <br><br>
-    <ul style='list-style-type: disc'>
-        <li>This website is made with <i class='fa fa-heart' style="color:red"></i> by <strong>Sanay Shah</strong> and <strong>Shivesh Jha</strong>.</li><br>
-        <li>We are computer engineering students from Dwarkadas J Sanghvi College Of Engineering, Mumbai.</li><br>
-        <li><a class='btn btn-linkedin' href='https://www.linkedin.com/in/sanay-shah-45b973194/'><i class="fab fa-linkedin-in"></i> @Sanay Shah</a>&ensp; <a class='btn btn-linkedin' href='https://www.linkedin.com/in/shivesh-jha-b74b46198/'><i class="fab fa-linkedin-in" aria-hidden="true"></i> @Shivesh Jha</a></li><br>
-        <li>If you have any cool ideas to add to the website, fill in the suggestion form below or connect on LinkedIn.</li>
-        </ul>
-        <div class='text-muted' style='text-align: right;font-weight: 630;'><i class="fa fa-info-circle" aria-hidden="true"></i> {{count}} {% if count == 1 %}person has {% else %}people have {% endif %}rated this site so far.</div>
-    </div>
-    <br>
-     <div class='card col-12'>
-         {% if messages %}
-         {% for x in messages %}
-         <div class='alert alert-custom' style="background-color: #121212;"><center><strong>{{x}}</strong></center></div>
-         {% endfor %}
-        {% endif %}
-        <form method="POST">
-            {% csrf_token %}
-            <div class='col-12'>
-                {{form|crispy}}
-             </div>   
-                <br>
-                <button class='btn-secondary' type='submit'>Submit</button>
-        </form>
-    </div>
-    </div>
-{% endblock content %}
 
 {% block style %}
 <style>
@@ -51,6 +19,64 @@
     background: #084461;
     color: #fff;
 }
+.animate
+{
+	transition: all 0.1s;
+	-webkit-transition: all 0.1s;
+}
+
+.action-button
+{
+	position: relative;
+	padding: 3px 5px;
+  margin: 0px 10px 10px 0px;
+  float: left;
+	border-radius: 10px;
+	
+	
+	color: #FFF;
+	text-decoration: none;	
+}
+
+.blue
+{
+	background-color: #3498DB;
+	border-bottom: 5px solid #2980B9;
+	text-shadow: 0px -2px #2980B9;
+}
 
 </style>
 {% endblock style %}
+{% block content %}
+<div class='container'>
+    <br>
+    <div class='new_card col-12' style="padding:20px;">
+    <center><h2>Who made this website?</h2></center>
+    <br><br>
+    <ul style='list-style-type: disc'>
+        <li>This website is made with <i class='fa fa-heart' style="color:red"></i> by <strong>Sanay Shah</strong> and <strong>Shivesh Jha</strong>.</li><br>
+        <li>We are computer engineering students from Dwarkadas J Sanghvi College Of Engineering, Mumbai.</li><br>
+        <li><a class='btn btn-linkedin' href='https://www.linkedin.com/in/sanay-shah-45b973194/'><i class="fab fa-linkedin-in"></i> @Sanay Shah</a>&ensp; <a class='btn btn-linkedin' href='https://www.linkedin.com/in/shivesh-jha-b74b46198/'><i class="fab fa-linkedin-in" aria-hidden="true"></i> @Shivesh Jha</a></li><br>
+        <li>If you have any cool ideas to add to the website, fill in the suggestion form below or connect on LinkedIn.</li>
+        </ul>
+        <div class='text-muted' style='text-align: right;font-weight: 630;'><i class="fa fa-info-circle" aria-hidden="true"></i> {{count}} {% if count == 1 %}person has {% else %}people have {% endif %}rated this site so far.</div>
+    </div>
+    <br>
+     <div class='new_card col-12' style="padding:20px;">
+         {% if messages %}
+         {% for x in messages %}
+         <div class='alert alert-custom' style="background-color: #121212;"><center><strong>{{x}}</strong></center></div>
+         {% endfor %}
+        {% endif %}
+        <form method="POST" class="form-group">
+            {% csrf_token %}
+            <div class='col-12'>
+                {{form|crispy}}
+             </div>   
+                <br>
+                <div style="padding-left: 15px;"><button class="action-button shadow animate blue"  type='submit'>Submit</button></div>
+        </form>
+    </div>
+    </div>
+{% endblock content %}
+
