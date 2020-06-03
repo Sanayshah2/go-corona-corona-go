@@ -36,6 +36,57 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 
   <style>
+@font-face {
+    font-family: SegoeUI;
+    src:
+        local("Segoe UI Light"),
+        url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/light/latest.woff2) format("woff2"),
+        url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/light/latest.woff) format("woff"),
+        url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/light/latest.ttf) format("truetype");
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: SegoeUI;
+    src:
+        local("Segoe UI Semilight"),
+        url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/semilight/latest.woff2) format("woff2"),
+        url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/semilight/latest.woff) format("woff"),
+        url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/semilight/latest.ttf) format("truetype");
+    font-weight: 200;
+}
+
+@font-face {
+    font-family: SegoeUI;
+    src:
+        local("Segoe UI"),
+        url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/normal/latest.woff2) format("woff2"),
+        url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/normal/latest.woff) format("woff"),
+        url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/normal/latest.ttf) format("truetype");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: SegoeUI;
+    src:
+        local("Segoe UI Bold"),
+        url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/bold/latest.woff2) format("woff2"),
+        url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/bold/latest.woff) format("woff"),
+        url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/bold/latest.ttf) format("truetype");
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: SegoeUI;
+    src:
+        local("Segoe UI Semibold"),
+        url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/semibold/latest.woff2) format("woff2"),
+        url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/semibold/latest.woff) format("woff"),
+        url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/semibold/latest.ttf) format("truetype");
+    font-weight: 700;
+}
+
+
 html { font-size: 1rem; }
 @media (min-width: 200px){
   .kit{ font-size: 1.2rem; }
@@ -170,6 +221,11 @@ font-style: normal;
 font-weight: normal;
 src: local('Archia Regular'), url('{% static "/covidapp/archia-medium-webfont.woff2" %}') format('woff2');
 }
+.new_card{
+    border-radius: 15px;
+    background-color: #1d1d1d;
+    border: 4px solid rgb(139, 139, 139);
+  }
   </style>
   {% block style %}
   {% endblock style %}
@@ -178,7 +234,7 @@ src: local('Archia Regular'), url('{% static "/covidapp/archia-medium-webfont.wo
 
 
     <body>  
-      <nav class="navbar navbar-expand-lg navbar-dark sticky-top static-top" style="background-color: #1d1d1d;">
+      <nav class="navbar navbar-expand-lg navbar-dark sticky-top static-top" style="background-color: #1d1d1d;border-bottom: 2px solid rgb(139,139,139);">
         <div class="container">
           <a class="navbar-brand" href={% url 'api' %}>
                 <h5 style="padding-top: 10px;"><i class="fa fa-viruses" style="margin-right: 8px;color: rgb(194, 52, 52);" ></i>Track It</h5>
@@ -197,10 +253,7 @@ src: local('Archia Regular'), url('{% static "/covidapp/archia-medium-webfont.wo
                 <a class="nav-link" href={% url 'statewise' %}>India</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href={% url 'Helpline' %}>Services</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href={% url 'Helpline' %}>Helpline Nos. (Indian States)</a>
+                <a class="nav-link" href={% url 'Helpline' %}>Helpline (States)</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href={% url 'about' %}>About</a>
@@ -208,7 +261,7 @@ src: local('Archia Regular'), url('{% static "/covidapp/archia-medium-webfont.wo
             </ul>
           </div>
         </div>
-      </nav> 
+      </nav> <br>
       
       {% block content %}
       {% endblock content %}
