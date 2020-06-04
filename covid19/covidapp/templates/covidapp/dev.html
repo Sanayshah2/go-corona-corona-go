@@ -1,68 +1,64 @@
-{% load static %}
-<!doctype html>
-<html lang="en" class="h-100">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+    />
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+    <style>
+      * {
+        margin: 0;
+      }
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dark Mode Switch</title>
-  <meta name="description" content="Add a dark-mode theme toggle with a Bootstrap Custom Switch">
+      #map {
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+  </body>
+  <script>
+    const coordinates = {
+      Latitude: {
+        '0': 17.7222014,
+        '1': 17.3924217,
+        '2': 17.3906471,
+        '3': 17.433709,
+      },
+      Longitude: {
+        '0': 83.2892612,
+        '1': 78.4689988,
+        '2': 78.5009093,
+        '3': 78.5016144,
+      },
+    };
 
-  <meta property="og:site_name" content="GitHub">
-  <meta property="og:image"
-    content="https://repository-images.githubusercontent.com/194995309/38db8f80-9db7-11e9-998f-43f2a26d9e0b">
-  <meta property="og:title" content="dark-mode-switch">
-  <meta property="og:description" content="Add a dark-mode theme toggle with a Bootstrap Custom Switch">
-  <meta property="og:url" content="https://coliff.github.io/dark-mode-switch/">
-  <link rel="author" href="https://christianoliff.com/">
+    const map = L.map('map').setView([17.3924217, 78.4689988], 7);
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href='{% static "/covidapp/dark-mode.css" %}'>
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
 
-</head>
+    for (let i = 0; i < Object.keys(coordinates.Latitude).length; i += 1) {
+      const marker = L.marker([
+        coordinates.Latitude[i.toString()],
+        coordinates.Longitude[i.toString()],
+      ]);
+      marker.myData = { id: coordinates.Latitude[i.toString()] };
 
-<body class="bg-white text-center d-flex h-100">
+      marker.on('click', function(e) {
+        alert(marker.myData.id);
+      });
 
-  <div class="container d-flex p-3 mx-auto flex-column">
-    <header class="mb-auto">
-      <h3 class="float-left">Dark Mode Switch</h3>
-      <nav class="nav justify-content-center float-right">
-        <a class="nav-link active" href="https://coliff.github.io/dark-mode-switch/">Home</a>
-        <a class="nav-link" href="https://github.com/coliff/dark-mode-switch" target="_blank">GitHub</a>
-        <div class="nav-link">
-
-          <div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="darkSwitch">
-            <label class="custom-control-label" for="darkSwitch">Dark Mode</label>
-          </div>
-          <script src="dark-mode-switch.min.js"></script>
-
-
-        </div>
-      </nav>
-    </header>
-
-    <main role="main">
-      <h1>🌓 Dark Mode Switch</h1>
-      <p class="lead">Add a dark-mode theme switch with a Bootstrap Custom Switch</p>
-      <ul class="list-unstyled">
-        <li>&middot; Uses local storage to save preference</li>
-        <li>&middot; Only 262 Bytes minified and gzipped!</li>
-      </ul>
-      <p>
-        <a href="https://github.com/coliff/dark-mode-switch" target="_blank" rel="noopener"
-          class="btn btn-lg btn-secondary">
-          Learn more
-        </a>
-      </p>
-    </main>
-
-    <footer class="mt-auto">
-      <p>&copy; 2019-2020</p>
-    </footer>
-
-  </div>
-</body>
-
+      marker.addTo(map);
+    }
+  </script>
 </html>
