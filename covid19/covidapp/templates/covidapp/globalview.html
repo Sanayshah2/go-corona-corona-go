@@ -1,0 +1,223 @@
+{% extends 'covidapp/base.html' %}
+
+
+
+{% block style %}
+{% endblock style %}
+{% block content %}
+<div class=" container" >
+    <p class="animated animatedFadeInUp fadeInUp " style="font-weight: bold;font-size: 15px;padding: 15px;animation-delay: 0.3s;text-align: center;"><i class="fa fa-calendar" style="padding: 10px;"></i>{{d}}</p>
+    <h5 class='kit animated animatedFadeInUp fadeInUp' style="text-align: center;font-weight: bold;margin:25px;color:white;animation-delay: 0.2s;"><i class='fas fa-globe-americas' style="padding: 12px;color: skyblue;"></i>GLOBAL <span style="color: bisque;">COVID19</span> STATS </h4><br>
+    <div class=" row" style="text-align: center;padding-bottom:30px;margin: 3px;">
+      <div class=" col-4  animated animatedFadeInUp fadeInUp" style="animation-delay: 0.3s;">
+        <h5 id="confirm" class="kit" style="color:rgba(93, 93, 255, 0.801);font-weight: bold;">{{global.total_cases}}</h5>
+        <p style="font-size: 15px;"><span class="count" style="color: rgb(160, 160, 253);">[+{{global.total_new_cases_today}}]</span></p><br>
+        <p style="color: rgba(93, 93, 255, 0.801);font-size: 15px;font-weight: bold;">Confirmed</h1>
+      </div>
+      <div class="col-4  animated animatedFadeInUp fadeInUp" style="animation-delay: 0.4s;">
+        <h5 class="kit" style="color: red;font-weight: bold;">{{global.total_deaths}}</h5>
+        <p style="font-size: 15px;"><span class="count" style="color: rgb(240, 133, 133);">[+{{global.total_new_deaths_today}}]</span></p><br>
+        <p style="color: red;font-size: 15px;font-weight: bold;">Deaths</h8>
+      </div><br>
+      <div class="col-4  animated animatedFadeInUp fadeInUp" style="animation-delay: 0.5s;">
+        <h5 class="kit" style="color: green;font-weight: bold;">{{global.total_recovered}}</h5>
+        <p  style="font-size: 15px;"><span class="count" style="color: yellowgreen;"><i class="fa fa-heart" aria-hidden="true" style="padding: 5px;"></i></span></p><br>
+        <p  style="color: green;font-size: 15px;font-weight: bold;">Cured</p>
+      </div>
+      
+  
+    </div><br>
+    
+    
+      <div >
+        <div class="row" >
+          <div class="container col-12 col-md-offset-3 col-md-4"><canvas class=' new_card' height="275px" id="line-chart-total" style="margin-bottom: 40px;padding: 15px;border:0px"></canvas></div>
+          <div class="container col-12 col-md-offset-3 col-md-4"><canvas class='new_card' height="275px" id="line-chart-confirmed" style="margin-bottom: 40px;padding: 15px; background-color: rgba(93, 93, 255, 0.15);border:0px" ></canvas></div>
+          <div class="container col-12 col-md-offset-3 col-md-4"><canvas class="new_card" height="275px"  id="line-chart-deaths" style="margin-bottom: 40px;padding: 15px;background-color:rgb(255, 0, 0, 0.15);border:0px" ></canvas></div><br><br>
+          </div> 
+  
+      </div></div>
+      
+  
+  </div>
+  {% block script %}
+  <script> 
+    new Chart(document.getElementById("line-chart-total"), {
+      type: 'line',
+      data: {
+        labels: [{% for x in globaltimeline %}
+                    
+                    "{{x.date}}",
+                    
+                    {% endfor %}       ],
+        datasets: [{ 
+            data: [{% for x in globaltimeline %}
+                    "{{x.confirmed}}",
+                  {% endfor %}                      ],
+            label: "Total cases",
+            borderColor: "rgba(93, 93, 255, 0.9)",
+            backgroundColor:'rgba(93, 93, 255, 0.15)',
+            borderWidth: 1.5
+          },{ 
+            data: [{% for x in globaltimeline %}
+                    "{{x.recovered}}",
+                  {% endfor %}                      ],
+            label: "Total Cured",
+            borderColor: "green",
+            backgroundColor:'rgb(0, 128, 0, 0.2)',
+            borderWidth: 1.5
+            
+          },{ 
+            data: [{% for x in globaltimeline %}
+                    "{{x.deaths}}",
+                  {% endfor %}                      ],
+            label: "Total Deaths",
+            borderColor: "red",
+            backgroundColor:'rgb(255, 0, 0, 0.2)',
+            borderWidth: 1.5
+          }
+          ],
+          
+      },
+      options: {
+        title: {
+          display: true,
+          text: 'Rise in Total cases in India'
+        },
+        scales: {
+                      xAxes: [{ 
+                        gridLines:{
+                          display:false,
+                          
+                           
+                              tickMarkLength: 19
+                         
+                        }
+                      }],
+                      yAxes: [{
+                        gridLines:{
+                          display:false,
+                          tickMarkLength: 19
+                        }
+                      }]
+                  }
+                 
+      }
+    });
+  
+  
+    var ctx = document.getElementById('line-chart-deaths').getContext('2d');
+          var myChart = new Chart(ctx, {
+              type: 'line',
+              data: {
+                  labels: [
+                  {% for x in globaltimeline %}
+                    
+                    "{{x.date}}",
+                    
+                    {% endfor %}      
+                           ],
+                 
+                  datasets: [{
+                      
+                      label: 'Per day deaths' ,
+                     // backgroundColor:'red',
+                      //barThickness : 180,   
+                      data: [{% for x in globaltimeline %}
+                    {{x.new_deaths}},
+                  {% endfor %}],                  
+                      backgroundColor: 'rgb(255, 0, 0, 0.15)',
+                          
+                    
+                      borderColor: 
+                          'red',
+                   
+                      borderWidth: 1
+                  }]
+              },
+              options: {
+                title: {
+                          display: true,
+                          text: 'Rise in Deaths in India'
+                        },
+                  scales: {
+                      xAxes: [{
+                        gridLines:{
+                          display:false,
+                          // ticks: {
+                            
+                              tickMarkLength: 19
+                          //}
+                        }
+                      }],
+                      yAxes: [{
+                        gridLines:{
+                          display:false,
+                          // ticks: {
+                            
+                              tickMarkLength: 19
+                          //}
+                        }
+                      }]
+                  }
+              }
+          });
+  
+          
+  
+          var ctx = document.getElementById('line-chart-confirmed').getContext('2d');
+          var myChart = new Chart(ctx, {
+              type: 'line',
+              data: {
+                  labels: [
+                  {% for x in globaltimeline %}
+                    
+                    "{{x.date}}",
+                    
+                    {% endfor %}      
+                           ],
+                 
+                  datasets: [{
+                      
+                      label: 'Per day confirmed cases' ,
+                     // backgroundColor:'red',
+                      //barThickness : 180,   
+                      data: [{% for x in globaltimeline %}
+                    {{x.new_confirmed}},
+                  {% endfor %}],                  
+                      backgroundColor: 'rgba(93, 93, 255, 0.15)',
+                          
+                    
+                      borderColor: 'rgba(93, 93, 255, 0.9)',
+                   
+                      borderWidth: 1
+                  }]
+              },
+              options: {
+                title: {
+                          display: true,
+                          text: 'Rise in Confirmed Cases in India'
+                        },
+                  scales: {
+                      xAxes: [{ 
+                        gridLines:{
+                          display:false,
+                          // ticks: {
+                           
+                              tickMarkLength: 19
+                          //}
+                        }
+                      }],
+                      yAxes: [{
+                        gridLines:{
+                          display:false,
+                          tickMarkLength: 19
+                        }
+                      }]
+                  }
+              }
+          });
+  
+  </script>
+  {% endblock script %}
+{% endblock content %}
