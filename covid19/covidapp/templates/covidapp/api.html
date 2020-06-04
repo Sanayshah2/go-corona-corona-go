@@ -104,7 +104,7 @@ form .f:hover{
 
 <div class='card' style="background-color:rgb(31, 31, 31);margin:12px;padding: 12px;">
 <strong style="letter-spacing: 1px;font-size: 12px;"><marquee onmouseover="stop()" onmouseout="start()">
-  Top 3 countries with highest number of cases.&ensp;&ensp;1. {{1.title}} : {{1.total_cases}}&ensp;&ensp;2. {{2.title}} : {{2.total_cases}}&ensp;&ensp;3. {{3.title}} : {{3.total_cases}}
+  Top 3 countries with highest number of cases.&ensp;&ensp;1. {{1.name}} : {{1.latest_data.confirmed}}&ensp;&ensp;2. {{2.name}} : {{2.latest_data.confirmed}}&ensp;&ensp;3. {{3.name}} : {{3.latest_data.confirmed}}
 </marquee>
 </strong>
 </div>
@@ -158,9 +158,9 @@ form .f:hover{
       
       <div class="row" style="border-bottom: 1px solid rgb(97, 97, 97);padding-bottom:30px;margin: 3px;">
           <div class=" col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:0.9s;margin-bottom: 30px;">
-            <h5 class='kit'><span class="counter " style="color: rgb(76, 76, 248);font-weight: bold;">{{india_total.confirmed}}</span></h3>
-            <p ><span class="counter" style="font-size: 12px;color: rgb(154, 154, 250); ">[+{{india_total.deltaconfirmed}}]</span></p><br>         
-              <p style="font-size: 12px;font-weight: bold;color: rgb(76, 76, 248);">Cases</p>
+            <h5 class='kit'><span class="counter " style="color: rgba(93, 93, 255, 0.801);font-weight: bold;">{{india_total.confirmed}}</span></h3>
+            <p ><span class="counter" style="font-size: 12px;color:rgb(160, 160, 253); ">[+{{india_total.deltaconfirmed}}]</span></p><br>         
+              <p style="font-size: 12px;font-weight: bold;color: rgba(93, 93, 255, 0.801);">Cases</p>
           </div>
 
           <div class="col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:1s;margin-bottom: 30px;">
@@ -201,17 +201,17 @@ form .f:hover{
       
     {% for value in all_country %}
     <tr>
-      <td><p style='text-align: left;'><a href='/api/countrywise/country/{{value.code}}/'>{{value.title}}</a></p></td>
-      <td><p ><span style='color: rgba(93, 93, 255, 0.801);'>{% if value.total_new_cases_today != 0 %}+{{value.total_new_cases_today}}{% endif %}</span> {{value.total_cases}}</p></td>
-      <td><p ><span style="color: red;">{% if value.total_new_deaths_today != 0 %}+ {{value.total_new_deaths_today}}{% endif %}</span> {{value.total_deaths}}</p></td>
-      <td><p ><span style="color: green;">{% if value.NewRecovered %}+ {{value.NewRecovered}}{% endif %}</span> {{value.total_recovered}}</p></td>
+      <td><p style='text-align: left;'><a href='/api/countrywise/country/{{value.code}}/'>{{value.name}}</a></p></td>
+      <td><p ><span style='color: rgba(93, 93, 255, 0.801);'>{% if value.today.confirmed != 0 %}+{{value.today.confirmed}}{% endif %}</span> {{value.latest_data.confirmed}}</p></td>
+      <td><p ><span style="color: red;">{% if value.today.deaths != 0 %}+ {{value.today.deaths}}{% endif %}</span> {{value.latest_data.deaths}}</p></td>
+      <td><p ><span style="color: green;">      </span> {{value.latest_data.recovered}}</p></td>
     </tr>
     {% endfor %}
   </table>
   </div>
 </center>
 </div></div> 
-<script>
+<script>                                    
   var n = {{global.total_cases}};
   n1=n.toLocaleString();
   console.log(n1);

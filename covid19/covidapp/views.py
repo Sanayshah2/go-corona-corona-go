@@ -17,6 +17,10 @@ from babel.numbers import format_currency
 
 def api(request):
 
+    # info = requests.get('https://covid19-update-api.herokuapp.com/api/v1/cases').json()
+    # totalCases = info['graphs']['totalCases']
+    # del totalCases['source']
+    # del totalCases['sourceLink']
     global_stats = requests.get('https://api.thevirustracker.com/free-api?global=stats')
     global_stats = global_stats.json()
     global_stats = global_stats['results'][0]
@@ -26,21 +30,16 @@ def api(request):
         b = format_currency(a, 'INR', locale='en_IN')
         c = b[1:len(b)-3]
         global_stats[x] = c
-    all_country = requests.get('https://api.thevirustracker.com/free-api?countryTotals=ALL')
+    all_country = requests.get('https://corona-api.com/countries')
     all_country = all_country.json()
-    all_country = all_country['countryitems'][0]
-    country_data = []
+    country_data = all_country['data']
     #list69 = ['total_cases', 'total_recovered', 'total_deaths', 'total_new_cases_today', 'total_new_deaths_today']
-    for key,value in all_country.items():
         #for x in range(len(list69)):
         # a = value['total_cases']
         # b = format_currency(a, 'INR', locale='en_IN')
         # c = b[1:len(b)-3]
         # value['total_cases'] = c
-        country_data.append(value)
-    country_data.remove('ok')
-
-    country_data = sorted(country_data, key=itemgetter('total_cases'),reverse=True)
+    #country_data = sorted(country_data, key=itemgetter(latest_data['confirmed']),reverse=True)
     #response = requests.get('https://api.covid19api.com/summary')
     #info = response.json()
     response_india = requests.get('https://api.covid19india.org/data.json')
@@ -94,6 +93,7 @@ def api(request):
         'india_total':india['statewise'][0],
         'statelist':statelist,
         'india':india,
+        # 'totalCases':totalCases
         #'daywise':daywise2,
         
     }
