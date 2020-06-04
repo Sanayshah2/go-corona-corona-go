@@ -1,8 +1,5 @@
 {% extends 'covidapp/base.html' %}
 {% block style %}
-<style>
-  
-</style>
 {% endblock style %}
 {% block content %}
 <div class="container">
@@ -36,11 +33,15 @@
     <p class="animated animatedFadeInUp fadeInUp text-muted" style="animation-delay:1.8s;font-weight: bold;">Last updated on: {{india_total.lastupdatedtime}}</p>
 
 
-</div><br><br><div class="row">
-<div class="container col-12 col-md-offset-3 col-md-4"><canvas class=' new_card' height="250px" id="line-chart-total" style="margin-bottom: 40px;padding: 15px;"></canvas></div>
-<div class="container col-12 col-md-offset-3 col-md-4"><canvas class='new_card' height="250px" id="line-chart-cured" style="margin-bottom: 40px;padding: 15px;" ></canvas></div>
-<div class="container col-12 col-md-offset-3 col-md-4"><canvas class="new_card" height="250px"  id="line-chart-deaths" style="margin-bottom: 40px;padding: 15px;" ></canvas></div><br><br>
-</div>
+</div><br><br>
+<div class="row" >
+<div class="container col-12 col-md-offset-3 col-md-4"><canvas class=' new_card' height="250px" id="line-chart-total" style="margin-bottom: 40px;padding: 15px;border:0px"></canvas></div>
+<div class="container col-12 col-md-offset-3 col-md-4"><canvas class='new_card' height="250px" id="line-chart-confirmed" style="margin-bottom: 40px;padding: 15px; background-color: rgba(93, 93, 255, 0.15);border:0px" ></canvas></div>
+<div class="container col-12 col-md-offset-3 col-md-4"><canvas class="new_card" height="250px"  id="line-chart-deaths" style="margin-bottom: 40px;padding: 15px;background-color:rgb(255, 0, 0, 0.15);border:0px" ></canvas></div><br><br>
+</div> 
+<div style='color:rgb(0, 128, 0)'></div>
+
+
 
 <div>
 <div class="" style="margin-top: 50px;">
@@ -91,22 +92,26 @@
                   "{{value.totalconfirmed}}",
                 {% endfor %}                      ],
           label: "Total cases",
-          borderColor: "rgba(93, 93, 255, 0.801)",
-          fill: false
+          borderColor: "rgba(93, 93, 255, 0.9)",
+          backgroundColor:'rgba(93, 93, 255, 0.15)',
+          borderWidth: 1.5
         },{ 
           data: [{% for key,value in daywise.items %}
                   "{{value.totalrecovered}}",
                 {% endfor %}                      ],
           label: "Total Cured",
           borderColor: "green",
-          fill: false
+          backgroundColor:'rgb(0, 128, 0, 0.2)',
+          borderWidth: 1.5
+          
         },{ 
           data: [{% for key,value in daywise.items %}
                   "{{value.totaldeceased}}",
                 {% endfor %}                      ],
           label: "Total Deaths",
           borderColor: "red",
-          fill: false
+          backgroundColor:'rgb(255, 0, 0, 0.2)',
+          borderWidth: 1.5
         }
         ],
         
@@ -115,62 +120,140 @@
       title: {
         display: true,
         text: 'Rise in Total cases in India'
-      }
+      },
+      scales: {
+                    xAxes: [{ 
+                      gridLines:{
+                        display:false,
+                        
+                         
+                            tickMarkLength: 19
+                       
+                      }
+                    }],
+                    yAxes: [{
+                      gridLines:{
+                        display:false,
+                        tickMarkLength: 19
+                      }
+                    }]
+                }
+               
     }
   });
 
-  new Chart(document.getElementById("line-chart-cured"), {
-    type: 'line',
-    data: {
-      labels: [{% for key,value in daywise.items %}
+
+  var ctx = document.getElementById('line-chart-deaths').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [
+                {% for key,value in daywise.items %}
                   
                   "{{key}}",
                   
-                  {% endfor %}       ],
-      datasets: [{ 
-          data: [{% for key,value in daywise.items %}
-                  "{{value.dailyconfirmed}}",
-                {% endfor %}                      ],
-          label: "Daily cases",
-          borderColor: "rgba(93, 93, 255, 0.801)",
-          fill: false
-        }] 
-    },
-    options: {
-      title: {
-        display: true,
-        text: 'Daily cases in India'
-      }
-    }
-  });
+                  {% endfor %}      
+                         ],
+               
+                datasets: [{
+                    
+                    label: 'Per day deaths' ,
+                   // backgroundColor:'red',
+                    //barThickness : 180,   
+                    data: [{% for key,value in daywise.items %}
+                  {{value.dailydeceased}},
+                {% endfor %}],                  
+                    backgroundColor: 'rgb(255, 0, 0, 0.15)',
+                        
+                  
+                    borderColor: 
+                        'red',
+                 
+                    borderWidth: 1
+                }]
+            },
+            options: {
+              title: {
+                        display: true,
+                        text: 'Rise in Deaths in India'
+                      },
+                scales: {
+                    xAxes: [{
+                      gridLines:{
+                        display:false,
+                        // ticks: {
+                          
+                            tickMarkLength: 19
+                        //}
+                      }
+                    }],
+                    yAxes: [{
+                      gridLines:{
+                        display:false,
+                        // ticks: {
+                          
+                            tickMarkLength: 19
+                        //}
+                      }
+                    }]
+                }
+            }
+        });
 
+        
 
-  new Chart(document.getElementById("line-chart-deaths"), {
-    type: 'line',
-    data: {
-      labels: [{% for key,value in daywise.items %}
+        var ctx = document.getElementById('line-chart-confirmed').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [
+                {% for key,value in daywise.items %}
                   
                   "{{key}}",
                   
-                  {% endfor %}       ],
-      datasets: [{ 
-          data: [{% for key,value in daywise.items %}
-                  "{{value.dailydeceased}}",
-                {% endfor %}                      ],
-          label: "Daily Deaths",
-          borderColor: "red",
-          fill: false
-        }] 
-    },
-    options: {
-      title: {
-        display: true,
-        text: 'Rise in Deaths in India'
-      }
-    }
-  });
+                  {% endfor %}      
+                         ],
+               
+                datasets: [{
+                    
+                    label: 'Per day confirmed cases' ,
+                   // backgroundColor:'red',
+                    //barThickness : 180,   
+                    data: [{% for key,value in daywise.items %}
+                  {{value.dailyconfirmed}},
+                {% endfor %}],                  
+                    backgroundColor: 'rgba(93, 93, 255, 0.15)',
+                        
+                  
+                    borderColor: 'rgba(93, 93, 255, 0.9)',
+                 
+                    borderWidth: 1
+                }]
+            },
+            options: {
+              title: {
+                        display: true,
+                        text: 'Rise in Confirmed Cases in India'
+                      },
+                scales: {
+                    xAxes: [{ 
+                      gridLines:{
+                        display:false,
+                        // ticks: {
+                         
+                            tickMarkLength: 19
+                        //}
+                      }
+                    }],
+                    yAxes: [{
+                      gridLines:{
+                        display:false,
+                        tickMarkLength: 19
+                      }
+                    }]
+                }
+            }
+        });
 
-  
 </script>
 {% endblock script %}
-

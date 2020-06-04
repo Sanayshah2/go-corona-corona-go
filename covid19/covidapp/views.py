@@ -33,32 +33,33 @@ def api(request):
     all_country = requests.get('https://corona-api.com/countries')
     all_country = all_country.json()
     country_data = all_country['data']
+    country_total_data_commas = ['confirmed', 'deaths', 'recovered']
+    country_daily_data_commas = ['confirmed', 'deaths']
+    for x in country_data:
+        for l in country_total_data_commas:
+            total = x['latest_data'][l]
+            total = format_currency(total, 'INR', locale='en_IN')
+            total = total[1:len(total)-3]
+            x['latest_data'][l] = total
 
-    
-    #list69 = ['total_cases', 'total_recovered', 'total_deaths', 'total_new_cases_today', 'total_new_deaths_today']
-        #for x in range(len(list69)):
-        # a = value['total_cases']
-        # b = format_currency(a, 'INR', locale='en_IN')
-        # c = b[1:len(b)-3]
-        # value['total_cases'] = c
-    #country_data = sorted(country_data, key=itemgetter(latest_data['confirmed']),reverse=True)
-    #response = requests.get('https://api.covid19api.com/summary')
-    #info = response.json()
+    for x in country_data:
+        for l in country_daily_data_commas:
+            total = x['today'][l]
+            total = format_currency(total, 'INR', locale='en_IN')
+            total = total[1:len(total)-3]
+            x['today'][l] = total
     response_india = requests.get('https://api.covid19india.org/data.json')
     india = response_india.json()
-    #file = jsonfiles.objects.get(file = 'countries_JOhe0Es.json')
-    #f = open(file.file.path, )
-    #continents = json.load(f)
-    #countries = info['Countries']
-    #for j in range(186):
-     #   for i in range(245):
-     #      if continents[i]['country'] == countries[j]['Country']:
-     #              countries[j]['Continent'] = continents[i]['continent']
-     #              break          
-    #f.close()           
-    #countries = list(countries)
+    
     #countries1 = sorted(countries, key=itemgetter('TotalConfirmed'),reverse=True)
     state=india['statewise']
+    india1_comma = ['active', 'confirmed', 'deaths','recovered' ,'deltaconfirmed', 'deltadeaths', 'deltarecovered', ]
+    for x in state:
+            for l in india1_comma:
+                total = x[l]
+                total = format_currency(total, 'INR', locale='en_IN')
+                total = total[1:len(total)-3]
+                x[l] = total
     state=list(state)
     newstate={}
     for entry in state:
@@ -67,12 +68,7 @@ def api(request):
     statelist=list(newstate)
     statelist.remove('Total')
 
-    #b = copy.deepcopy(countries1)
-    #newcountries={}
-    #for entry in countries:
-    #    name = entry.pop('Country')
-    #    newcountries[name] = entry
-    #countrylist=list(newcountries)
+   
          
     data={
         'all_country':country_data ,
@@ -83,8 +79,7 @@ def api(request):
         'india_total':india['statewise'][0],
         'statelist':statelist,
         'india':india,
-        # 'totalCases':totalCases
-        #'daywise':daywise2,
+        
         
     }
     
@@ -98,13 +93,18 @@ def statewise(request):
     
     india = response_india.json()    
     india1=india['statewise']
+    india1_comma = ['active', 'confirmed', 'deaths','recovered' ,'deltaconfirmed', 'deltadeaths', 'deltarecovered', ]
+    for x in india1:
+        for l in india1_comma:
+            total = x[l]
+            total = format_currency(total, 'INR', locale='en_IN')
+            total = total[1:len(total)-3]
+            x[l] = total
     graph=india['cases_time_series']
-    
     daywise={}
     for entry in graph:
         day = entry.pop('date')
         daywise[day] = entry
-
     l=len(daywise)
     l=l-1
     daywise = dict(list(daywise.items())[l:0: -10])
@@ -148,6 +148,13 @@ def stateview(request,sname):
         response_state=requests.get('https://api.covid19india.org/state_district_wise.json')
         districts= response_state.json()
         state=india['statewise']
+        india1_comma = ['active', 'confirmed', 'deaths','recovered' ,'deltaconfirmed', 'deltadeaths', 'deltarecovered', ]
+        for x in state:
+            for l in india1_comma:
+                total = x[l]
+                total = format_currency(total, 'INR', locale='en_IN')
+                total = total[1:len(total)-3]
+                x[l] = total
         state=list(state)
         newstate={}
         for entry in state:
@@ -227,6 +234,23 @@ def countryview(request,code):
         
         
         country=info['data']
+        # country_total_data_commas = ['confirmed', 'deaths', 'recovered']
+        # country_daily_data_commas = ['confirmed', 'deaths']
+        # for x in country:
+        #     if x == 'latest_data':
+        #         for l in country_total_data_commas:
+        #             total = x[l]
+        #             total = format_currency(total, 'INR', locale='en_IN')
+        #             total = total[1:len(total)-3]
+        #             x[l] = total
+
+        # for x in country:
+        #      if x == 'today':
+        #         for l in country_total_data_commas:
+        #             total = x[l]
+        #             total = format_currency(total, 'INR', locale='en_IN')
+        #             total = total[1:len(total)-3]
+        #             x[l] = total
         timeline=info['data']['timeline']
         l=len(timeline)
         l=l-1
