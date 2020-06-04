@@ -7,6 +7,7 @@ from django.conf.urls import url
 urlpatterns = [
     path('dev/',views.dev,name='dev'),
     path('',views.api,name='api'),
+    path('api/global/',views.globalview,name='globalview'),
     path('api/statewise/',views.statewise,name='statewise'),
     path('api/statewise/state/<sname>/',views.stateview,name='stateview'),
     path('api/countrywise/country/<code>/',views.countryview,name='countryview'),

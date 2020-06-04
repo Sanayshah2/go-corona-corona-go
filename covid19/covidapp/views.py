@@ -14,6 +14,46 @@ from .models import Suggestion
 import copy
 from babel.numbers import format_currency
 
+def globalview(request):
+    d=datetime.datetime.now(pytz.timezone('Asia/Kolkata'))
+    # info = requests.get('https://covid19-update-api.herokuapp.com/api/v1/cases').json()
+    # totalCases = info['graphs']['totalCases']
+    # del totalCases['source']
+    # del totalCases['sourceLink']
+    global_stats = requests.get('https://api.thevirustracker.com/free-api?global=stats')
+    global_timeline = requests.get('https://corona-api.com/timeline')
+    global_timeline1 = global_timeline.json()
+    global_timeline1 = global_timeline1['data']
+    l= len(global_timeline1)
+    l=l-1 
+    global_timeline1 = global_timeline1[0:l:10]
+    global_timeline1 = global_timeline1[::-1]
+
+    global_stats = global_stats.json()
+    global_stats = global_stats['results'][0]
+    del global_stats['source']
+    for x in global_stats:
+        a = global_stats[x]
+        b = format_currency(a, 'INR', locale='en_IN')
+        c = b[1:len(b)-3]
+        global_stats[x] = c
+    all_country = requests.get('https://corona-api.com/countries')
+    all_country = all_country.json()
+    country_data = all_country['data']
+    data={
+        'all_country':country_data ,
+        '1':country_data[0],
+        '2':country_data[1],
+        '3':country_data[2],
+        'global': global_stats,
+        
+        'globaltimeline': global_timeline1,
+        'd':d,
+        # 'totalCases':totalCases
+        #'daywise':daywise2,
+        
+    }
+    return render(request,'covidapp/globalview.html',data)
 
 def api(request):
 
