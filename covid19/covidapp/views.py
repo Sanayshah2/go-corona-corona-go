@@ -33,6 +33,8 @@ def api(request):
     all_country = requests.get('https://corona-api.com/countries')
     all_country = all_country.json()
     country_data = all_country['data']
+
+    
     #list69 = ['total_cases', 'total_recovered', 'total_deaths', 'total_new_cases_today', 'total_new_deaths_today']
         #for x in range(len(list69)):
         # a = value['total_cases']
@@ -93,23 +95,11 @@ def api(request):
 def statewise(request):
     d=datetime.datetime.now(pytz.timezone('Asia/Kolkata'))
     response_india = requests.get('https://api.covid19india.org/data.json')
-    code='IN'
-    india = response_india.json()
-    url1='https://api.thevirustracker.com/free-api?countryTimeline={}'
-    timeline=requests.get(url1.format(code)).json()
-    timeline = timeline['timelineitems'][0]
-    m=len(timeline)
-    m=m-2
-
-    timeline = dict(list(timeline.items())[m:0:-5])
-
-
-    timeline2 = dict(list(timeline.items())[::-1 ])
-
-
     
+    india = response_india.json()    
     india1=india['statewise']
     graph=india['cases_time_series']
+    
     daywise={}
     for entry in graph:
         day = entry.pop('date')
@@ -131,7 +121,7 @@ def statewise(request):
         'india_total':india['statewise'][0],
         'd':d,
         'daywise':daywise2,
-        'timeline':timeline2,
+        
       
     }
 
@@ -193,7 +183,7 @@ def statesearch(request):
     statelist=set(statelist)
 
 
-    countrylist=['US', 'BR', 'RU', 'ES', 'GB', 'IT', 'FR', 'DE', 'IN', 'TR', 'PE', 'IR', 'CL', 'CA', 'MX', 'SA', 'CN', 'PK', 'BE', 'QA', 'BD', 'NL', 'BY', 'EC', 'SE', 'SG', 'AE', 'PT', 'ZA', 'CH', 'CO', 'KW', 'ID', 'IE', 'PL', 'UA', 'EG', 'RO', 'PH', 'IL', 'DO', 'JP', 'AT', 'AR', 'AF', 'PA', 'DK', 'OM', 'RS', 'KZ', 'NG', 'BO', 'AM', 'DZ', 'CZ', 'NO', 'MD', 'GH', 'MY', 'MA', 'AU', 'FI', 'KR', 'IQ', 'CM', 'AZ', 'HN', 'SD', 'GT', 'LU', 'HU', 'TJ', 'GN', 'SN', 'UZ', 'DJ', 'TH', 'GR', 'CI', 'GA', 'SV', 'BG', 'BA', 'HR', 'MK', 'CU', 'SO', 'KE', 'EE', 'HT', 'IS', 'KG', 'LT', 'LK', 'NP', 'SK', 'NZ', 'SI', 'VE', 'GQ', 'GW', 'ML', 'LB', 'AL', 'HK', 'TN', 'LV', 'ET', 'ZM', 'CR', 'SS', 'PY', 'NE', 'CY', 'SL', 'BF', 'UY', 'GE', 'TD', 'NI', 'MG', 'JO', 'DP', 'JM', 'CG', 'TZ', 'MR', 'GF', 'PS', 'TW', 'TG', 'UG', 'RW', 'VN', 'ME', 'YE', 'LR', 'MW', 'MZ', 'BJ', 'MM', 'MN', 'ZW', 'GY', 'BN', 'LY', 'KH', 'TT', 'BS', 'AO', 'BI', 'BT', 'PR', 'BW', 'GM', 'NA', 'NC', 'BZ', 'FJ', 'SR', 'FK', 'GL', 'EH', 'PG', 'LS', 'CF', 'CD', 'ER', 'TF', 'KP', 'LA', 'XK', 'SB', 'SJ', 'SZ', 'SY', 'TL', 'TM', 'VU', 'CD', 'XK', 'KP']
+    countrylist=['AF', 'AL', 'AX', 'AS', 'DZ', 'AD', 'AO', 'AI', 'AG', 'AQ', 'AU', 'AT', 'BH', 'BD', 'BJ', 'BZ', 'AR', 'AM', 'BA', 'AW', 'AZ', 'BS', 'BN', 'BQ', 'BY', 'BB', 'IO', 'BM', 'BE', 'CM', 'BT', 'BO', 'KH', 'CF', 'BW', 'TD', 'BG', 'BV', 'BR', 'CC', 'CO', 'CA', 'BF', 'BI', 'CR', 'CV', 'KY', 'CK', 'CN', 'CW', 'CY', 'CX', 'CL', 'DO', 'KM', 'CG', 'CD', 'DM', 'GQ', 'CI', 'HR', 'CU', 'ER', 'CZ', 'DK', 'DJ', 'FJ', 'FO', 'SV', 'EG', 'TF', 'PF', 'EC', 'GH', 'EE', 'ET', 'DE', 'FK', 'FI', 'GD', 'FR', 'GP', 'GA', 'GF', 'GN', 'GM', 'GW', 'HN', 'GI', 'GE', 'GR', 'GL', 'VA', 'GT', 'ID', 'GG', 'IN', 'GU', 'IM', 'IL', 'GY', 'HK', 'HT', 'HM', 'JE', 'HU', 'IS', 'IR', 'IQ', 'IE', 'IT', 'JM', 'JP', 'KP', 'LV', 'LI', 'MG', 'MT', 'YT', 'MN', 'MM', 'NC', 'NU', 'JO', 'KR', 'LB', 'LT', 'MW', 'MH', 'KE', 'MX', 'KG', 'ME', 'KI', 'LR', 'LA', 'MO', 'LY', 'MV', 'MK', 'MR', 'ML', 'MU', 'NA', 'PK', 'MD', 'NZ', 'MA', 'NF', 'NP', 'PY', 'NE', 'MC', 'MZ', 'NL', 'NO', 'NG', 'PT', 'OM', 'RU', 'LC', 'SM', 'PW', 'SC', 'PE', 'SI', 'PR', 'SS', 'RW', 'SJ', 'MF', 'TW', 'ST', 'TG', 'SL', 'TR', 'SB', 'UA', 'ES', 'UY', 'SZ', 'VG', 'TJ', 'TK', 'TM', 'AE', 'UZ', 'VI', 'ZW', 'KZ', 'KW', 'LS', 'LU', 'MY', 'MQ', 'FM', 'MS', 'NR', 'NI', 'MP', 'PA', 'PN', 'RE', 'SH', 'VC', 'SN', 'SX', 'ZA', 'SD', 'CH', 'TH', 'TT', 'TV', 'US', 'VE', 'PG', 'PL', 'RO', 'KN', 'WS', 'RS', 'SK', 'GS', 'SR', 'SY', 'TL', 'TN', 'UG', 'UM', 'VN', 'PS', 'PH', 'QA', 'BL', 'PM', 'SA', 'SG', 'SO', 'LK', 'SE', 'TZ', 'TO', 'TC', 'GB', 'VU', 'WF', 'ZM', 'EH', 'YE']
     
     countrylist=set(countrylist)
     if request.method == 'POST':
@@ -230,25 +220,36 @@ def countryview(request,code):
         return redirect('statewise')
     else:    
         d=datetime.datetime.now(pytz.timezone('Asia/Kolkata'))
-        url = 'https://api.thevirustracker.com/free-api?countryTotal={}'
-        url1 = 'https://api.thevirustracker.com/free-api?countryTimeline={}'
-        info = requests.get(url.format(code)).json()
-        timeline = requests.get(url1.format(code)).json()
-        timeline = timeline['timelineitems'][0]
-        info=info['countrydata']
-        info=info[0]
+        url = 'http://corona-api.com/countries/{}'
         
-        name=info['info']['title']
-
-
+        info = requests.get(url.format(code)).json()
+        
+        
+        
+        country=info['data']
+        timeline=info['data']['timeline']
         l=len(timeline)
+        l=l-1
+        daywise = timeline[0:l: 10]
+        daywise2 = daywise[::-1 ]
+        daywise1={}
+        for entry in daywise2:
+            date = entry.pop('date')
+            daywise1[date] = entry
+                
+        #print(country)
+        #print(daywise1)
+
+
+
+        '''l=len(timeline)
         l=l-2
         timeline = dict(list(timeline.items())[l:0:-5])
 
 
         timeline2 = dict(list(timeline.items())[::-1 ])
 
-        '''countries = info['Countries']
+        countries = info['Countries']
 
         countries = list(countries)
         
@@ -259,10 +260,10 @@ def countryview(request,code):
 
         n=newcountries[cname]'''
         data={
-            'name':name,
-            'info':info,
+            
+            'info':country,
             'd':d,
-            'timeline':timeline2,
+            'timeline':daywise1,
         }
     return render(request,'covidapp/countryview.html',data)
 

@@ -6,26 +6,27 @@
 
   <div  style="text-align: center;">
   
-    <h5 class="kit animated animatedFadeInUp fadeInUp" style="color: white;animation-delay: 0.6s;" ><i class="fa fa-viruses" style="padding: 10px;color: rgb(194, 52, 52);" ></i>COVID19 IN <span style="color:lightsalmon;font-weight: bold;text-transform: uppercase;">{{name}}</span></h4><br><br>
+    <h5 class="kit animated animatedFadeInUp fadeInUp" style="color: white;animation-delay: 0.6s;" ><i class="fa fa-viruses" style="padding: 10px;color: rgb(194, 52, 52);" ></i>COVID19 IN <span style="color:lightsalmon;font-weight: bold;text-transform: uppercase;">{{info.name}}</span></h4><br><br>
     <div class="row">
         <div class="col-4 animated animatedFadeInUp fadeInUp" style="animation-delay:0.9s;">
-             <h5 class="kit" c style="font-weight: bold;color:rgb(100, 100, 255);">{{info.total_cases}}</h4>
-             <p><span class="counter" style="color: rgb(134, 134, 252);font-size: 15px; ">{% if info.total_new_cases_today > -1 %}+[{{info.total_new_cases_today}}]{% endif %}</span></p><br>
+             <h5 class="kit" c style="font-weight: bold;color:rgb(100, 100, 255);">{{info.latest_data.confirmed}}</h4>
+             <p><span class="counter" style="color: rgb(134, 134, 252);font-size: 15px; ">{% if info.today.confirmed > -1 %}+[{{info.today.confirmed}}]{% endif %}</span></p><br>
              <h7 style="font-weight: bold;color: rgb(100, 100, 255);font-size: 15px;">Cases</p>
         </div>
         
         <div class="col-4 animated animatedFadeInUp fadeInUp" style="animation-delay:1.5s;">
-            <h5 class="kit"  style="font-weight: bold;color:red ;">{{info.total_deaths}}</h5>
-            <p><span  style="color: rgb(255, 77, 77);font-size: 15px; ">{% if info.total_new_deaths_today > -1 %}+[{{info.total_new_deaths_today}}]{% endif %}</span></p><br>
+            <h5 class="kit"  style="font-weight: bold;color:red ;">{{info.latest_data.deaths}}</h5>
+            <p><span  style="color: rgb(255, 77, 77);font-size: 15px; ">{% if info.today.deaths > -1 %}+[{{info.today.deaths}}]{% endif %}</span></p><br>
             <p style="font-weight: bold;color: red;font-size: 15px;">Deaths</p>
         </div>
 
         <div class="col-4 animated animatedFadeInUp fadeInUp" style="animation-delay:1.8s;">
-            <h5 class="kit"  style="font-weight: bold;color:green ;">{{info.total_recovered}}</h5 >
+            <h5 class="kit"  style="font-weight: bold;color:green ;">{{info.latest_data.recovered}}</h5 >
             <p><span  style="color: yellowgreen; font-size: 15px;"><i class="fa fa-heart" aria-hidden="true" style="padding: 5px;"></i></span></p><br>
             <h7 style="font-weight: bold;color: green;font-size: 15px;">Cured</p>
         </div>
-    </div>
+    </div><br>
+    <p class="animated animatedFadeInUp fadeInUp" style="animation-delay:1.8s;">Last updated on: {{info.updated_at}}</p>
   </div>
 </div><br><br>
     
@@ -38,6 +39,7 @@
     <div class="container col-12  col-md-4"><canvas class="new_card" height="250px" id="line-chart-deaths" style="margin-bottom: 40px;padding: 15px;" ></canvas></div><br><br>
   </div>
  </div> 
+ 
 {% endblock content %}
 
 
@@ -55,19 +57,26 @@
                   {% endfor %}       ],
       datasets: [{ 
           data: [{% for key,value in timeline.items %}
-                  "{{value.total_cases}}",
+                  "{{value.confirmed}}",
                 {% endfor %}                      ],
           label: "Total cases",
           borderColor: "rgba(93, 93, 255, 0.801)",
           fill: false
         },{ 
           data: [{% for key,value in timeline.items %}
-                  "{{value.total_deaths}}",
+                  "{{value.deaths}}",
                 {% endfor %}                      ],
           label: "Total Deaths",
           borderColor: "red",
           fill: false
-        },
+        },{ 
+          data: [{% for key,value in timeline.items %}
+                  "{{value.recovered}}",
+                {% endfor %}                      ],
+          label: "Total Recovered",
+          borderColor: "green",
+          fill: false
+        }
     
         
         ],
@@ -93,7 +102,7 @@
                   {% endfor %}       ],
       datasets: [{ 
           data: [{% for key,value in timeline.items %}
-                  "{{value.new_daily_deaths}}",
+                  "{{value.new_deaths}}",
                 {% endfor %}                      ],
           label: "Daily deaths",
           borderColor: "red",
@@ -119,7 +128,7 @@
                   {% endfor %}       ],
       datasets: [{ 
           data: [{% for key,value in timeline.items %}
-                  "{{value.new_daily_cases}}",
+                  "{{value.new_confirmed}}",
                 {% endfor %}                      ],
           label: "Daily cases",
           borderColor: "rgba(93, 93, 255, 0.801)",

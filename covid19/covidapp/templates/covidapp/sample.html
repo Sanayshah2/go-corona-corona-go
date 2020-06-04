@@ -32,13 +32,14 @@
             <p><span  style="color: rgb(113, 252, 113);font-size: 15px; ">{% if india_total.deltarecovered %}+[{{india_total.deltarecovered}}]{% endif %}</span></p><br>
             <p style="font-weight: bold;color: green;font-size: 15px;">Cured</p>
         </div>
-    </div>
+    </div><br>
+    <p class="animated animatedFadeInUp fadeInUp" style="animation-delay:1.8s;">Last updated on: {{india_total.lastupdatedtime}}</p>
 
 
 </div><br><br><div class="row">
-<div class="container col-12 col-md-offset-3 col-md-4"><canvas class=' new_card' height="320px" id="line-chart-total" style="margin-bottom: 40px;padding: 15px;"></canvas></div>
-<div class="container col-12 col-md-offset-3 col-md-4"><canvas class='new_card' height="320px" id="line-chart-cured" style="margin-bottom: 40px;padding: 15px;" ></canvas></div>
-<div class="container col-12 col-md-offset-3 col-md-4"><canvas class="new_card" height="320px"  id="line-chart-deaths" style="margin-bottom: 40px;padding: 15px;" ></canvas></div><br><br>
+<div class="container col-12 col-md-offset-3 col-md-4"><canvas class=' new_card' height="250px" id="line-chart-total" style="margin-bottom: 40px;padding: 15px;"></canvas></div>
+<div class="container col-12 col-md-offset-3 col-md-4"><canvas class='new_card' height="250px" id="line-chart-cured" style="margin-bottom: 40px;padding: 15px;" ></canvas></div>
+<div class="container col-12 col-md-offset-3 col-md-4"><canvas class="new_card" height="250px"  id="line-chart-deaths" style="margin-bottom: 40px;padding: 15px;" ></canvas></div><br><br>
 </div>
 
 <div>
@@ -121,14 +122,14 @@
   new Chart(document.getElementById("line-chart-cured"), {
     type: 'line',
     data: {
-      labels: [{% for key,value in timeline.items %}
+      labels: [{% for key,value in daywise.items %}
                   
                   "{{key}}",
                   
                   {% endfor %}       ],
       datasets: [{ 
-          data: [{% for key,value in timeline.items %}
-                  "{{value.new_daily_cases}}",
+          data: [{% for key,value in daywise.items %}
+                  "{{value.dailyconfirmed}}",
                 {% endfor %}                      ],
           label: "Daily cases",
           borderColor: "rgba(93, 93, 255, 0.801)",
@@ -147,14 +148,14 @@
   new Chart(document.getElementById("line-chart-deaths"), {
     type: 'line',
     data: {
-      labels: [{% for key,value in timeline.items %}
+      labels: [{% for key,value in daywise.items %}
                   
                   "{{key}}",
                   
                   {% endfor %}       ],
       datasets: [{ 
-          data: [{% for key,value in timeline.items %}
-                  "{{value.new_daily_deaths}}",
+          data: [{% for key,value in daywise.items %}
+                  "{{value.dailydeceased}}",
                 {% endfor %}                      ],
           label: "Daily Deaths",
           borderColor: "red",
