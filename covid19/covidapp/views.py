@@ -56,18 +56,6 @@ def api(request):
     #f.close()           
     #countries = list(countries)
     #countries1 = sorted(countries, key=itemgetter('TotalConfirmed'),reverse=True)
-    #graph=india['cases_time_series']
-    #daywise={}
-    #for entry in graph:
-    #    day = entry.pop('date')
-    #    daywise[day] = entry
-
-    #daywise = dict(list(daywise.items())[119:0: -10])
-    
-    #daywise2 = dict(list(daywise.items())[::-1 ])
-
-
-
     state=india['statewise']
     state=list(state)
     newstate={}
