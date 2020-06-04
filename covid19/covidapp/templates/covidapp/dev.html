@@ -1,109 +1,68 @@
 {% load static %}
-<html>
+<!doctype html>
+<html lang="en" class="h-100">
+
 <head>
-
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <!-- jQuery library -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <!-- Latest compiled JavaScript -->
-   
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dark Mode Switch</title>
+  <meta name="description" content="Add a dark-mode theme toggle with a Bootstrap Custom Switch">
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-    
-<style>
-  @font-face {
-font-family: 'Archia Regular';
-font-style: normal;
-font-weight: normal;
-src: local('Archia Regular'), url('{% static "/covidapp/archia-medium-webfont.woff2" %}') format('woff2');
-}
-  html { font-size: 1rem; }
+  <meta property="og:site_name" content="GitHub">
+  <meta property="og:image"
+    content="https://repository-images.githubusercontent.com/194995309/38db8f80-9db7-11e9-998f-43f2a26d9e0b">
+  <meta property="og:title" content="dark-mode-switch">
+  <meta property="og:description" content="Add a dark-mode theme toggle with a Bootstrap Custom Switch">
+  <meta property="og:url" content="https://coliff.github.io/dark-mode-switch/">
+  <link rel="author" href="https://christianoliff.com/">
 
-@media screen and (max-width: 576px) {
-    html { font-size: 1.5rem }
-}
-@media screen and (min-width: 576px) {
-    html { font-size: calc(20% + 0.5vw + 1.2vh) }
-
-
-}
-/* @media screen and (min-width: 992px) {
-    html { font-size: 1.75rem; }
-}
-@media screen and (min-width: 1200px) {
-    html { font-size: 2rem; }
-} */
-
-</style>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href='{% static "/covidapp/dark-mode.css" %}'>
 
 </head>
-<body style="background-color: #121212; color: lightgray;">
-  
-      {{totalCases}}
+
+<body class="bg-white text-center d-flex h-100">
+
+  <div class="container d-flex p-3 mx-auto flex-column">
+    <header class="mb-auto">
+      <h3 class="float-left">Dark Mode Switch</h3>
+      <nav class="nav justify-content-center float-right">
+        <a class="nav-link active" href="https://coliff.github.io/dark-mode-switch/">Home</a>
+        <a class="nav-link" href="https://github.com/coliff/dark-mode-switch" target="_blank">GitHub</a>
+        <div class="nav-link">
+
+          <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="darkSwitch">
+            <label class="custom-control-label" for="darkSwitch">Dark Mode</label>
+          </div>
+          <script src="dark-mode-switch.min.js"></script>
 
 
-      <br><br><br>
-      <div class='col-md-6 offset-md-3'>
-      <canvas id="myChart" width="400" height="400"></canvas>
+        </div>
+      </nav>
+    </header>
 
-      <script>
-        Chart.defaults.global.defaultFontFamily = "Archia Regular";
-        Chart.defaults.global.defaultFontSize = 12;
-        Chart.defaults.global.defaultFontColor = 'lightgray';
+    <main role="main">
+      <h1>🌓 Dark Mode Switch</h1>
+      <p class="lead">Add a dark-mode theme switch with a Bootstrap Custom Switch</p>
+      <ul class="list-unstyled">
+        <li>&middot; Uses local storage to save preference</li>
+        <li>&middot; Only 262 Bytes minified and gzipped!</li>
+      </ul>
+      <p>
+        <a href="https://github.com/coliff/dark-mode-switch" target="_blank" rel="noopener"
+          class="btn btn-lg btn-secondary">
+          Learn more
+        </a>
+      </p>
+    </main>
 
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: [
-                              {% for x in totalCases.categories %}
-                                  '{{x}}',    
-                              {% endfor %}
-                         ],
-                details : '{{totalCases.details}}',
-                datasets: [{
-                    
-                    label: '{{totalCases.title}}' ,
-                   // backgroundColor:'red',
-                    barThickness : 3,   
-                    data: {{totalCases.data}},
-                    backgroundColor: 'rgba(255, 99, 132, 0.2  )',
-                        
-                  
-                    borderColor: 
-                        'rgba(255, 99, 132, 1)',
-                 
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    xAxes: [{
-                      gridLines:{
-                        display:false,
-                        // ticks: {
-                          color:'rgba(128, 128, 128, 0.144)',
-                            tickMarkLength: 19
-                        //}
-                      }
-                    }],
-                    yAxes: [{
-                      gridLines:{
-                        display:false,
-                        // ticks: {
-                          color:'rgba(128, 128, 128, 0.144)',
-                            tickMarkLength: 19
-                        //}
-                      }
-                    }]
-                }
-            }
-        });
-        </script>
-                    <div style="color: rgba(128, 128, 128, 0.144);">        
+    <footer class="mt-auto">
+      <p>&copy; 2019-2020</p>
+    </footer>
+
+  </div>
+</body>
+
 </html>
