@@ -1,3 +1,4 @@
+{% load static %}
 <html>
 <head>
 
@@ -15,6 +16,12 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
     
 <style>
+  @font-face {
+font-family: 'Archia Regular';
+font-style: normal;
+font-weight: normal;
+src: local('Archia Regular'), url('{% static "/covidapp/archia-medium-webfont.woff2" %}') format('woff2');
+}
   html { font-size: 1rem; }
 
 @media screen and (max-width: 576px) {
@@ -35,49 +42,67 @@
 </style>
 
 </head>
-<body style="background-color: #121212;">
-  <div class='container  animated animatedFadeInUp fadeInUp ' style="text-align: center  ; padding-bottom: 0px;font-family:inherit;margin-bottom: 40px;animation-delay: 0.3s">
-    <p class='text-responsive' style="text-align: center;font-size: 20px;font-weight: bold;margin:25px;color:white"><i class='fas fa-globe-americas text-responsive' style="font-size: 18px;padding: 10px;color: skyblue;"></i>GLOBAL <span style="color: bisque;">COVID19</span> STATS </p>
-    <div class="row" style="margin-top: 20px;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-        <div class="col-4" style="margin-bottom: 20px;">
-          <div class="button1 animated animatedFadeInUp fadeInUp" style="animation-delay:0.4s; ">
-        <h5 class="text-responsive"><span class="count" style="color: rgb(104, 104, 255);letter-spacing: 1.5px;font-weight: bold;">8765432</span></h1>
-        <p class='text-responsive' style="font-size: 15px;"><span class="count" style="color: rgb(134, 134, 252);">[+8765432]</span></p><br>
-        <p class='text-responsive' style="font-size: 15px;font-weight: bold;color: rgb(104, 104, 255);">Cases</p><br>
-        
-        </div> </div>
+<body style="background-color: #121212; color: lightgray;">
+  
+      {{totalCases}}
 
-        <!--<div class=" col-12" style="margin-bottom: 20px;">
-          <div class="button1 animated animatedFadeInUp fadeInUp" style="animation-delay:0.5s">
-          <h4 ><span class="count" style="color: yellow;letter-spacing: 1.5px;font-weight: 700;">{{global.total_active_cases}}</span></h2>
-          <h7><span class="count" style="color: #121212;">[+{{global.NewRecovered}}]</span></h4><br><br>
-          <h8 style="font-weight: bold;color: yellow;">Active</h3><br>
-        
-        
-        </div></div>-->
 
-        <div class=" col-4" style="margin-bottom: 20px;">
-          <div class="button1 animated animatedFadeInUp fadeInUp" style="animation-delay:0.6s; ">
-          <h5 class='text-responsive'><span class="count" style="color: red;letter-spacing: 1.5px; font-weight: bold;">876543</span></h4>
-          <p class='text-responsive' style="font-size: 15px;"><span class="count" style="color: rgb(240, 133, 133);">[+9876543]</span></p><br>
-          <p class='text-responsive' style="font-size: 15px;font-weight: bold;color: red;"> Deaths</p><br>
-        </div></div>
+      <br><br><br>
+      <div class='col-md-6 offset-md-3'>
+      <canvas id="myChart" width="400" height="300"></canvas>
 
-        <div class=" col-4" style="margin-bottom: 20px;">
-          <div class="button1 animated animatedFadeInUp fadeInUp" style="animation-delay:0.7s;">
-          <h5 class='text-responsive'><span class="count" style="color: green;letter-spacing: 1.5px;">876543</span></h1>
-          <p class='text-responsive' style="font-size: 15px;"><span class="count" style="color: #121212;">1</span></p><br>
-          <p class='text-responsive' style="font-size: 15px;font-weight: bold;color: green;"> Cured</h8><br>
-        
-        </div></div>
-        <div class="md-form">
-          <i class="fa fa-envelope prefix grey-text"></i>
-          <input type="email" id="materialFormCardEmailEx" class="form-control">
-          <label for="materialFormCardEmailEx" class="font-weight-light">Your email</label>
-        </div>
-      
-      </div>
-    
-      </div>
-</body>
+      <script>
+        Chart.defaults.global.defaultFontFamily = "Archia Regular";
+        Chart.defaults.global.defaultFontSize = 15;
+        Chart.defaults.global.defaultFontColor = 'lightgray';
+
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [
+                              {% for x in totalCases.categories %}
+                                  '{{x}}',    
+                              {% endfor %}
+                         ],
+                details : '{{totalCases.details}}',
+                datasets: [{
+                    label: '{{totalCases.title}}' ,
+                   // backgroundColor:'red',
+                    barThickness : 3,   
+                    data: {{totalCases.data}},
+                    backgroundColor: 'rgba(255, 99, 132, 0.2  )',
+                        
+                  
+                    borderColor: 
+                        'rgba(255, 99, 132, 1)',
+                 
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    xAxes: [{
+                      gridLines:{
+                        display:false,
+                        // ticks: {
+                          color:'rgba(128, 128, 128, 0.144)',
+                            tickMarkLength: 19
+                        //}
+                      }
+                    }],
+                    yAxes: [{
+                      gridLines:{
+                        display:false,
+                        // ticks: {
+                          color:'rgba(128, 128, 128, 0.144)',
+                            tickMarkLength: 19
+                        //}
+                      }
+                    }]
+                }
+            }
+        });
+        </script>
+                    <div style="color: rgba(128, 128, 128, 0.144);">        
 </html>

@@ -30,12 +30,17 @@ def api(request):
     all_country = all_country.json()
     all_country = all_country['countryitems'][0]
     country_data = []
+    #list69 = ['total_cases', 'total_recovered', 'total_deaths', 'total_new_cases_today', 'total_new_deaths_today']
     for key,value in all_country.items():
+        #for x in range(len(list69)):
+        # a = value['total_cases']
+        # b = format_currency(a, 'INR', locale='en_IN')
+        # c = b[1:len(b)-3]
+        # value['total_cases'] = c
         country_data.append(value)
     country_data.remove('ok')
 
     country_data = sorted(country_data, key=itemgetter('total_cases'),reverse=True)
-    
     #response = requests.get('https://api.covid19api.com/summary')
     #info = response.json()
     response_india = requests.get('https://api.covid19india.org/data.json')
@@ -222,11 +227,15 @@ def statesearch(request):
 def dev(request):
     from datetime import date
     from datetime import datetime
+    info = requests.get('https://covid19-update-api.herokuapp.com/api/v1/cases').json()
+    totalCases = info['graphs']['totalCases']
+    del totalCases['source']
+    del totalCases['sourceLink']
     x = datetime.now(pytz.timezone('Asia/Kolkata'))
     today = date.today()
 
     d2 = today.strftime("%B %d, %Y")
-    return render(request,'covidapp/dev.html', {'d':d2, 'x':x})
+    return render(request,'covidapp/dev.html', {'d':d2, 'x':x, 'totalCases':totalCases})
 
 def countryview(request,code):
     if code == 'IN':
