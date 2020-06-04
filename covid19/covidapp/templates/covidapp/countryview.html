@@ -32,11 +32,11 @@
     
 <div class='container'>
   <div class="row">
-        <div class="container col-12 col-md-4 "><canvas class='new_card' height="250px" id="line-chart-total" style="margin-bottom: 40px;padding: 15px;"></canvas></div>
+        <div class="container col-12 col-md-4 "><canvas class='new_card' height="275px" id="line-chart-total" style="margin-bottom: 40px;padding: 15px; border:0px"></canvas></div>
   
   
-    <div class="container col-12 col-md-4"><canvas class='new_card' height="250px" id="line-chart-cured" style="margin-bottom: 40px;padding: 15px;" ></canvas></div>
-    <div class="container col-12  col-md-4"><canvas class="new_card" height="250px" id="line-chart-deaths" style="margin-bottom: 40px;padding: 15px;" ></canvas></div><br><br>
+    <div class="container col-12 col-md-4"><canvas class='new_card' height="275px" id="line-chart-deaths" style="margin-bottom: 40px;padding: 15px;background-color:rgb(255, 0, 0, 0.2); border:0px" ></canvas></div>
+    <div class="container col-12  col-md-4"><canvas class="new_card" height="275px" id="line-chart-confirmed" style="margin-bottom: 40px;padding: 15px; border:0px;background-color:rgba(93, 93, 255, 0.15)" ></canvas></div><br><br>
   </div>
  </div> 
  
@@ -60,22 +60,25 @@
                   "{{value.confirmed}}",
                 {% endfor %}                      ],
           label: "Total cases",
-          borderColor: "rgba(93, 93, 255, 0.801)",
-          fill: false
+          borderColor: "rgba(93, 93, 255, 0.9)",
+          backgroundColor:'rgba(93, 93, 255, 0.15)',
+          borderWidth: 1.5
         },{ 
           data: [{% for key,value in timeline.items %}
                   "{{value.deaths}}",
                 {% endfor %}                      ],
           label: "Total Deaths",
           borderColor: "red",
-          fill: false
+          backgroundColor:'rgb(255, 0, 0, 0.2)',
+          borderWidth: 1.5
         },{ 
           data: [{% for key,value in timeline.items %}
                   "{{value.recovered}}",
                 {% endfor %}                      ],
           label: "Total Recovered",
           borderColor: "green",
-          fill: false
+          backgroundColor:'rgb(0, 128, 0, 0.2)',
+          borderWidth: 1.5
         }
     
         
@@ -87,36 +90,10 @@
     options: {
       title: {
         display: true,
-        text: 'Rise in Total cases in India'
+        text: 'Rise in All types of cases in {{info.name}}'
       }
     }
   });
-
-  new Chart(document.getElementById("line-chart-cured"), {
-    type: 'line',
-    data: {
-      labels: [{% for key,value in timeline.items %}
-                  
-                  "{{key}}",
-                  
-                  {% endfor %}       ],
-      datasets: [{ 
-          data: [{% for key,value in timeline.items %}
-                  "{{value.new_deaths}}",
-                {% endfor %}                      ],
-          label: "Daily deaths",
-          borderColor: "red",
-          fill: false
-        }] 
-    },
-    options: {
-      title: {
-        display: true,
-        text: 'Rise in Total recovered in India'
-      }
-    }
-  });
-
 
   new Chart(document.getElementById("line-chart-deaths"), {
     type: 'line',
@@ -128,18 +105,78 @@
                   {% endfor %}       ],
       datasets: [{ 
           data: [{% for key,value in timeline.items %}
-                  "{{value.new_confirmed}}",
+                  "{{value.new_deaths}}",
                 {% endfor %}                      ],
-          label: "Daily cases",
-          borderColor: "rgba(93, 93, 255, 0.801)",
-          fill: false
+          label: "Per day deaths",
+          backgroundColor: 'rgb(255, 0, 0, 0.15)',
+          borderColor:  'red',
+          borderWidth: 1
         }] 
     },
     options: {
       title: {
         display: true,
-        text: 'Rise in Deaths in India'
-      }
+        text: 'Rise in deaths in {{info.name}}'
+      },
+      scales: {
+                    xAxes: [{ 
+                      gridLines:{
+                        display:false,                                      
+                            tickMarkLength: 19             
+                      }
+                    }],
+                    yAxes: [{
+                      gridLines:{
+                        display:false,
+                        tickMarkLength: 19
+                      }
+                    }]
+                }
+    }
+  });
+
+
+  new Chart(document.getElementById("line-chart-confirmed"), {
+    type: 'line',
+    data: {
+      labels: [{% for key,value in timeline.items %}
+                  
+                  "{{key}}",
+                  
+                  {% endfor %}       ],
+      datasets: [{ 
+          data: [{% for key,value in timeline.items %}
+                  "{{value.new_confirmed}}",
+                {% endfor %}                      ],
+          label: "Per day confirmed cases",
+          backgroundColor: 'rgba(93, 93, 255, 0.15)',           
+          borderColor: 'rgba(93, 93, 255, 0.9)',
+          borderWidth: 1
+          
+        }] 
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Rise in confirmed cases in {{info.name}}'
+      },
+      scales: {
+                    xAxes: [{ 
+                      gridLines:{
+                        display:false,
+                        // ticks: {
+                         
+                            tickMarkLength: 19
+                        //}
+                      }
+                    }],
+                    yAxes: [{
+                      gridLines:{
+                        display:false,
+                        tickMarkLength: 19
+                      }
+                    }]
+                }
     }
   });
 
