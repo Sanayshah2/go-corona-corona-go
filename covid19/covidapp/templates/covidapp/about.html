@@ -45,6 +45,21 @@
 	text-shadow: 0px -2px #2980B9;
 }
 
+#id_suggestion{
+    width: 60%;
+    border-radius: 7px;
+}
+
+#id_rating{
+    width: 60%;
+    border-radius: 7px;
+}
+
+#id_email{
+    width: 60%;
+    border-radius: 7px;
+}
+
 </style>
 {% endblock style %}
 {% block content %}
@@ -72,7 +87,7 @@
     {% endfor %}
     {% endif %}
     <br>
-    <div class='new_card col-12' style="padding:10px;">
+    <div class='new_card col-12 ' style="padding:10px;">
        
     <center><h2><i class="fas fa-cogs"></i> Who made this website?</h2></center>
     <br><br>
@@ -86,16 +101,16 @@
     </div>
     <br>
      <div class='new_card col-12' style="padding:20px;">
-  
+        <div class='col-12 '>
         <form method="POST" class="form-group">
             {% csrf_token %}
-            <p>Suggestion/Comments(if any) :<br><br>{{form.suggestion}}</p><br>
-                <p>Email<sup>*</sup> :<br><br>{{form.email}}</p><br>
-                <p>Rating(Out of 5)<sup>*</sup> :<br><br>{{form.rating}}</p><br>
+            <p>Suggestion/Comments (if any) :<br>{{form.suggestion}}</p><br>
+                <p>Email<sup>*</sup> :<br>{{form.email}}</p><br>
+                <p>Rating (Out of 5)<sup>*</sup> :<br>{{form.rating}}</p>
                 
-                <div style="padding-left: 15px;"><button class="btn btn-secondary"  type='submit' style="background-color: #1d1d1d;">Submit</button></div>
+            <button class="btn btn-secondary"  type='submit' style="background-color: #1d1d1d;">Submit</button>
         </form>
-    
+        </div>
     </div>
     </div>
     

@@ -244,7 +244,29 @@ src: local('Archia Regular'), url('{% static "/covidapp/archia-medium-webfont.wo
             </ul>
           </div>
         </div>
-      </nav>       
+      </nav>   
+      <!-- <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.5/lib/darkmode-js.min.js"></script>
+      <script>
+
+        var options = {
+          bottom: '64px', // default: '32px'
+          right: 'unset', // default: '32px'
+          left: '32px', // default: 'unset'
+          time: '0.5s', // default: '0.3s'
+          mixColor: '#fff', // default: '#fff'
+          backgroundColor: '#fff',  // default: '#fff'
+          buttonColorDark: '#100f2c',  // default: '#100f2c'
+          buttonColorLight: '#fff', // default: '#fff'
+          saveInCookies: false, // default: true,
+          label: '🌓', // default: ''
+          autoMatchOsTheme: true // default: true
+}
+
+        const darkmode = new Darkmode(options);
+        darkmode.showWidget();
+
+      </script> -->
+    </body>    
       {% block content %}
       {% endblock content %}
       <footer class="page-footer font-small cyan darken-3" style="text-align: center;margin-top: 30px;">
@@ -286,7 +308,7 @@ src: local('Archia Regular'), url('{% static "/covidapp/archia-medium-webfont.wo
             <i class="fab fa-twitter" style="padding: 10px;"> </i>
           </a>
           <!-- Google +-->
-          <a class="gplus-ic">
+          <a class="gplus-ic" href='mailto:sanayshah2@gmail.com'>
             <i class="fab fa-google-plus-g" style="padding: 10px;"> </i>
           </a>
           <!--Linkedin -->
