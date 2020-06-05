@@ -26,6 +26,10 @@
             <h7 style="font-weight: bold;color: green;font-size: 15px;">Cured</p>
         </div>
     </div><br>
+    <p class="animated animatedFadeInUp fadeInUp" style="color: red;animation-delay: 1.8s;"><span style="font-weight: bold;">Death rate : </span>{{info.latest_data.calculated.death_rate}}</p><br>
+    <p class="animated animatedFadeInUp fadeInUp" style="color: green;animation-delay: 1.8s;"><span style="font-weight: bold;">Recovery rate : </span>{{info.latest_data.calculated.recovery_rate}}</p><br>
+    <p class="animated animatedFadeInUp fadeInUp" style="color: rgb(95, 95, 255);font-weight: bold;animation-delay: 1.8s;">Cases per million : {{info.latest_data.calculated.cases_per_million_population}}</p><br>
+
     <p class="animated animatedFadeInUp fadeInUp text-muted" style="animation-delay:1.8s;font-weight: bold;">Last updated on: {{info.updated_at}}</p>
   </div>
 </div><br><br>
