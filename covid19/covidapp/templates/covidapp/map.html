@@ -13,8 +13,8 @@
     }
 
     #map {
-      width: 500px;
-      height: 600px;
+      width: 100%;
+      height: 100%;
     }
   </style>
 {% endblock style %}
@@ -36,7 +36,7 @@
       },
     };
 
-    const map = L.map('map').setView([17.3924217, 78.4689988], 7);
+    const map = L.map('map').setView([30.3924217, 20.4689988], 1.5);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution:
