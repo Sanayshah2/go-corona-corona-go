@@ -62,6 +62,23 @@
     };
     console.log(coordinates)
     const map = L.map('map').setView([20, 77], 1.5);
+    var greenIcon = L.icon({
+    iconUrl: 'https://leafletjs.com/examples/custom-icons/leaf-green.png',
+    shadowUrl: 'https://leafletjs.com/examples/custom-icons/leaf-shadow.png',
+
+    iconSize:     [38, 95], // size of the icon
+    shadowSize:   [50, 64], // size of the shadow
+    iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+    shadowAnchor: [4, 62],  // the same for the shadow
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+
+var myIcon = L.icon({
+    iconUrl: 'https://img.icons8.com/nolan/64/street-view.png',
+    iconSize: [30, 40],
+
+});
+
     
    
     var CartoDB_DarkMatter = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
@@ -71,10 +88,11 @@
 }).addTo(map);
 
     for (let i = 0; i < Object.keys(coordinates.Latitude).length; i =i+ 2) {
+   
       const marker = L.marker([
         coordinates.Latitude[i],
         coordinates.Longitude[i],
-      ]);
+      ],{icon: myIcon});
       marker.myData = { id: coordinates.name[i] ,cases:coordinates.Cases[i],deaths:coordinates.Deaths[i],recovered:coordinates.Recovered[i]};
       marker.bindPopup("<p >"+ marker.myData.id +"</p>"+"<p>"+ "Cases"+" : "+marker.myData.cases +"</p>"+"<p>"+"Deaths"+" : "+marker.myData.deaths +"</p>"+"<p>"+"Recovered"+" : "+marker.myData.recovered +"</p>");
       marker.on('mouseover',function(e){
@@ -87,4 +105,5 @@
       marker.addTo(map);
     }
   </script>
+
 {% endblock script %} 
