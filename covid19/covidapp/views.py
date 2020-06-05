@@ -73,6 +73,13 @@ def api(request):
     all_country = requests.get('https://corona-api.com/countries')
     all_country = all_country.json()
     country_data = all_country['data']
+    for x in country_data:
+        x['total_confirmed'] = (x['latest_data']['confirmed'])    
+    country_data = sorted(country_data, key=itemgetter('total_confirmed'),reverse=True)
+    ranknumber = 1
+    for x in country_data:
+        x['rank'] = ranknumber
+        ranknumber = ranknumber + 1
     country_total_data_commas = ['confirmed', 'deaths', 'recovered']
     country_daily_data_commas = ['confirmed', 'deaths']
     for x in country_data:
@@ -88,10 +95,11 @@ def api(request):
             total = format_currency(total, 'INR', locale='en_IN')
             total = total[1:len(total)-3]
             x['today'][l] = total
+
     response_india = requests.get('https://api.covid19india.org/data.json')
     india = response_india.json()
     
-    #countries1 = sorted(countries, key=itemgetter('TotalConfirmed'),reverse=True)
+    
     state=india['statewise']
     india1_comma = ['active', 'confirmed', 'deaths','recovered' ,'deltaconfirmed', 'deltadeaths', 'deltarecovered', ]
     for x in state:

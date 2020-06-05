@@ -215,7 +215,7 @@ form .f:hover{
 <br><br>
 
 <div class="container">
-  <p style="color: rgb(255, 36, 36);font-weight: bold;text-align: center;">Hover the marker for corona data in that country:</p><br>
+  <p style="color:rgba(255, 255, 224, 0.767);font-weight: bold;text-align: center;">Hover the marker for corona data in that country:</p><br>
     <div id="map"></div><br>
 </div>
 
@@ -234,7 +234,7 @@ form .f:hover{
       
     {% for value in all_country %}
     <tr>
-      <td><p style='text-align: left;'><a href='/country/{{value.code}}/'>{{value.name}}</a></p></td>
+      <td><p style='text-align: left;'><a href='/country/{{value.code}}/'>{{value.rank}}. {{value.name}}</a></p></td>
       <td><p ><span style='color: rgba(93, 93, 255, 0.801);'>{% if value.today.confirmed != 0 %}+{{value.today.confirmed}}{% endif %}</span> {{value.latest_data.confirmed}}</p></td>
       <td><p ><span style="color: red;">{% if value.today.deaths != 0 %}+ {{value.today.deaths}}{% endif %}</span> {{value.latest_data.deaths}}</p></td>
       <td><p ><span style="color: green;">      </span> {{value.latest_data.recovered}}</p></td>
@@ -435,7 +435,7 @@ form .f:hover{
     ]
   };
   console.log(coordinates)
-  const map = L.map('map').setView([20, 77], 1.5);
+  const map = L.map('map').setView([20, 77], 3);
   
  
   var CartoDB_DarkMatter = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
