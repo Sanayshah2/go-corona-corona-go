@@ -395,5 +395,5 @@ def about(request):
 
 
 
-    def map(request):
-        return render(request, 'covidapp/map.html')
+def map(request):
+    return render(request, 'covidapp/map.html')
