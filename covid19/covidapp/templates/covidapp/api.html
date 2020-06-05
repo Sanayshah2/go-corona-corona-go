@@ -78,7 +78,7 @@ input{
     position: absolute;
     top: 0;
     right: 0;
-    border-radius: 50%;
+    
     color: #575757;
     text-align: center;
     font-size: 1.2em;
@@ -131,7 +131,7 @@ form .f:hover{
   {% csrf_token %}
   
   <input  class=""  list="browsers" onfocus="this.value=''"  placeholder="Enter state,country " type="search"   name="searchstate">
-  <button type="submit" ><i class="f fa fa-search " style="" type="submit"></i></button>
+  <button type="submit" ><i class="f fa fa-search " style="border-radius: 50%;" type="submit"></i></button>
   
   <datalist id="browsers"  style="background-color: #121212;">
     {% for s in statelist %}
@@ -151,15 +151,15 @@ form .f:hover{
 </div>
 <div class=" container" >
   <h5 class='kit animated animatedFadeInUp fadeInUp' style="text-align: center;font-weight: bold;margin:25px;color:white;animation-delay: 0.2s;"><i class='fas fa-globe-americas' style="padding: 12px;color: skyblue;"></i>GLOBAL <span style="color: bisque;">COVID19</span> STATS </h4><br>
-  <div class=" row" style="text-align: center;padding-bottom:30px;margin: 3px;">
+  <div class=" row" style="text-align: center;padding-bottom:30px;">
     <div class=" col-4  animated animatedFadeInUp fadeInUp" style="animation-delay: 0.3s;">
       <h5 id="confirm" class="kit" style="color:rgba(93, 93, 255, 0.801);font-weight: bold;">{{global.total_cases}}</h5>
-      <p style="font-size: 15px;"><span class="count" style="color: rgb(160, 160, 253);">[+{{global.total_new_cases_today}}]</span></p><br>
+      <p style="font-size: 15px;"><span class="count" style="color: rgb(160, 160, 253);">+[{{global.total_new_cases_today}}]</span></p><br>
       <p style="color: rgba(93, 93, 255, 0.801);font-size: 15px;font-weight: bold;">Confirmed</h1>
     </div>
     <div class="col-4  animated animatedFadeInUp fadeInUp" style="animation-delay: 0.4s;">
       <h5 class="kit" style="color: red;font-weight: bold;">{{global.total_deaths}}</h5>
-      <p style="font-size: 15px;"><span class="count" style="color: rgb(240, 133, 133);">[+{{global.total_new_deaths_today}}]</span></p><br>
+      <p style="font-size: 15px;"><span class="count" style="color: rgb(240, 133, 133);">+[{{global.total_new_deaths_today}}]</span></p><br>
       <p style="color: red;font-size: 15px;font-weight: bold;">Deaths</h8>
     </div><br>
     <div class="col-4  animated animatedFadeInUp fadeInUp" style="animation-delay: 0.5s;">
@@ -183,7 +183,7 @@ form .f:hover{
       <div class="row" style="padding-bottom:30px;">
           <div class=" col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:0.9s;margin-bottom: 30px;">
             <h5 class='kit'><span class="counter " style="color: rgba(93, 93, 255, 0.801);font-weight: bold;">{{india_total.confirmed}}</span></h3>
-            <p ><span class="counter" style="font-size: 12px;color:rgb(160, 160, 253); ">[+{{india_total.deltaconfirmed}}]</span></p><br>         
+            <p ><span class="counter" style="font-size: 12px;color:rgb(160, 160, 253); ">+[{{india_total.deltaconfirmed}}]</span></p><br>         
               <p style="font-size: 12px;font-weight: bold;color: rgba(93, 93, 255, 0.801);">Cases</p>
           </div>
 
@@ -437,20 +437,24 @@ form .f:hover{
     ]
   };
   console.log(coordinates)
+  var myIcon = L.icon({
+    iconUrl: 'https://img.icons8.com/nolan/64/street-view.png',
+    iconSize: [30, 40],
+
+});
   const map = L.map('map').setView([20, 77], 3);
   
  
   var CartoDB_DarkMatter = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
 subdomains: 'abcd',
 maxZoom: 19
 }).addTo(map);
 
-  for (let i = 0; i < Object.keys(coordinates.Latitude).length; i =i+ 2) {
+  for (let i = 0; i < Object.keys(coordinates.Latitude).length; i =i+ 1) {
     const marker = L.marker([
       coordinates.Latitude[i],
       coordinates.Longitude[i],
-    ]);
+    ],{icon : myIcon});
     marker.myData = { id: coordinates.name[i] ,cases:coordinates.Cases[i],deaths:coordinates.Deaths[i],recovered:coordinates.Recovered[i]};
     marker.bindPopup("<p >"+ marker.myData.id +"</p>"+"<p>"+ "Cases"+" : "+marker.myData.cases +"</p>"+"<p>"+"Deaths"+" : "+marker.myData.deaths +"</p>"+"<p>"+"Recovered"+" : "+marker.myData.recovered +"</p>");
     marker.on('mouseover',function(e){

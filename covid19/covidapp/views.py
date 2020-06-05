@@ -137,6 +137,13 @@ def api(request):
 
 def statewise(request):
     d=datetime.datetime.now(pytz.timezone('Asia/Kolkata'))
+    url = 'http://corona-api.com/countries/{}'
+        
+    info = requests.get(url.format('IN')).json()
+        
+        
+        
+    country=info['data']
     response_india = requests.get('https://api.covid19india.org/data.json')
     
     india = response_india.json()    
@@ -169,6 +176,7 @@ def statewise(request):
         'india_total':india['statewise'][0],
         'd':d,
         'daywise':daywise2,
+        'info':country,
         
       
     }
