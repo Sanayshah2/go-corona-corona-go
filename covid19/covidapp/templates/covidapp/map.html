@@ -16,7 +16,7 @@
 
     #map {
       width: 100%;
-      height: 100%;
+      height: 70%;
     }
 
 
@@ -27,20 +27,23 @@
 {% block script %} 
 <script>
     const coordinates = {
-      Latitude: {
-        '0': 17.7222014,
-        '1': 17.3924217,
-        '2': 17.3906471,
-        '3': 17.433709,
-      },
-      Longitude: {
-        '0': 83.2892612,
-        '1': 78.4689988,
-        '2': 78.5009093,
-        '3': 78.5016144,
-      },
+      Latitude:[ 
+        {% for x in country_data %}
+        '{{x.coordinates.latitude}}', 
+        {% endfor %}
+      ],
+      Longitude: [
+        {% for x in country_data %}
+        '{{x.coordinates.longitude}}', 
+        {% endfor %}
+      ],
+      name:[
+          {% for x in country_data %}
+          '{{x.name}}',
+          {% endfor %}
+      ]
     };
-
+    console.log(coordinates)
     const map = L.map('map').setView([30.3924217, 20.4689988], 1.5);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -50,10 +53,10 @@
 
     for (let i = 0; i < Object.keys(coordinates.Latitude).length; i += 1) {
       const marker = L.marker([
-        coordinates.Latitude[i.toString()],
-        coordinates.Longitude[i.toString()],
+        coordinates.Latitude[i],
+        coordinates.Longitude[i],
       ]);
-      marker.myData = { id: coordinates.Latitude[i.toString()] };
+      marker.myData = { id: coordinates.name[i] };
 
       marker.on('click', function(e) {
         alert(marker.myData.id);

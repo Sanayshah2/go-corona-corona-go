@@ -260,7 +260,12 @@ def dev(request):
     today = date.today()
 
     d2 = today.strftime("%B %d, %Y")
-    return render(request,'covidapp/dev.html', {'d':d2, 'x':x, 'totalCases':totalCases})
+
+
+    all_country = requests.get('https://corona-api.com/countries')
+    all_country = all_country.json()
+    country_data = all_country['data']
+    return render(request,'covidapp/dev.html', {'d':d2, 'x':x, 'totalCases':totalCases, 'country_data':country_data})
 
 def countryview(request,code):
     if code == 'IN':
@@ -396,4 +401,7 @@ def about(request):
 
 
 def map(request):
-    return render(request, 'covidapp/map.html')
+    all_country = requests.get('https://corona-api.com/countries')
+    all_country = all_country.json()
+    country_data = all_country['data']
+    return render(request, 'covidapp/map.html',{'country_data':country_data})
