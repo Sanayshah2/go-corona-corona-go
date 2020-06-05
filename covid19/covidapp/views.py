@@ -90,11 +90,13 @@ def api(request):
             x['today'][l] = total
 
     for x in country_data:
-        
+        x['total_confirmed'] = (x['latest_data']['confirmed'])    
+    country_data = sorted(country_data, key=itemgetter('total_confirmed'),reverse=True)
+    print(country_data)    
     response_india = requests.get('https://api.covid19india.org/data.json')
     india = response_india.json()
     
-    #countries1 = sorted(countries, key=itemgetter('TotalConfirmed'),reverse=True)
+    
     state=india['statewise']
     india1_comma = ['active', 'confirmed', 'deaths','recovered' ,'deltaconfirmed', 'deltadeaths', 'deltarecovered', ]
     for x in state:
