@@ -234,7 +234,7 @@ form .f:hover{
       
     {% for value in all_country %}
     <tr>
-      <td><p style='text-align: left;'><a href='/country/{{value.code}}/'>{{value.name}}</a></p></td>
+      <td><p style='text-align: left;'><a href='/country/{{value.code}}/'>{{value.rank}}. {{value.name}}</a></p></td>
       <td><p ><span style='color: rgba(93, 93, 255, 0.801);'>{% if value.today.confirmed != 0 %}+{{value.today.confirmed}}{% endif %}</span> {{value.latest_data.confirmed}}</p></td>
       <td><p ><span style="color: red;">{% if value.today.deaths != 0 %}+ {{value.today.deaths}}{% endif %}</span> {{value.latest_data.deaths}}</p></td>
       <td><p ><span style="color: green;">      </span> {{value.latest_data.recovered}}</p></td>
