@@ -448,7 +448,7 @@ subdomains: 'abcd',
 maxZoom: 19
 }).addTo(map);
 
-  for (let i = 0; i < Object.keys(coordinates.Latitude).length; i =i+ 2) {
+  for (let i = 0; i < Object.keys(coordinates.Latitude).length; i =i+ 1) {
     const marker = L.marker([
       coordinates.Latitude[i],
       coordinates.Longitude[i],
