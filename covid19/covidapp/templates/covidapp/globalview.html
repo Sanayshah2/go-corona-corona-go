@@ -43,7 +43,7 @@
   {% block script %}
   <script> 
     new Chart(document.getElementById("line-chart-total"), {
-      type: 'line',
+      type: 'bar',
       data: {
         labels: [{% for x in globaltimeline %}
                     
@@ -108,7 +108,7 @@
   
     var ctx = document.getElementById('line-chart-deaths').getContext('2d');
           var myChart = new Chart(ctx, {
-              type: 'line',
+              type: 'bar',
               data: {
                   labels: [
                   {% for x in globaltimeline %}
