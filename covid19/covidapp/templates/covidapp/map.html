@@ -41,14 +41,29 @@
           {% for x in country_data %}
           '{{x.name}}',
           {% endfor %}
+      ],
+      Cases:[
+          {% for x in country_data %}
+          '{{x.latest_data.confirmed}}',
+          {% endfor %}
+      ],
+      Deaths:[
+          {% for x in country_data %}
+          '{{x.latest_data.deaths}}',
+          {% endfor %}
+      ],
+      Recovered:[
+          {% for x in country_data %}
+          '{{x.latest_data.recovered}}',
+          {% endfor %}
       ]
     };
     console.log(coordinates)
     const map = L.map('map').setView([30.3924217, 20.4689988], 1.5);
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    
+    L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
+	  maxZoom: 20,
+	  attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
     }).addTo(map);
 
     for (let i = 0; i < Object.keys(coordinates.Latitude).length; i += 1) {
@@ -56,10 +71,13 @@
         coordinates.Latitude[i],
         coordinates.Longitude[i],
       ]);
-      marker.myData = { id: coordinates.name[i] };
-
-      marker.on('click', function(e) {
-        alert(marker.myData.id);
+      marker.myData = { id: coordinates.name[i] ,cases:coordinates.Cases[i],deaths:coordinates.Deaths[i],recovered:coordinates.Recovered[i]};
+      marker.bindPopup("<p >"+ marker.myData.id +"</p>"+"<p>"+ "Cases"+":"+marker.myData.cases +"</p>"+"<p>"+"Deaths"+":"+marker.myData.deaths +"</p>"+"<p>"+"Recovered"+":"+marker.myData.recovered +"</p>");
+      marker.on('mouseover',function(e){
+        this.openPopup();
+      });
+      marker.on('mouseout',function(e){
+        this.closePopup();
       });
 
       marker.addTo(map);
