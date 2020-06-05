@@ -1,7 +1,7 @@
 {% extends 'covidapp/base.html' %}
 
 {% block content %} 
-,
+
 <div class="container">
   <p style="color: rgb(255, 36, 36);font-weight: bold;">Hover the marker for corona data in that country:</p><br>
     <div id="map"></div>
@@ -76,7 +76,7 @@
         coordinates.Longitude[i],
       ]);
       marker.myData = { id: coordinates.name[i] ,cases:coordinates.Cases[i],deaths:coordinates.Deaths[i],recovered:coordinates.Recovered[i]};
-      marker.bindPopup("<p >"+ marker.myData.id +"</p>"+"<p>"+ "Cases"+":"+marker.myData.cases +"</p>"+"<p>"+"Deaths"+":"+marker.myData.deaths +"</p>"+"<p>"+"Recovered"+":"+marker.myData.recovered +"</p>");
+      marker.bindPopup("<p >"+ marker.myData.id +"</p>"+"<p>"+ "Cases"+" : "+marker.myData.cases +"</p>"+"<p>"+"Deaths"+" : "+marker.myData.deaths +"</p>"+"<p>"+"Recovered"+" : "+marker.myData.recovered +"</p>");
       marker.on('mouseover',function(e){
         this.openPopup();
       });
