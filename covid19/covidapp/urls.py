@@ -14,6 +14,6 @@ urlpatterns = [
     path('search/',views.statesearch,name='statesearch'),
     path('helpline/',views.Helpline,name='Helpline'),
     path('about', views.about, name='about'),
-
+    path('map', views.map, name='map'),
     
 ]

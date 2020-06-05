@@ -392,3 +392,8 @@ def about(request):
         form = SuggestionForm()
     count = Suggestion.objects.all().count()
     return render(request, 'covidapp/about.html', {'form':form, 'count':count})
+
+
+
+    def map(request):
+        return render(request, 'covidapp/map.html')
