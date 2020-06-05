@@ -244,7 +244,7 @@ def statesearch(request):
                 else:
                     return redirect('countryview',code=sname)
         else:
-                #messages.info(request, 'No search found.')
+                messages.info(request, 'No search found.')
                 return redirect('api')
                 #return HttpResponse('No such country or state exists')
 

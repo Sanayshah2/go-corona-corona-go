@@ -94,8 +94,7 @@ form .f{
 form .f:hover{
     background: white;
     color: black;
-    
-}
+  }
 </style>
 {% endblock style %}
 
@@ -132,6 +131,10 @@ form .f:hover{
     {% endfor %}
   </datalist>
 </form>
+
+{% if messages %}
+<span class='text-muted'>No Search found.</span>
+{% endif %}
 </div>
 <div class=" container" >
   <h5 class='kit animated animatedFadeInUp fadeInUp' style="text-align: center;font-weight: bold;margin:25px;color:white;animation-delay: 0.2s;"><i class='fas fa-globe-americas' style="padding: 12px;color: skyblue;"></i>GLOBAL <span style="color: bisque;">COVID19</span> STATS </h4><br>
