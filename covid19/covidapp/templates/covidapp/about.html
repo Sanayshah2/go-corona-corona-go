@@ -49,8 +49,16 @@
 {% endblock style %}
 {% block content %}
 <div class='container'>
+
+    {% if messages %}
+    <br>
+    {% for x in messages %}
+    <div class='alert alert-custom' style="background-color: #1d1d1d;font-weight: 450;"><center>{{x}}</center></div>
+    {% endfor %}
+   {% endif %}
     <br>
     <div class='new_card col-12' style="padding:10px;">
+       
     <center><h2>Who made this website?</h2></center>
     <br><br>
     <ul style='list-style-type: disc'>
@@ -63,11 +71,7 @@
     </div>
     <br>
      <div class='new_card col-12' style="padding:20px;">
-         {% if messages %}
-         {% for x in messages %}
-         <div class='alert alert-custom' style="background-color: #121212;"><center><strong>{{x}}</strong></center></div>
-         {% endfor %}
-        {% endif %}
+         
         <form method="POST" class="form-group">
             {% csrf_token %}
             <div class='col-12'>

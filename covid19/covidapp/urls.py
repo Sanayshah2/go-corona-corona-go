@@ -7,12 +7,13 @@ from django.conf.urls import url
 urlpatterns = [
     path('dev/',views.dev,name='dev'),
     path('',views.api,name='api'),
-    path('api/global/',views.globalview,name='globalview'),
-    path('api/statewise/',views.statewise,name='statewise'),
-    path('api/statewise/state/<sname>/',views.stateview,name='stateview'),
-    path('api/countrywise/country/<code>/',views.countryview,name='countryview'),
-    path('api/statewise/search/',views.statesearch,name='statesearch'),
-    path('api/helpline/',views.Helpline,name='Helpline'),
-    path('api/about', views.about, name='about')
+    path('global/',views.globalview,name='globalview'),
+    path('india/',views.statewise,name='statewise'),
+    path('india/<sname>/',views.stateview,name='stateview'),
+    path('country/<code>/',views.countryview,name='countryview'),
+    path('search/',views.statesearch,name='statesearch'),
+    path('helpline/',views.Helpline,name='Helpline'),
+    path('about', views.about, name='about'),
+
     
 ]

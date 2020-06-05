@@ -59,7 +59,7 @@
             {% for i in india %}
             
             <tr>
-              <td><a href="/api/statewise/state/{{i.state}}/"><p style="text-align: left;">{{i.state}}</p></a></td>
+              <td><a href="/india/{{i.state}}/"><p style="text-align: left;">{{i.state}}</p></a></td>
               <td><p ><span style='color: rgba(93, 93, 255, 0.801);'>{% if i.deltaconfirmed != '0' %}+ {{i.deltaconfirmed}}{% endif %}</span> {{i.confirmed}}</p></td>
               <td><p ><span style="color: red;">{% if i.deltadeaths != '0' %}+ {{i.deltadeaths}}{% endif %}</span> {{i.deaths}}</p></td>
               <td><p><span style="color: green;">{% if i.deltarecovered != '0' %}+ {{i.deltarecovered}}{% endif %}</span> {{i.recovered}}</p></td>

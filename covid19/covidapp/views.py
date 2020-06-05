@@ -165,7 +165,7 @@ def statewise(request):
       
     }
 
-    return render(request, 'covidapp/sample.html',data)
+    return render(request, 'covidapp/india.html',data)
 
 def stateview(request,sname):
     if sname == 'Total':
