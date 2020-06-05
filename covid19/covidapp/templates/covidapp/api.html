@@ -4,10 +4,19 @@
 
 {% block style %}
 <style>
-     .map {
-        height: 400px;
-        width: 100%;
-      }
+      * {
+      margin: 0;
+    }
+
+    
+
+    #map {
+      width: 100%;
+      height: 70%;
+    }
+
+
+   
   .ta{
     margin-bottom: 30px;
   }
@@ -205,6 +214,11 @@ form .f:hover{
 </div>
 <br><br>
 
+<div class="container">
+  <p style="color: rgb(255, 36, 36);font-weight: bold;text-align: center;">Hover the marker for corona data in that country:</p><br>
+    <div id="map"></div><br>
+</div>
+
 <div class=" container animated animatedFadeInUp fadeInUp " style="animation-delay: 1.4s;">
 <h3 style="font-weight: 600;">World</h2><br>
 <center>
@@ -230,13 +244,7 @@ form .f:hover{
   </div>
 </center>
 </div></div> <br><br>
-<script>                                    
-  var n = {{global.total_cases}};
-  n1=n.toLocaleString();
-  console.log(n1);
-  document.getElementById("confirm").innerHTML=n1;
 
-</script>
 
 
 <!--  <div class='ta container' id='Asia'>
@@ -393,6 +401,66 @@ form .f:hover{
         </div>
       </div><br> -->
 {% block script %}
+<script>
+  const coordinates = {
+    Latitude:[ 
+      {% for x in all_country %}
+      '{{x.coordinates.latitude}}', 
+      {% endfor %}
+    ],
+    Longitude: [
+      {% for x in all_country %}
+      '{{x.coordinates.longitude}}', 
+      {% endfor %}
+    ],
+    name:[
+        {% for x in all_country %}
+        '{{x.name}}',
+        {% endfor %}
+    ],
+    Cases:[
+        {% for x in all_country %}
+        '{{x.latest_data.confirmed}}',
+        {% endfor %}
+    ],
+    Deaths:[
+        {% for x in all_country %}
+        '{{x.latest_data.deaths}}',
+        {% endfor %}
+    ],
+    Recovered:[
+        {% for x in all_country %}
+        '{{x.latest_data.recovered}}',
+        {% endfor %}
+    ]
+  };
+  console.log(coordinates)
+  const map = L.map('map').setView([20, 77], 1.5);
+  
+ 
+  var CartoDB_DarkMatter = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+subdomains: 'abcd',
+maxZoom: 19
+}).addTo(map);
+
+  for (let i = 0; i < Object.keys(coordinates.Latitude).length; i =i+ 2) {
+    const marker = L.marker([
+      coordinates.Latitude[i],
+      coordinates.Longitude[i],
+    ]);
+    marker.myData = { id: coordinates.name[i] ,cases:coordinates.Cases[i],deaths:coordinates.Deaths[i],recovered:coordinates.Recovered[i]};
+    marker.bindPopup("<p >"+ marker.myData.id +"</p>"+"<p>"+ "Cases"+" : "+marker.myData.cases +"</p>"+"<p>"+"Deaths"+" : "+marker.myData.deaths +"</p>"+"<p>"+"Recovered"+" : "+marker.myData.recovered +"</p>");
+    marker.on('mouseover',function(e){
+      this.openPopup();
+    });
+    marker.on('mouseout',function(e){
+      this.closePopup();
+    });
+
+    marker.addTo(map);
+  }
+</script>
 
 {% endblock script %}
     {% endblock content %}
