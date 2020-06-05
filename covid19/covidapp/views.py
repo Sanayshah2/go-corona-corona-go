@@ -88,6 +88,9 @@ def api(request):
             total = format_currency(total, 'INR', locale='en_IN')
             total = total[1:len(total)-3]
             x['today'][l] = total
+
+    for x in country_data:
+        
     response_india = requests.get('https://api.covid19india.org/data.json')
     india = response_india.json()
     
