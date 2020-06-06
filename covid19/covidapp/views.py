@@ -453,3 +453,7 @@ def districtview(request,sname,dname):
 
     }
     return render(request,'covidapp/districtview.html',data)
+
+def wiki(request):
+    return render(request,'covidapp/wiki.html')
+
