@@ -15,6 +15,7 @@ urlpatterns = [
     path('helpline/',views.Helpline,name='Helpline'),
     path('about/', views.about, name='about'),
     path('map/', views.map, name='map'),
+    path('help/', views.map, name='help'),
     path('india/<sname>/<dname>/', views.districtview, name='districtview'),
     
 ]
