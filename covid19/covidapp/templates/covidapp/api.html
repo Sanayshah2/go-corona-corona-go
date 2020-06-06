@@ -4,6 +4,8 @@
 
 {% block style %}
 <style>
+
+  
       * {
       margin: 0;
     }
@@ -454,7 +456,6 @@ form .f:hover{
 });
   const map = L.map('map').setView([20, 77], 3);
   
- 
   var CartoDB_DarkMatter = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
 subdomains: 'abcd',
 maxZoom: 19
@@ -466,13 +467,13 @@ maxZoom: 19
       coordinates.Longitude[i],
     ],{icon : myIcon});
     marker.myData = { id: coordinates.name[i] ,cases:coordinates.Cases[i],deaths:coordinates.Deaths[i],recovered:coordinates.Recovered[i]};
-    marker.bindPopup("<a href='#'>"+"<p style='font-weight:800'>"+ marker.myData.id +"</p>"+"</a>"+"<p>"+ "Cases"+" : "+marker.myData.cases +"</p>"+"<p>"+"Deaths"+" : "+marker.myData.deaths +"</p>"+"<p>"+"Recovered"+" : "+marker.myData.recovered +"</p>");
+    marker.bindPopup("<p style='font-weight:800'>"+ marker.myData.id +"</p>"+"<p>"+ "Cases"+" : "+marker.myData.cases +"</p>"+"<p>"+"Deaths"+" : "+marker.myData.deaths +"</p>"+"<p>"+"Recovered"+" : "+marker.myData.recovered +"</p>");
     marker.on('mouseover',function(e){
       this.openPopup();
     });
-    // marker.on('mouseout',function(e){
-    //   this.closePopup();
-    // });
+    marker.on('mouseout',function(e){
+      this.closePopup();
+    });
 
     marker.addTo(map);
   }
