@@ -421,3 +421,26 @@ def map(request):
     all_country = all_country.json()
     country_data = all_country['data']
     return render(request, 'covidapp/map.html',{'country_data':country_data})
+
+def districtview(request,sname,dname):
+    d=datetime.datetime.now(pytz.timezone('Asia/Kolkata'))
+    response_state=requests.get('https://api.covid19india.org/state_district_wise.json')
+    response_state=response_state.json()
+    dis=response_state[sname]['districtData'][dname]
+
+
+           
+
+    all_districts = requests.get('https://api.covid19india.org/districts_daily.json')
+    all_districts=all_districts.json()
+    all_districts=all_districts['districtsDaily']
+    state=all_districts[sname]
+    district_timeline=state[dname]
+    data={
+        'district':district_timeline,
+        'dis':dis,
+        'dname':dname,
+        'd':d,
+
+    }
+    return render(request,'covidapp/districtview.html',data)
