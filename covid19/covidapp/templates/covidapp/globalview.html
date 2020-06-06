@@ -5,6 +5,12 @@
 {% block style %}
 {% endblock style %}
 {% block content %}
+<div class='card' style="background-color:rgb(31, 31, 31);margin:12px;padding: 12px;">
+  <strong style="letter-spacing: 1px;font-size: 12px;"><marquee onmouseover="stop()" onmouseout="start()">
+    Top 3 countries with highest number of cases.&ensp;&ensp;1. {{1.name}} : {{1.latest_data.confirmed}}&ensp;&ensp;2. {{2.name}} : {{2.latest_data.confirmed}}&ensp;&ensp;3. {{3.name}} : {{3.latest_data.confirmed}}
+  </marquee>
+  </strong>
+  </div>
 <div class=" container" >
     <p class="animated animatedFadeInUp fadeInUp " style="font-weight: bold;font-size: 15px;padding: 15px;animation-delay: 0.3s;text-align: center;"><i class="fa fa-calendar" style="padding: 10px;"></i>{{d}}</p>
     <h5 class='kit animated animatedFadeInUp fadeInUp' style="text-align: center;font-weight: bold;margin:25px;color:white;animation-delay: 0.2s;"><i class='fas fa-globe-americas' style="padding: 12px;color: skyblue;"></i>GLOBAL <span style="color: bisque;">COVID19</span> STATS </h4><br>
