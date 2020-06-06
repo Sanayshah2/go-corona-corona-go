@@ -9,24 +9,24 @@
         <h5 class="kit animated animatedFadeInUp fadeInUp" style="color: white;animation-delay: 0.4s;" ><i class="fa fa-viruses" style="padding: 10px;color: rgb(194, 52, 52);" ></i>COVID19 IN <span style="color: palegreen;font-weight: bold;text-transform: uppercase;">{{dname}}</span></h4><br><br>
         <div class="row">
             <div class="col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:0.5s;">
-                 <h5 class="kit" class="kit" style="font-weight: bold;color: rgb(102, 102, 255);">{{dis.confirmed}}</h4>
+                 <h5 class="kit" id="cases" style="font-weight: bold;color: rgb(102, 102, 255);"></h4>
                  <p><span class="counter" style="color: rgb(134, 134, 252);font-size: 15px; ">+[{{dis.delta.confirmed}}]</span></p><br>
                  <p style="font-weight: bold;font-size: 15px;color: rgb(102, 102, 255);">Cases</p>
             </div>
             <div class="col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:0.6s;">
-                <h5 class="kit"  style="font-weight: bold;color:yellow ;">{{dis.active}}</h5>
+                <h5 class="kit" id="active" style="font-weight: bold;color:yellow ;">{{dis.active}}</h5>
                 <p><span  style="color: rgb(255, 255, 137);font-size: 15px; "><i class="fa fa-heart" aria-hidden="true" style="padding: 5px;"></i></span></p><br>
                 <p style="font-weight: bold;color: yellow;font-size: 15px;">Active</p>
             </div>
     
             <div class="col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:0.7s;">
-                <h5 class="kit"  style="font-weight: bold;color:red ;">{{dis.deceased}}</h5 >
+                <h5 class="kit" id="deaths"  style="font-weight: bold;color:red ;">{{dis.deceased}}</h5 >
                 <p><span  style="color: rgb(255, 77, 77);font-size: 15px; ">{% if dis.delta.deceased %}+[{{dis.delta.deceased}}]{% else %}<i class="fa fa-heart" aria-hidden="true" style="padding: 5px;columns: red;"></i>{% endif %}</span></p><br>
                 <p style="font-weight: bold;color: red;font-size: 15px;">Deaths</p>
             </div>
     
             <div class="col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:0.8s;">
-                <h5 class="kit"  style="font-weight: bold;color:green ;">{{dis.recovered}}</h5>
+                <h5 class="kit" id="cured" style="font-weight: bold;color:green ;">{{dis.recovered}}</h5>
                 <p><span  style="color: rgb(113, 252, 113);font-size: 15px; ">{% if s.delta.recovered %}+[{{s.delta.recovered}}]{% else %}<i class="fa fa-heart" aria-hidden="true" style="padding: 5px;color: green;"></i>{% endif %}</span></p><br>
                 <p style="font-weight: bold;color: green;font-size: 15px;">Cured</p>
             </div>
@@ -41,6 +41,21 @@
     
 {% endblock content %}
 {% block script %}
+<script>
+    var cases = {{dis.confirmed}};
+    cases1 = cases.toLocaleString();
+    document.getElementById("cases").innerHTML= cases1 ;
+    var deaths = {{dis.deceased}};
+    deaths1 = deaths.toLocaleString();
+    document.getElementById("deaths").innerHTML= deaths1 ;
+    var recovered = {{dis.recovered}};
+    recovered1 = recovered.toLocaleString();
+    document.getElementById("cured").innerHTML= recovered1 ;
+    var active = {{dis.active}};
+    active1 = recovered.toLocaleString();
+    document.getElementById("active").innerHTML= active1 ;
+    
+  </script>
 
     <script> 
   
