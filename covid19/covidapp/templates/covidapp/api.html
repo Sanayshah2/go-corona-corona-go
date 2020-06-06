@@ -156,17 +156,17 @@ form .f:hover{
   <h5 class='kit animated animatedFadeInUp fadeInUp' style="text-align: center;font-weight: bold;margin:25px;color:white;animation-delay: 0.1s;"><i class='fas fa-globe-americas' style="padding: 12px;color: skyblue;"></i>GLOBAL <span style="color: bisque;">COVID19</span> STATS </h4><br>
   <div class=" row" style="text-align: center;padding-bottom:30px;">
     <div class=" col-4  animated animatedFadeInUp fadeInUp" style="animation-delay: 0.3s;">
-      <h5 id="confirm" class="kit" style="color:rgba(93, 93, 255, 0.801);font-weight: bold;">{{global.total_cases}}</h5>
-      <p style="font-size: 15px;"><span class="count" style="color: rgb(160, 160, 253);">+[{{global.total_new_cases_today}}]</span></p><br>
+      <h5 id="confirm" class="kit" style="color:rgba(93, 93, 255, 0.801);font-weight: bold;">{{global.totalConfirmed}}</h5>
+      <p style="font-size: 15px;"><span class="count" style="color: rgb(160, 160, 253);">+[{{global.totalNewCases}}]</span></p><br>
       <p style="color: rgba(93, 93, 255, 0.801);font-size: 15px;font-weight: bold;">Confirmed</h1>
     </div>
     <div class="col-4  animated animatedFadeInUp fadeInUp" style="animation-delay: 0.5s;">
-      <h5 class="kit" style="color: red;font-weight: bold;">{{global.total_deaths}}</h5>
-      <p style="font-size: 15px;"><span class="count" style="color: rgb(240, 133, 133);">+[{{global.total_new_deaths_today}}]</span></p><br>
+      <h5 class="kit" style="color: red;font-weight: bold;">{{global.totalDeaths}}</h5>
+      <p style="font-size: 15px;"><span class="count" style="color: rgb(240, 133, 133);">+[{{global.totalNewDeaths}}]</span></p><br>
       <p style="color: red;font-size: 15px;font-weight: bold;">Deaths</h8>
     </div><br>
     <div class="col-4  animated animatedFadeInUp fadeInUp" style="animation-delay: 0.7s;">
-      <h5 class="kit" style="color: green;font-weight: bold;">{{global.total_recovered}}</h5>
+      <h5 class="kit" style="color: green;font-weight: bold;">{{global.totalRecovered}}</h5>
       <p  style="font-size: 15px;"><span class="count" style="color: yellowgreen;"><i class="fa fa-heart" aria-hidden="true" style="padding: 5px;"></i></span></p><br>
       <p  style="color: green;font-size: 15px;font-weight: bold;">Cured</p>
     </div>

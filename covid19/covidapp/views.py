@@ -16,7 +16,7 @@ from babel.numbers import format_currency
 
 def globalview(request):
     d=datetime.datetime.now(pytz.timezone('Asia/Kolkata'))
-    global_stats = requests.get('https://api.thevirustracker.com/free-api?global=stats')
+    global_stats = requests.get('http://api.coronatracker.com/v3/stats/worldometer/global')
     global_timeline = requests.get('https://corona-api.com/timeline')
     global_timeline1 = global_timeline.json()
     global_timeline1 = global_timeline1['data']
@@ -26,8 +26,8 @@ def globalview(request):
     global_timeline1 = global_timeline1[::-1]
 
     global_stats = global_stats.json()
-    global_stats = global_stats['results'][0]
-    del global_stats['source']
+    del global_stats['totalCasesPerMillionPop']
+    del global_stats['created']
     for x in global_stats:
         a = global_stats[x]
         b = format_currency(a, 'INR', locale='en_IN')
@@ -64,10 +64,10 @@ def api(request):
     # totalCases = info['graphs']['totalCases']
     # del totalCases['source']
     # del totalCases['sourceLink']
-    global_stats = requests.get('https://api.thevirustracker.com/free-api?global=stats')
+    global_stats = requests.get('http://api.coronatracker.com/v3/stats/worldometer/global')
     global_stats = global_stats.json()
-    global_stats = global_stats['results'][0]
-    del global_stats['source']
+    del global_stats['totalCasesPerMillionPop']
+    del global_stats['created']
     for x in global_stats:
         a = global_stats[x]
         b = format_currency(a, 'INR', locale='en_IN')
@@ -227,7 +227,7 @@ def stateview(request,sname):
                 if x == key:
                     dis[key]['zone'] = zone_name[x]['zone']
                 
-        
+        print(dis)
         data={
             's':s,
             'sname':sname,
@@ -455,5 +455,4 @@ def districtview(request,sname,dname):
     return render(request,'covidapp/districtview.html',data)
 
 def wiki(request):
-    return render(request,'covidapp/wiki.html')
-
+    return render(request, 'covidapp/wiki.html')
