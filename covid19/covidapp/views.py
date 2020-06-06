@@ -227,7 +227,7 @@ def stateview(request,sname):
                 if x == key:
                     dis[key]['zone'] = zone_name[x]['zone']
                 
-                
+        print(dis)
         data={
             's':s,
             'sname':sname,
