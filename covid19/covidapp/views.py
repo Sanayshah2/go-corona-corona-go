@@ -436,8 +436,14 @@ def districtview(request,sname,dname):
     all_districts=all_districts['districtsDaily']
     state=all_districts[sname]
     district_timeline=state[dname]
+    l=len(district_timeline)
+    l=l-1
+    timeline = district_timeline[l:0:-5]
+    timeline2 = timeline[::-1]
+
+    
     data={
-        'district':district_timeline,
+        'district':timeline2,
         'dis':dis,
         'dname':dname,
         'd':d,

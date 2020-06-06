@@ -35,8 +35,8 @@
     </div>
     <br><br>
     <div class="row " >
-    <div class="container col-12 col-md-offset-3 col-md-4"><canvas class=' new_card' height="275px" id="line-chart-total" style="margin-bottom: 40px;padding: 15px;border:0px"></canvas></div>
-><br><br>
+    <div class="container col-12 col-md-offset-3 col-md-4"><canvas class=' new_card' height="300px" id="line-chart-total" style="margin-bottom: 40px;padding: 15px;border:0px"></canvas></div>
+<br><br>
     </div>
     
 {% endblock content %}
@@ -45,7 +45,7 @@
     <script> 
   
     new Chart(document.getElementById("line-chart-total"), {
-      type: 'line',
+      type: 'bar',
       data: {
         labels: [{% for x in district %}
                     
@@ -59,7 +59,8 @@
             label: "Total cases",
             borderColor: "rgba(93, 93, 255, 0.9)",
             backgroundColor:'rgba(93, 93, 255, 0.15)',
-            borderWidth: 1.5
+            borderWidth: 1.5,
+            barThickness:8
           },{ 
             data: [{% for x in district %}
                     "{{x.deceased}}",
@@ -67,7 +68,8 @@
             label: "Total Deaths",
             borderColor: "red",
             backgroundColor:'rgb(255, 0, 0, 0.2)',
-            borderWidth: 1.5
+            borderWidth: 1.5,
+            barThickness:8
           },{ 
             data: [{% for x in district %}
                     "{{x.recovered}}",
@@ -75,7 +77,8 @@
             label: "Total Recovered",
             borderColor: "green",
             backgroundColor:'rgb(0, 128, 0, 0.2)',
-            borderWidth: 1.5
+            borderWidth: 1.5,
+            barThickness:8
           }
       
           
