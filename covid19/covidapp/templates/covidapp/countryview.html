@@ -27,7 +27,7 @@
         </div>
     </div><br>
     <p class="animated animatedFadeInUp fadeInUp" style="color: red;animation-delay: 1.8s;"><span style="font-weight: bold;">Death rate : </span>{{info.latest_data.calculated.death_rate|floatformat:4}}</p><br>
-    <p class="animated animatedFadeInUp fadeInUp" style="color: green;animation-delay: 1.8s;"><span style="font-weight: bold;">Recovery rate : </span>{{info.latest_data.calculated.recovery_rate|floatformat:4}}</p><br>
+    <p class="animated animatedFadeInUp fadeInUp" style="color: green;animation-delay: 1.8s;"><span style="font-weight: bold;">Recovery rate : </span>{% if info.name == 'Spain' or info.name == 'UK' or info.name == 'Netherlands' or info.name == 'Sweden' and info.latest_data.recovered == '0' %}N/A{% else %}{{info.latest_data.calculated.recovery_rate|floatformat:4}}{% endif %}</p><br>
     <p class="animated animatedFadeInUp fadeInUp" style="color: rgb(95, 95, 255);font-weight: bold;animation-delay: 1.8s;">Cases per million : {{info.latest_data.calculated.cases_per_million_population}}</p><br>
 
     <p class="animated animatedFadeInUp fadeInUp text-muted" style="animation-delay:1.8s;font-weight: bold;">Last updated on: {{info.updated_at}}</p>
@@ -51,15 +51,23 @@
 
 {% block script %}
 <script>
+  var cname = '{{info.name}}';
   var cases = {{info.latest_data.confirmed}};
   cases1 = cases.toLocaleString();
   document.getElementById("cases").innerHTML= cases1 ;
   var deaths = {{info.latest_data.deaths}};
   deaths1 = deaths.toLocaleString();
   document.getElementById("deaths").innerHTML= deaths1 ;
-  var recovered = {{info.latest_data.recovered}};
-  recovered1 = recovered.toLocaleString();
-  document.getElementById("cured").innerHTML= recovered1 ;
+  if (cname == 'Spain' || cname == 'Netherlands' || cname == 'UK' || cname == 'Sweden')
+  {
+    document.getElementById("cured").innerHTML= 'N/A' ;
+  }
+  else
+  {
+    var recovered = {{info.latest_data.recovered}};
+    recovered1 = recovered.toLocaleString();
+    document.getElementById("cured").innerHTML= recovered1 ;
+  }
   
 </script>
   <script> 
