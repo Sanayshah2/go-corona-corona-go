@@ -43,7 +43,7 @@
   {% block script %}
   <script> 
     new Chart(document.getElementById("line-chart-total"), {
-      type: 'line',
+      type: 'bar',
       data: {
         labels: [{% for x in globaltimeline %}
                     
@@ -57,7 +57,8 @@
             label: "Total cases",
             borderColor: "rgba(93, 93, 255, 0.9)",
             backgroundColor:'rgba(93, 93, 255, 0.15)',
-            borderWidth: 1.5
+            borderWidth: 1.5,
+            barThickness:8
           },{ 
             data: [{% for x in globaltimeline %}
                     "{{x.recovered}}",
@@ -65,7 +66,8 @@
             label: "Total Cured",
             borderColor: "green",
             backgroundColor:'rgb(0, 128, 0, 0.2)',
-            borderWidth: 1.5
+            borderWidth: 1.5,
+            barThickness:8
             
           },{ 
             data: [{% for x in globaltimeline %}
@@ -74,7 +76,8 @@
             label: "Total Deaths",
             borderColor: "red",
             backgroundColor:'rgb(255, 0, 0, 0.2)',
-            borderWidth: 1.5
+            borderWidth: 1.5,
+            barThickness:8
           }
           ],
           
@@ -108,7 +111,7 @@
   
     var ctx = document.getElementById('line-chart-deaths').getContext('2d');
           var myChart = new Chart(ctx, {
-              type: 'line',
+              type: 'bar',
               data: {
                   labels: [
                   {% for x in globaltimeline %}
@@ -121,8 +124,6 @@
                   datasets: [{
                       
                       label: 'Per day deaths' ,
-                     // backgroundColor:'red',
-                      //barThickness : 180,   
                       data: [{% for x in globaltimeline %}
                     {{x.new_deaths}},
                   {% endfor %}],                  
@@ -144,19 +145,15 @@
                       xAxes: [{
                         gridLines:{
                           display:false,
-                          // ticks: {
                             
                               tickMarkLength: 19
-                          //}
                         }
                       }],
                       yAxes: [{
                         gridLines:{
                           display:false,
-                          // ticks: {
                             
                               tickMarkLength: 19
-                          //}
                         }
                       }]
                   }
@@ -167,7 +164,7 @@
   
           var ctx = document.getElementById('line-chart-confirmed').getContext('2d');
           var myChart = new Chart(ctx, {
-              type: 'line',
+              type: 'bar',
               data: {
                   labels: [
                   {% for x in globaltimeline %}
@@ -180,8 +177,8 @@
                   datasets: [{
                       
                       label: 'Per day confirmed cases' ,
-                     // backgroundColor:'red',
-                      //barThickness : 180,   
+                     
+                    
                       data: [{% for x in globaltimeline %}
                     {{x.new_confirmed}},
                   {% endfor %}],                  
@@ -202,10 +199,9 @@
                       xAxes: [{ 
                         gridLines:{
                           display:false,
-                          // ticks: {
                            
                               tickMarkLength: 19
-                          //}
+                          
                         }
                       }],
                       yAxes: [{
