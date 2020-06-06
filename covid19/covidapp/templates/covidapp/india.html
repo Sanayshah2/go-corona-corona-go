@@ -2,6 +2,12 @@
 {% block style %}
 {% endblock style %}
 {% block content %}
+<div class='card' style="background-color:rgb(31, 31, 31);margin:12px;padding: 12px;">
+  <strong style="letter-spacing: 1px;font-size: 12px;"><marquee onmouseover="stop()" onmouseout="start()">
+   Boycott Chinese products. Support local indian businesses. #VocalForLocal
+  </marquee>
+  </strong>
+  </div>
 <div class="container">
 <p class="animated animatedFadeInUp fadeInUp " style="font-weight: bold;font-size: 15px;padding: 15px;animation-delay: 0.3s;text-align: center;"><i class="fa fa-calendar" style="padding: 10px;"></i>{{d}}</p>
   <div style="text-align: center;">
@@ -30,18 +36,18 @@
             <p style="font-weight: bold;color: green;font-size: 15px;">Cured</p>
         </div>
     </div><br>
-    <p class="animated animatedFadeInUp fadeInUp" style="color: red;animation-delay: 1.8s;"><span style="font-weight: bold;">Death rate : </span>{{info.latest_data.calculated.death_rate}}</p><br>
-    <p class="animated animatedFadeInUp fadeInUp" style="color: green;animation-delay: 1.8s;"><span style="font-weight: bold;">Recovery rate : </span>{{info.latest_data.calculated.recovery_rate}}</p><br>
-    <p class="animated animatedFadeInUp fadeInUp" style="color: rgb(95, 95, 255);font-weight: bold;animation-delay: 1.8s;">Cases per million : {{info.latest_data.calculated.cases_per_million_population}}</p><br>
+    <p class="animated animatedFadeInUp fadeInUp" style="color: red;animation-delay: 1.9s;"><span style="font-weight: bold;">Death rate : </span>{{info.latest_data.calculated.death_rate|floatformat:4}}</p><br>
+    <p class="animated animatedFadeInUp fadeInUp" style="color: green;animation-delay: 2.0s;"><span style="font-weight: bold;">Recovery rate : </span>{{info.latest_data.calculated.recovery_rate|floatformat:4}}</p><br>
+    <p class="animated animatedFadeInUp fadeInUp" style="color: rgb(95, 95, 255);font-weight: bold;animation-delay: 2.1s;">Cases per million : {{info.latest_data.calculated.cases_per_million_population}}</p><br>
 
-    <p class="animated animatedFadeInUp fadeInUp text-muted" style="animation-delay:1.8s;font-weight: bold;">Last updated on: {{india_total.lastupdatedtime}}</p>
+    <p class="animated animatedFadeInUp fadeInUp text-muted" style="animation-delay:2.2s;font-weight: bold;">Last updated on: {{india_total.lastupdatedtime}}</p>
 
 
 </div><br><br>
 <div class="row" >
-<div class="container col-12 col-md-offset-3 col-md-4"><canvas class=' new_card' height="275px" id="line-chart-total" style="margin-bottom: 40px;padding: 15px;border:0px"></canvas></div>
-<div class="container col-12 col-md-offset-3 col-md-4"><canvas class='new_card' height="275px" id="line-chart-confirmed" style="margin-bottom: 40px;padding: 15px; background-color: rgba(93, 93, 255, 0.15);border:0px" ></canvas></div>
-<div class="container col-12 col-md-offset-3 col-md-4"><canvas class="new_card" height="275px"  id="line-chart-deaths" style="margin-bottom: 40px;padding: 15px;background-color:rgb(255, 0, 0, 0.15);border:0px" ></canvas></div><br><br>
+<div class="container col-12 col-md-offset-3 col-md-4 animated animatedFadeInUp fadeInUp" style="animation-delay:2.4s;"><canvas class=' new_card' height="275px" id="line-chart-total" style="margin-bottom: 40px;padding: 15px;border:0px"></canvas></div>
+<div class="container col-12 col-md-offset-3 col-md-4 animated animatedFadeInUp fadeInUp" style="animation-delay:2.6s;"><canvas class='new_card' height="275px" id="line-chart-confirmed" style="margin-bottom: 40px;padding: 15px; background-color: rgba(93, 93, 255, 0.15);border:0px" ></canvas></div>
+<div class="container col-12 col-md-offset-3 col-md-4 animated animatedFadeInUp fadeInUp" style="animation-delay:2.8s;"><canvas class="new_card" height="275px"  id="line-chart-deaths" style="margin-bottom: 40px;padding: 15px;background-color:rgb(255, 0, 0, 0.15);border:0px" ></canvas></div><br><br>
 </div> 
 <div style='color:rgb(0, 128, 0)'></div>
 
@@ -49,7 +55,7 @@
 
 <div>
 <div class="" style="margin-top: 50px;">
-  <h5 class="animated animatedFadeInUp fadeInUp"  style="font-weight: bold;animation-delay: 1.2s;">States</h5>
+  <h5 class="animated animatedFadeInUp fadeInUp"  style="font-weight: bold;animation-delay: 2.9s;">States</h5>
   <div class=''>
   <table class="animated animatedFadeInUp fadeInUp" style="animation-delay: 1.4s;">
             <tr >
@@ -64,9 +70,9 @@
             
             <tr>
               <td><a href="/india/{{i.state}}/"><p style="text-align: left;">{{i.state}}</p></a></td>
-              <td><p ><span style='color: rgba(93, 93, 255, 0.801);'>{% if i.deltaconfirmed != '0' %}+ {{i.deltaconfirmed}}{% endif %}</span> {{i.confirmed}}</p></td>
-              <td><p ><span style="color: red;">{% if i.deltadeaths != '0' %}+ {{i.deltadeaths}}{% endif %}</span> {{i.deaths}}</p></td>
-              <td><p><span style="color: green;">{% if i.deltarecovered != '0' %}+ {{i.deltarecovered}}{% endif %}</span> {{i.recovered}}</p></td>
+              <td><p ><span style='color: rgba(93, 93, 255, 0.801);'>+ {{i.deltaconfirmed}}</span> {{i.confirmed}}</p></td>
+              <td><p ><span style="color: red;">+ {{i.deltadeaths}}</span> {{i.deaths}}</p></td>
+              <td><p><span style="color: green;">+ {{i.deltarecovered}}</span> {{i.recovered}}</p></td>
             </tr>
             
             {% endfor %}

@@ -150,19 +150,19 @@ form .f:hover{
 {% endif %}
 </div>
 <div class=" container" >
-  <h5 class='kit animated animatedFadeInUp fadeInUp' style="text-align: center;font-weight: bold;margin:25px;color:white;animation-delay: 0.2s;"><i class='fas fa-globe-americas' style="padding: 12px;color: skyblue;"></i>GLOBAL <span style="color: bisque;">COVID19</span> STATS </h4><br>
+  <h5 class='kit animated animatedFadeInUp fadeInUp' style="text-align: center;font-weight: bold;margin:25px;color:white;animation-delay: 0.1s;"><i class='fas fa-globe-americas' style="padding: 12px;color: skyblue;"></i>GLOBAL <span style="color: bisque;">COVID19</span> STATS </h4><br>
   <div class=" row" style="text-align: center;padding-bottom:30px;">
     <div class=" col-4  animated animatedFadeInUp fadeInUp" style="animation-delay: 0.3s;">
       <h5 id="confirm" class="kit" style="color:rgba(93, 93, 255, 0.801);font-weight: bold;">{{global.total_cases}}</h5>
       <p style="font-size: 15px;"><span class="count" style="color: rgb(160, 160, 253);">+[{{global.total_new_cases_today}}]</span></p><br>
       <p style="color: rgba(93, 93, 255, 0.801);font-size: 15px;font-weight: bold;">Confirmed</h1>
     </div>
-    <div class="col-4  animated animatedFadeInUp fadeInUp" style="animation-delay: 0.4s;">
+    <div class="col-4  animated animatedFadeInUp fadeInUp" style="animation-delay: 0.5s;">
       <h5 class="kit" style="color: red;font-weight: bold;">{{global.total_deaths}}</h5>
       <p style="font-size: 15px;"><span class="count" style="color: rgb(240, 133, 133);">+[{{global.total_new_deaths_today}}]</span></p><br>
       <p style="color: red;font-size: 15px;font-weight: bold;">Deaths</h8>
     </div><br>
-    <div class="col-4  animated animatedFadeInUp fadeInUp" style="animation-delay: 0.5s;">
+    <div class="col-4  animated animatedFadeInUp fadeInUp" style="animation-delay: 0.7s;">
       <h5 class="kit" style="color: green;font-weight: bold;">{{global.total_recovered}}</h5>
       <p  style="font-size: 15px;"><span class="count" style="color: yellowgreen;"><i class="fa fa-heart" aria-hidden="true" style="padding: 5px;"></i></span></p><br>
       <p  style="color: green;font-size: 15px;font-weight: bold;">Cured</p>
@@ -170,56 +170,56 @@ form .f:hover{
     
 
   </div>
-  <div style="text-align: center;"><a style="animation-delay: 0.5s;" href={% url 'globalview' %} class="animated animatedFadeInUp fadeInUp" >Click for more info</a>
+  <div style="text-align: center;"><a style="animation-delay: 0.9s;" href={% url 'globalview' %} class="animated animatedFadeInUp fadeInUp" >Click for more info</a>
   </div><br>
-    <div style="margin: 10px;margin-top: 20px;border-bottom: 1px solid lightgray;"></div>
+    <div class="animated animatedFadeInUp fadeInUp" style="margin: 10px;margin-top: 20px;border-bottom: 1px solid lightgray;animation-delay: 1s;"></div>
 
 </div><br><br>
 
-<div class="container animated animatedFadeInUp fadeInUp"  style="text-align: center  ;animation-delay: 0.8s; text-align: center;"> 
+<div class="container"  style="text-align: center; text-align: center;"> 
   
-  <h5 class='kit' style="text-align: center;font-weight: bold;color: white;"><i class="fa fa-viruses" style="padding: 12px;"></i><span style="color: bisque;">COVID19</span> IN INDIA</h6><br><br>
+  <h5 class='kit animated animatedFadeInUp fadeInUp' style="text-align: center;font-weight: bold;color: white;animation-delay: 1.1s;"><i class="fa fa-viruses" style="padding: 12px;"></i><span style="color: bisque;">COVID19</span> IN INDIA</h5><br><br>
       
       <div class="row" style="padding-bottom:30px;">
-          <div class=" col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:0.9s;margin-bottom: 30px;">
+          <div class=" col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:1.2s;margin-bottom: 30px;">
             <h5 class='kit'><span class="counter " style="color: rgba(93, 93, 255, 0.801);font-weight: bold;">{{india_total.confirmed}}</span></h3>
             <p ><span class="counter" style="font-size: 12px;color:rgb(160, 160, 253); ">+[{{india_total.deltaconfirmed}}]</span></p><br>         
               <p style="font-size: 12px;font-weight: bold;color: rgba(93, 93, 255, 0.801);">Cases</p>
           </div>
 
-          <div class="col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:1s;margin-bottom: 30px;">
+          <div class="col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:1.2s;margin-bottom: 30px;">
             <h5 class='kit'><span class="counter" style="color: rgb(203, 206, 10);font-weight: bold;">{{india_total.active}}</span></h1>
             <p ><span class="counter" style="font-size: 12px;color: rgb(203, 206, 10);"><i class="fa fa-heart" aria-hidden="true" style="padding-top: 5px;"></i></span></p><br>
               <p style="font-size: 12px;font-weight: bold;color: rgb(203, 206, 10);">Active</p>
           </div>
 
-          <div class="col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:1.2s;margin-bottom: 30px;"> 
+          <div class="col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:1.3s;margin-bottom: 30px;"> 
             <h5 class='kit'><span class="counter" style="color: red;font-weight: bold;">{{india_total.deaths}}</span></h1>
             <p ><span class="counter" style="color: red;font-size: 12px;">+[{{india_total.deltadeaths}}]</span></p><br>                 
               <p   style="font-weight: bold;font-size: 12px;color: red;">Deaths</p> 
             </div>
 
-          <div class="col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:1.3s;margin-bottom: 40px;">
+          <div class="col-3 animated animatedFadeInUp fadeInUp" style="animation-delay:1.4s;margin-bottom: 40px;">
             <h5 class='kit'><span class="counter" style="color: green;font-weight: bold;">{{india_total.recovered}}</span></h1>
               <p style="font-size: 12px;"><span class="counter" style="color: green;">+[{{india_total.deltarecovered}}]</span></p><br>        
                 <p style="font-size: 12px;font-weight: bold;color: green;">Cured</p>
           </div>
-        <div class="container animated animatedFadeInUp fadeInUp" style="color: white;padding: 12px;animation-delay: 1.2s"><a href="/india/">Click here for statewise stats</a> </div>
+        <div class="container animated animatedFadeInUp fadeInUp" style="color: white;padding: 12px;animation-delay: 1.5s"><a href="/india/">Click here for statewise stats</a> </div>
         
         </div>
      
 </div>
 <div class='container'>
-  <div style="border-top: 1px solid lightgray;margin: 4px;"></div>
+  <div class=" animated animatedFadeInUp fadeInUp" style="border-top: 1px solid lightgray;margin: 4px;animation-delay: 1.6s"></div>
 </div>
 <br><br>
 
 <div class="container">
-  <p style="color:rgba(255, 255, 224, 0.767);font-weight: bold;text-align: center;">Tap the marker for <span style="color: red;">COVID19</span> data in that particular country:</p><br>
-    <div id="map"></div><br><br>
+  <p class=" animated animatedFadeInUp fadeInUp" style="color:rgba(255, 255, 224, 0.767);font-weight: bold;text-align: center;animation-delay: 1.7s">Tap the marker for <span style="color: red;">COVID19</span> data in that particular country:</p><br>
+    <div class=" animated animatedFadeInUp fadeInUp" id="map" style='animation-delay: 1.8s'></div><br><br>
 </div>
 
-<div class=" container animated animatedFadeInUp fadeInUp " style="animation-delay: 1.4s;">
+<div class=" container animated animatedFadeInUp fadeInUp " style="animation-delay: 1.9s;">
 <h3 style="font-weight: 600;">World</h2><br>
 <center>
 <div class="table-wrapper-scroll-y my-custom-scrollbar">
