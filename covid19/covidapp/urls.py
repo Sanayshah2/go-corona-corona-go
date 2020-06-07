@@ -17,6 +17,7 @@ urlpatterns = [
     path('map/', views.map, name='map'),
     path('wiki/', views.wiki, name='wiki'),
     path('india/<sname>/<dname>/', views.districtview, name='districtview'),
-    path('essentials/', views.essentials, name='essentials')
+    path('essentials/<category69>', views.essentials, name='essentials'),
+    path('essential_category/<category>', views.essential_category, name='essential_category')
     
 ]

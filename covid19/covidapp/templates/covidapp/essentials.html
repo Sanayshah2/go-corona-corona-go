@@ -1,19 +1,91 @@
 {% extends 'covidapp/base.html' %}
 
 {% block content %}
-<div class='container'>
-    <br>
+<br>
+    {% for x in category_list %}
+    <a class='btn btn-secondary mb-3 mr-2 ml-3  animated animatedFadeInUp fadeInUp' style="animation-delay: 0.2s;font-size: 14px;background-color: #1d1d1d;" href='/essential_category/{{x}}'>{{x}}</a>
+    {% endfor %}
+    <br><br><br>
+
+<div class='container animated animatedFadeInUp fadeInUp' style="animation-delay: 0.4s;">
+   
+    <h2 class='mb-3 kit' style="color: rgb(188, 229, 255)">{{category69}} : </h2>
     {% for data in data %}
-    {% if data.city == 'Mumbai' %}
+    {% if data.city == 'Mumbai' and data.category == category69 %}
     <div class='new_card' style="padding: 20px;">
-        <h4>{{data.category}}</h4>
-        <p>Name of the organisation : <strong>{{data.nameoftheorganisation}}</strong></p>
-        <p>Service provided : {{data.descriptionandorserviceprovided}}</p>
-        <p>Contact : {{data.phonenumber}}</p>
-     </div>
+        <p><span style="color: rgb(189, 255, 189);">Name of the organisation : </span><strong>{{data.nameoftheorganisation}}</strong></p>
+        <p><span style="color: rgb(189, 255, 189);">Service provided : </span>{{data.descriptionandorserviceprovided}}</p>
+        {% if data.phonenumber %}<p><span style="color: rgb(189, 255, 189);">Contact : </span>{{data.phonenumber}}</p>{% endif %}     
+        {% if data.contact %}<p><span style="color: rgb(189, 255, 189);">Link : </span>{{data.contact}}</p>{% endif %} 
+    </div>
      <br>
      {% endif %}
      {% endfor %}
+     <!-- <br><br><br>
+     <h2 class='mb-3 kit'>Delivery [Vegetables, Fruits, Groceries, Medicines, etc.] : </h2>
+     {% for data in data %}
+     {% if data.city == 'Mumbai' and data.category == 'Delivery [Vegetables, Fruits, Groceries, Medicines, etc.]' %}
+     <div class='new_card' style="padding: 20px;">
+         <p>Name of the organisation : <strong>{{data.nameoftheorganisation}}</strong></p>
+         <p>Service provided : {{data.descriptionandorserviceprovided}}</p>
+         {% if data.phonenumber %}<p>Contact : {{data.phonenumber}}</p>{% endif %}     
+         {% if data.contact %}<p>Link : {{data.contact}}</p>{% endif %}      
+         </div>
+      <br>
+      {% endif %}
+      {% endfor %}
+      <br><br><br>
+      <h2 class='mb-3 kit'>Mental well being and Emotional Support : </h2>
+      {% for data in data %}
+      {% if data.city == 'Mumbai' and data.category == 'Mental well being and Emotional Support' %}
+      <div class='new_card' style="padding: 20px;">
+          <p>Name of the organisation : <strong>{{data.nameoftheorganisation}}</strong></p>
+          <p>Service provided : {{data.descriptionandorserviceprovided}}</p>
+          {% if data.phonenumber %}<p>Contact : {{data.phonenumber}}</p>{% endif %}     
+          {% if data.contact %}<p>Link : {{data.contact}}</p>{% endif %} 
+       </div>
+       <br>
+       {% endif %}
+       {% endfor %}
+       <br><br><br>
+       <h2 class='mb-3 kit'>Accommodation and Shelter Homes : </h2>
+       {% for data in data %}
+       {% if data.city == 'Mumbai' and data.category == 'Accommodation and Shelter Homes' %}
+       <div class='new_card' style="padding: 20px;">
+           <p>Name of the organisation : <strong>{{data.nameoftheorganisation}}</strong></p>
+           <p>Service provided : {{data.descriptionandorserviceprovided}}</p>
+           {% if data.phonenumber %}<p>Contact : {{data.phonenumber}}</p>{% endif %}     
+           {% if data.contact %}<p>Link : {{data.contact}}</p>{% endif %} 
+        </div>
+        <br>
+        {% endif %}
+        {% endfor %}
+        <br><br><br>
+       <h2 class='mb-3 kit'>Fundraisers : </h2>
+       {% for data in data %}
+       {% if data.city == 'Mumbai' and data.category == 'Fundraisers' %}
+       <div class='new_card' style="padding: 20px;">
+           <p>Name of the organisation : <strong>{{data.nameoftheorganisation}}</strong></p>
+           <p>Service provided : {{data.descriptionandorserviceprovided}}</p>
+           {% if data.phonenumber %}<p>Contact : {{data.phonenumber}}</p>{% endif %}     
+           {% if data.contact %}<p>Link : {{data.contact}}</p>{% endif %} 
+        </div>
+        <br>
+        {% endif %}
+        {% endfor %}
+        <br><br><br>
+       <h2 class='mb-3 kit'>Fundraisers : </h2>
+       {% for data in data %}
+       {% if data.city == 'Mumbai' and data.category == 'Fundraisers' %}
+       <div class='new_card' style="padding: 20px;">
+           <p>Name of the organisation : <strong>{{data.nameoftheorganisation}}</strong></p>
+           <p>Service provided : {{data.descriptionandorserviceprovided}}</p>
+           {% if data.phonenumber %}<p>Contact : {{data.phonenumber}}</p>{% endif %}     
+           {% if data.contact %}<p>Link : {{data.contact}}</p>{% endif %} 
+        </div>
+        <br>
+        {% endif %}
+        {% endfor %} -->
 </div>
 {% endblock content %}
 
