@@ -3,9 +3,9 @@
 {% block content %}
 <div class="container">
 <br>
-<h5 style="font-weight: bold;color: aqua;">Click the category:</h5><br>
+<h5 style="font-weight: bold;color: greenyellow;">Click the category:</h5><br>
     {% for x in category_list %}
-    <a class='btn btn-secondary mb-3 mr-2 ml-3  animated animatedFadeInUp fadeInUp' style="animation-delay: 0.2s;font-size: 12px;background-color: #1d1d1d;" href='/essential_category/{{x}}'>{{x}}</a>
+    <a class='btn btn-secondary mb-3 mr-2   animated animatedFadeInUp fadeInUp' style="animation-delay: 0.2s;font-size: 12px;background-color: #1d1d1d;" href='/essential_category/{{x}}'>{{x}}</a>
     {% endfor %}
     <br><br><br>
 
@@ -95,4 +95,13 @@
 {% endblock script %}
 
 {% block style %}
+<style>
+ .btn:hover{
+     color: greenyellow;
+     
+
+
+
+}
+</style>
 {% endblock style %}
