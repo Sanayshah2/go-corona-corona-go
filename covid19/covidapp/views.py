@@ -26,6 +26,7 @@ def globalview(request):
     global_timeline1 = global_timeline1[::-1]
 
     global_stats = global_stats.json()
+    last_updated = global_stats['created']
     del global_stats['totalCasesPerMillionPop']
     del global_stats['created']
     for x in global_stats:
@@ -52,20 +53,17 @@ def globalview(request):
         'global': global_stats,
         
         'globaltimeline': global_timeline1,
-        'd':d
+        'd':d,
+        'last_updated':last_updated
        
         
     }
     return render(request,'covidapp/globalview.html',data)
 
 def api(request):
-
-    # info = requests.get('https://covid19-update-api.herokuapp.com/api/v1/cases').json()
-    # totalCases = info['graphs']['totalCases']
-    # del totalCases['source']
-    # del totalCases['sourceLink']
     global_stats = requests.get('http://api.coronatracker.com/v3/stats/worldometer/global')
     global_stats = global_stats.json()
+    last_updated = global_stats['created']
     del global_stats['totalCasesPerMillionPop']
     del global_stats['created']
     for x in global_stats:
@@ -130,6 +128,7 @@ def api(request):
         'india_total':india['statewise'][0],
         'statelist':statelist,
         'india':india,
+        'last_updated':last_updated
         
         
     }
@@ -227,7 +226,6 @@ def stateview(request,sname):
                 if x == key:
                     dis[key]['zone'] = zone_name[x]['zone']
                 
-        print(dis)
         data={
             's':s,
             'sname':sname,
@@ -265,7 +263,6 @@ def statesearch(request):
         else:
                 messages.info(request, 'No search found.')
                 return redirect('api')
-                #return HttpResponse('No such country or state exists')
 
 
 def dev(request):
@@ -298,23 +295,6 @@ def countryview(request,code):
         
         
         country=info['data']
-        # country_total_data_commas = ['confirmed', 'deaths', 'recovered']
-        # country_daily_data_commas = ['confirmed', 'deaths']
-        # for x in country:
-        #     if x == 'latest_data':
-        #         for l in country_total_data_commas:
-        #             total = x[l]
-        #             total = format_currency(total, 'INR', locale='en_IN')
-        #             total = total[1:len(total)-3]
-        #             x[l] = total
-
-        # for x in country:
-        #      if x == 'today':
-        #         for l in country_total_data_commas:
-        #             total = x[l]
-        #             total = format_currency(total, 'INR', locale='en_IN')
-        #             total = total[1:len(total)-3]
-        #             x[l] = total
         timeline=info['data']['timeline']
         l=len(timeline)
         l=l-1
@@ -325,28 +305,6 @@ def countryview(request,code):
             date = entry.pop('date')
             daywise1[date] = entry
                 
-        #print(country)
-        #print(daywise1)
-
-
-
-        '''l=len(timeline)
-        l=l-2
-        timeline = dict(list(timeline.items())[l:0:-5])
-
-
-        timeline2 = dict(list(timeline.items())[::-1 ])
-
-        countries = info['Countries']
-
-        countries = list(countries)
-        
-        newcountries={}
-        for entry in countries:
-            name = entry.pop('Country')
-            newcountries[name] = entry
-
-        n=newcountries[cname]'''
         data={
             
             'info':country,
