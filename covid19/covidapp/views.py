@@ -63,7 +63,7 @@ def globalview(request):
 def api(request):
     global_stats = requests.get('http://api.coronatracker.com/v3/stats/worldometer/global')
     global_stats = global_stats.json()
-    last_updated = global_stats['created']
+    
     del global_stats['totalCasesPerMillionPop']
     del global_stats['created']
     for x in global_stats:
@@ -128,7 +128,6 @@ def api(request):
         'india_total':india['statewise'][0],
         'statelist':statelist,
         'india':india,
-        'last_updated':last_updated
         
         
     }
