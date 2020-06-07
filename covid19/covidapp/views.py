@@ -413,3 +413,9 @@ def districtview(request,sname,dname):
 
 def wiki(request):
     return render(request, 'covidapp/wiki.html')
+
+def essentials(request):
+    r = requests.get('http://ipinfo.io').json()
+    city = r['city']
+    state = r['region']
+    return render(request, 'covidapp/essentials.html', {'city':city, 'state':state})    
