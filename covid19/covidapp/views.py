@@ -415,8 +415,17 @@ def wiki(request):
     return render(request, 'covidapp/wiki.html')
 
 def essentials(request):
-    r = requests.get('https://ipinfo.io/json').json()
-    city = r['city']
-    state = r['region']
-    print(city)
-    return render(request, 'covidapp/essentials.html', {'city':city, 'state':state})    
+    import socket    
+    hostname = socket.gethostname()    
+    IPAddr = socket.gethostbyname(hostname)    
+    print("Your Computer IP Address is:" + IPAddr) 
+   
+    send_url = "http://api.ipstack.com/{}?access_key=f022b36ab445297a0d223017fb17c495&format=1".format(IPAddr)
+    geo_req = requests.get(send_url)
+    geo_json = json.loads(geo_req.text)
+    print(geo_json)
+    latitude = geo_json['latitude']
+    longitude = geo_json['longitude']
+    city = geo_json['city']
+     
+    return render(request, 'covidapp/essentials.html', {'city':city})    
