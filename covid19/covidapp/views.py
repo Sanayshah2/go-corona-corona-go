@@ -415,7 +415,8 @@ def wiki(request):
     return render(request, 'covidapp/wiki.html')
 
 def essentials(request):
-    r = requests.get('http://ipinfo.io').json()
+    r = requests.get('https://ipinfo.io/json').json()
     city = r['city']
     state = r['region']
+    print(city)
     return render(request, 'covidapp/essentials.html', {'city':city, 'state':state})    
