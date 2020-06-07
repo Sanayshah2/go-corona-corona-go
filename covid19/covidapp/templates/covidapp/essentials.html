@@ -1,14 +1,20 @@
 {% extends 'covidapp/base.html' %}
 
 {% block content %}
-<br>
-<form style="text-align: center;">
-    {% csrf_token %}
-<button class='btn btn-secondary' type='submit'>Know essential services around you.</button>
-<!-- <p class='mt-3'>State : {{state}}</p> -->
-<p class='mt-3'>city : {{city}}</p>
-
-</form>
+<div class='container'>
+    <br>
+    {% for data in data %}
+    {% if data.city == 'Mumbai' %}
+    <div class='new_card' style="padding: 20px;">
+        <h4>{{data.category}}</h4>
+        <p>Name of the organisation : <strong>{{data.nameoftheorganisation}}</strong></p>
+        <p>Service provided : {{data.descriptionandorserviceprovided}}</p>
+        <p>Contact : {{data.phonenumber}}</p>
+     </div>
+     <br>
+     {% endif %}
+     {% endfor %}
+</div>
 {% endblock content %}
 
 {% block script %}
