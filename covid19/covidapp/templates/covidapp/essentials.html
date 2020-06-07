@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container">
 <br>
-<h5 style="font-weight: bold;color: greenyellow;">Click the category:</h5><br>
+<h5 class="animated animatedFadeInUp fadeInUp" style="font-weight: bold;color: greenyellow;animation-delay: 0.2s;">Click the category:</h5><br>
     {% for x in category_list %}
     <a class='btn btn-secondary mb-3 mr-2   animated animatedFadeInUp fadeInUp' style="animation-delay: 0.2s;font-size: 12px;background-color: #1d1d1d;" href='/essential_category/{{x}}'>{{x}}</a>
     {% endfor %}
