@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect,reverse,HttpResponse
 from .models import Suggestion
 from .forms import SuggestionForm
 from django.contrib import messages
+import geoip2.database
 
 import datetime
 from datetime import date
@@ -419,13 +420,16 @@ def essentials(request):
     hostname = socket.gethostname()    
     IPAddr = socket.gethostbyname(hostname)    
     print("Your Computer IP Address is:" + IPAddr) 
-   
-    send_url = "http://api.ipstack.com/{}?access_key=f022b36ab445297a0d223017fb17c495&format=1".format(IPAddr)
-    geo_req = requests.get(send_url)
-    geo_json = json.loads(geo_req.text)
-    print(geo_json)
-    latitude = geo_json['latitude']
-    longitude = geo_json['longitude']
-    city = geo_json['city']
+    reader = geoip2.database.Reader('GeoLite2-City.mmdb')
+    response = reader.city(IPAddr)
+    city = response.city.name
+    reader.close()
+    # send_url = "http://api.ipstack.com/{}?access_key=f022b36ab445297a0d223017fb17c495&format=1".format(IPAddr)
+    # geo_req = requests.get(send_url)
+    # geo_json = json.loads(geo_req.text)
+    # print(geo_json)
+    # latitude = geo_json['latitude']
+    # longitude = geo_json['longitude']
+    # city = geo_json['city']
      
     return render(request, 'covidapp/essentials.html', {'city':city})    
