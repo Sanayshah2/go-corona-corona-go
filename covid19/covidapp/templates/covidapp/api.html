@@ -72,22 +72,7 @@ input{
     padding: 0 20px;
 }
 
-.f{
-    
-    padding: 12px;
-    
-    
-    position: absolute;
-    top: 0;
-    right: 0;
-    
-    color: #575757;
-    text-align: center;
-    font-size: 1.2em;
-    transition:all 0.5s;
-    border-radius: 50%;
-    
-}
+
 
 form{
     width: 250px;
@@ -102,6 +87,19 @@ form .f{
     background: #161616;
     color: white;
     border-radius: 50%;
+        
+    padding: 12px;
+    
+    
+    position: absolute;
+    top: 0;
+    right: 0;
+    
+    
+    text-align: center;
+    font-size: 1.2em;
+    transition:all 0.5s;
+    
 }
 
 form .f:hover{
@@ -141,7 +139,7 @@ form .f:hover{
   {% csrf_token %}
   
   <input  class=""  list="browsers" onfocus="this.value=''"  placeholder="Search state,country " type="search"   name="searchstate">
-  <button type="submit" style="border-radius: 50%;" ><i class="f fa fa-search " style="border-radius: 50%;" type="submit"></i></button>
+  <button type="submit" style="border-radius: 50%;" ><i class="f fa fa-search " type="submit"></i></button>
   
   <datalist id="browsers"  style="background-color: #121212;">
     {% for s in statelist %}
