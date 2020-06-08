@@ -39,75 +39,16 @@ display: block;
     width: 100%;
     background: #121212;
 }
-
-form{
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    transition: all 1s;
-    width: 50px;
-    height: 50px;
-    background: #1d1d1d;
-    box-sizing: border-box;
-    border-radius: 25px;
-    border: 4px solid rgb(139, 139, 139);
-    padding: 5px;
+.form-control:focus {
+  box-shadow: none;
 }
 
-input{
-    position: absolute;
-    color: whitesmoke;
-    background-color: #121212;
-    top: 0;
-    left: 0;
-    width: 100%;;
-    height: 42.5px;
-    line-height: 30px;
-    outline: 0;
-    border: 0;
-    display: none;
-    font-size: 1em;
-    border-radius: 20px;
-    padding: 0 20px;
+.form-control-underlined {
+  border-width: 0;
+  border-bottom-width: 1px;
+  border-radius: 0;
+  padding-left: 0;
 }
-
-
-
-form{
-    width: 250px;
-    cursor: pointer;
-}
-
-form input{
-    display: block;
-}
-
-form .f{
-    background: #161616;
-    color: white;
-    border-radius: 50%;
-        
-    padding: 12px;
-    
-    
-    position: absolute;
-    top: 0;
-    right: 0;
-    
-    
-    text-align: center;
-    font-size: 1.2em;
-    transition:all 0.5s;
-    
-}
-
-form .f:hover{
-    background: white;
-    color: black;
-    border-radius: 50%;
-  }
-
 
 </style>
 {% endblock style %}
@@ -131,16 +72,20 @@ form .f:hover{
      <span aria-hidden="true" style="font-size:20px;color: lightgray;">×</span>
    </button><center>Added Essential services' contacts in Mumbai. <a style="color: lightgray;text-decoration: underline;" href='{% url 'essentials' category69='Free Food' %}'>Click  here</a> to checkout.</center>
  </div>
-<br><br>
+<br>
 
 <div class="container">       
 
-<form method='post' action='/search/' class="">
+<center><form method="post" action="/search/" style="margin-top: ;">
   {% csrf_token %}
-  
-  <input  class=""  list="browsers" onfocus="this.value=''"  placeholder="Search state,country " type="search"   name="searchstate">
-  <button type="submit" style="border-radius: 50%;" ><i class="f fa fa-search " type="submit"></i></button>
-  
+  <div class="p-1  shadow-sm md-4" style="border-radius: 24px;width:300px;background-color: #1d1d1d;border: 3px solid lightgray;">
+    <div class="input-group">
+      <input type="search" list="browsers" placeholder="Search state,country" onfocus="this.value=''" type="search" name="searchstate" aria-describedby="button-addon1" class="form-control border-0 " style="background-color: #1d1d1d;border-radius: 10px;">
+      <div class="input-group-append">
+        <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i class="fa fa-search" style="color: white;"></i></button>
+      </div>
+    </div>
+  </div>
   <datalist id="browsers"  style="background-color: #121212;">
     {% for s in statelist %}
     <option value='{{s}}' style="background-color: #121212;">
@@ -149,8 +94,7 @@ form .f:hover{
     <option value='{{x.code}}'>{{x.name}}</option>
     {% endfor %}
   </datalist>
-</form>
-
+  </form></center><br>
 {% if messages %}
 {% for x in messages %}
 <center><span class='alert alert-custom text-muted' style="background-color: #121212;">{{x}}</span></center>
