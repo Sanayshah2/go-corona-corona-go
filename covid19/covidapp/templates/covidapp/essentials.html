@@ -1,13 +1,15 @@
 {% extends 'covidapp/base.html' %}
 
 {% block content %}
+<div class="container">
 <br>
+<h5 class="animated animatedFadeInUp fadeInUp" style="font-weight: bold;color: rgb(189, 255, 189);animation-delay: 0.2s;">Choose category:</h5><br>
     {% for x in category_list %}
-    <a class='btn btn-secondary mb-3 mr-2 ml-3  animated animatedFadeInUp fadeInUp' style="animation-delay: 0.2s;font-size: 14px;background-color: #1d1d1d;" href='/essential_category/{{x}}'>{{x}}</a>
+    <a class='btn btn-secondary mb-3 mr-2   animated animatedFadeInUp fadeInUp' style="animation-delay: 0.2s;font-size: 12px;background-color: #1d1d1d;" href='/essential_category/{{x}}'>{{x}}</a>
     {% endfor %}
     <br><br><br>
 
-<div class='container animated animatedFadeInUp fadeInUp' style="animation-delay: 0.4s;word-wrap: break-word;">
+<div class=' animated animatedFadeInUp fadeInUp' style="animation-delay: 0.4s;word-wrap: break-word;">
    
     <h2 class='mb-3 kit' style="color: rgb(188, 229, 255)">{{category69}} : </h2>
     {% for data in data %}
@@ -86,11 +88,20 @@
         <br>
         {% endif %}
         {% endfor %} -->
-</div>
+</div></div>
 {% endblock content %}
 
 {% block script %}
 {% endblock script %}
 
 {% block style %}
+<style>
+ .btn:hover{
+     color: greenyellow;
+     
+
+
+
+}
+</style>
 {% endblock style %}
