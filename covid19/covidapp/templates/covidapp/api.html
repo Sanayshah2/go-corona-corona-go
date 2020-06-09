@@ -67,18 +67,14 @@ display: block;
 </marquee>
 </strong>
 </div>
-<div class="alert alert-custom  fade in alert-dismissable show" style="background-color:rgb(31, 31, 31);margin:12px;padding: 12px;">
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-     <span aria-hidden="true" style="font-size:20px;color: lightgray;">×</span>
-   </button><center>Added Essential services' contacts in Mumbai. <a style="color: lightgray;text-decoration: underline;" href='{% url 'essentials' category69='Free Food' %}'>Click  here</a> to checkout.</center>
- </div>
+
 <br>
 
 <div class="container">       
 
 <center><form method="post" action="/search/" style="margin-top: ;">
   {% csrf_token %}
-  <div class="p-1  shadow-sm md-4" style="border-radius: 24px;width:260px;background-color: #1d1d1d;border: 3px solid lightgray;">
+  <div class="p-1  shadow-sm md-4" style="border-radius: 24px;width:275px;background-color: #1d1d1d;border: 3px solid lightgray;">
     <div class="input-group">
       <input type="search" list="browsers" placeholder="Search state,country" onfocus="this.value=''" type="search" name="searchstate" aria-describedby="button-addon1" class="form-control border-0 " style="background-color: #1d1d1d;border-radius: 10px;color: whitesmoke;">
       <div class="input-group-append">
