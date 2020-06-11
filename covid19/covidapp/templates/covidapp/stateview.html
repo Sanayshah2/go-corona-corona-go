@@ -39,7 +39,14 @@
 
 </div>
 </div><br>
-
+<div class="contaier">
+<div class="row" >
+  <div class="container col-12 col-md-offset-3 col-md-4 animated animatedFadeInUp fadeInUp" style="animation-delay:1.4s;"><canvas class=' new_card' height="275px" id="line-chart-recovered" style="margin-bottom: 40px;padding: 15px;border:0px; background-color: rgb(0, 128, 0, 0.2);"></canvas></div>
+  <div class="container col-12 col-md-offset-3 col-md-4 animated animatedFadeInUp fadeInUp" style="animation-delay:1.6s;"><canvas class='new_card' height="275px" id="line-chart-confirmed" style="margin-bottom: 40px;padding: 15px; background-color: rgba(93, 93, 255, 0.15);border:0px" ></canvas></div>
+  <div class="container col-12 col-md-offset-3 col-md-4 animated animatedFadeInUp fadeInUp" style="animation-delay:1.8s;"><canvas class="new_card" height="275px"  id="line-chart-deaths" style="margin-bottom: 40px;padding: 15px;background-color:rgb(255, 0, 0, 0.15);border:0px" ></canvas></div><br><br>
+  </div> 
+</div> 
+  <div style='color:rgb(0, 128, 0)'></div>
 <div>
     <div class="container" style="margin-top: 50px;">
       <h5 class="kit animated animatedFadeInUp fadeInUp"   style="font-weight: bold;animation-delay: 1.2s;">District</h5><br>
@@ -70,7 +77,7 @@
       </table>
       </div>      
     </div>
-</div>
+</div>   
 {% endblock content %}
 
 {% block style %}
@@ -86,3 +93,177 @@
   }
 </style> 
 {% endblock style %}
+
+{% block script %}
+<script> 
+
+  var ctx = document.getElementById('line-chart-deaths').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [
+                {% for x in state_timeline %}
+                  {% if x.status == 'Deceased' %}
+                  "{{x.date}}",
+                  {% endif %}
+                  {% endfor %}      
+                         ],
+               
+                datasets: [{
+                    
+                    label: 'Per day deaths' ,   
+                    data: [ {% for x in deceased %}
+                  "{{x}}",
+                {% endfor %}],                  
+                    backgroundColor: 'rgb(255, 0, 0, 0.15)',
+                        
+                  
+                    borderColor: 
+                        'red',
+                 
+                    borderWidth: 1
+                }]
+            },
+            options: {
+              title: {
+                        display: true,
+                        text: 'Rise in Deaths in India'
+                      },
+                scales: {
+                    xAxes: [{
+                      gridLines:{
+                        display:false,
+                        // ticks: {
+                          
+                            tickMarkLength: 19
+                        //}
+                      }
+                    }],
+                    yAxes: [{
+                      gridLines:{
+                        display:false,
+                        // ticks: {
+                          
+                            tickMarkLength: 19
+                        //}
+                      }
+                    }]
+                }
+            }
+        });
+
+        
+
+        var ctx = document.getElementById('line-chart-confirmed').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [
+                {% for x in state_timeline %}
+                  {% if x.status == 'Confirmed' %}
+                  "{{x.date}}",
+                  {% endif %}
+                  {% endfor %}       
+                         ],
+               
+                datasets: [{
+                    
+                    label: 'Per day confirmed cases' ,
+
+                    data: [{% for x in confirmed %}
+                  '{{x}}',
+                {% endfor %}],                  
+                    backgroundColor: 'rgba(93, 93, 255, 0.15)',
+                        
+                  
+                    borderColor: 'rgba(93, 93, 255, 0.9)',
+                 
+                    borderWidth: 1
+                }]
+            },
+            options: {
+              title: {
+                        display: true,
+                        text: 'Rise in Confirmed Cases in India'
+                      },
+                scales: {
+                    xAxes: [{ 
+                      gridLines:{
+                        display:false,
+                        // ticks: {
+                         
+                            tickMarkLength: 19
+                        //}
+                      }
+                    }],
+                    yAxes: [{
+                      gridLines:{
+                        display:false,
+                        tickMarkLength: 19
+                      }
+                    }]
+                }
+            }
+        });
+
+
+  var ctx = document.getElementById('line-chart-recovered').getContext('2d');
+  var myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+          labels: [
+          {% for x in state_timeline %}
+            {% if x.status == 'Recovered' %}
+            "{{x.date}}",
+            {% endif %}
+            {% endfor %}      
+                    ],
+          
+          datasets: [{
+              
+              label: 'Per day recovered' ,   
+              data: [ {% for x in recovered %}
+            "{{x}}",
+          {% endfor %}],                  
+              backgroundColor: 'rgb(0, 128, 0, 0.2)',
+                  
+            
+              borderColor: 
+                  'green',
+            
+              borderWidth: 1
+          }]
+      },
+      options: {
+        title: {
+                  display: true,
+                  text: 'Rise in Recoveries in India'
+                },
+          scales: {
+              xAxes: [{
+                gridLines:{
+                  display:false,
+                  // ticks: {
+                    
+                      tickMarkLength: 19
+                  //}
+                }
+              }],
+              yAxes: [{
+                gridLines:{
+                  display:false,
+                  // ticks: {
+                    
+                      tickMarkLength: 19
+                  //}
+                }
+              }]
+          }
+      }
+  });
+
+        
+
+
+</script>
+{% endblock script %}

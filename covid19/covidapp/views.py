@@ -115,11 +115,9 @@ def api(request):
     for entry in state:
         name = entry.pop('state')
         newstate[name] = entry
-    statelist=list(newstate)
-    statelist.remove('Total')
-
-   
-         
+    # statelist=list(newstate)
+    del newstate['Total']
+    print(newstate)
     data={
         'all_country':country_data ,
         '1':country_data[0],
@@ -127,7 +125,7 @@ def api(request):
         '3':country_data[2],
         'global': global_stats,
         'india_total':india['statewise'][0],
-        'statelist':statelist,
+        'statelist':newstate,
         'india':india,
         
         
@@ -185,12 +183,14 @@ def statewise(request):
 
     return render(request, 'covidapp/india.html',data)
 
-def stateview(request,sname):
+def stateview(request,sname, scode):
+    scode = scode.lower()
     if sname == 'Total':
         return redirect('statewise')
     else:    
         d=datetime.datetime.now(pytz.timezone('Asia/Kolkata'))
-
+        state_timeline = requests.get('https://api.covid19india.org/states_daily.json').json()
+        state_timeline = state_timeline['states_daily']
         zones = requests.get('https://api.covid19india.org/zones.json')
         zones = zones.json()
         zones = zones['zones']
@@ -225,13 +225,28 @@ def stateview(request,sname):
             for x in zone_name:
                 if x == key:
                     dis[key]['zone'] = zone_name[x]['zone']
-                
+        deceased = []
+        confirmed = []
+        recovered = []
+        for x in state_timeline:
+            if x['status'] == 'Deceased':
+                deceased.append(x[scode])  
+            if x['status'] == 'Confirmed':
+                confirmed.append(x[scode]) 
+            if x['status'] == 'Recovered':
+                recovered.append(x[scode])               
+
         data={
             's':s,
             'sname':sname,
+            'scode':scode,
             'd':d,
             'dis':dis,
-            'zone_name':zone_name
+            'zone_name':zone_name,
+            'state_timeline':state_timeline,
+            'deceased':deceased,
+            'confirmed':confirmed,
+            'recovered':recovered
             
          
         }
@@ -242,24 +257,24 @@ def stateview(request,sname):
     
 def statesearch(request):
     
-    statelist=['Maharashtra', 'Tamil Nadu', 'Delhi', 'Gujarat', 'Rajasthan', 'Madhya Pradesh', 'Uttar Pradesh', 'West Bengal', 'State Unassigned', 'Andhra Pradesh', 'Bihar', 'Karnataka', 'Punjab', 'Telangana', 'Jammu and Kashmir', 'Odisha', 'Haryana', 'Kerala', 'Assam', 'Uttarakhand', 'Jharkhand', 'Chhattisgarh', 'Chandigarh', 'Himachal Pradesh', 'Tripura', 'Goa', 'Ladakh', 'Puducherry', 'Manipur', 'Andaman and Nicobar Islands', 'Meghalaya', 'Nagaland', 'Dadra and Nagar Haveli and Daman and Diu', 'Arunachal Pradesh', 'Mizoram', 'Sikkim', 'Lakshadweep']
+    statelist={'MH' : 'Maharashtra', 'TN' : 'Tamil Nadu', 'DL' : 'Delhi', 'GJ' : 'Gujarat', 'UP' : 'Uttar Pradesh', 'RJ' : 'Rajasthan', 'MP' : 'Madhya Pradesh', 'WB' : 'West Bengal', 'UN' : 'State Unassigned', 'KA' : 'Karnataka', 'HR' : 'Haryana', 'BR' : 'Bihar', 'AP' : 'Andhra Pradesh', 'JK' : 'Jammu and Kashmir', 'TG' : 'Telangana', 'OR' : 'Odisha', 'AS' : 'Assam', 'PB' : 'Punjab', 'KL' : 'Kerala', 'UT' : 'Uttarakhand', 'JH' : 'Jharkhand', 'CT' : 'Chhattisgarh', 'TR' : 'Tripura', 'HP' : 'Himachal Pradesh', 'GA' : 'Goa', 'MN' : 'Manipur', 'CH' : 'Chandigarh', 'PY' : 'Puducherry', 'LA' : 'Ladakh', 'NL' : 'Nagaland', 'MZ' : 'Mizoram', 'AR' : 'Arunachal Pradesh', 'ML' : 'Meghalaya', 'AN' : 'Andaman and Nicobar Islands', 'DN' : 'Dadra and Nagar Haveli and Daman and Diu', 'SK' : 'Sikkim', 'LD' : 'Lakshadweep' }
     
-    statelist=set(statelist)
+    state_list=list(statelist)
 
 
     countrylist=['AF', 'AL', 'AX', 'AS', 'DZ', 'AD', 'AO', 'AI', 'AG', 'AQ', 'AU', 'AT', 'BH', 'BD', 'BJ', 'BZ', 'AR', 'AM', 'BA', 'AW', 'AZ', 'BS', 'BN', 'BQ', 'BY', 'BB', 'IO', 'BM', 'BE', 'CM', 'BT', 'BO', 'KH', 'CF', 'BW', 'TD', 'BG', 'BV', 'BR', 'CC', 'CO', 'CA', 'BF', 'BI', 'CR', 'CV', 'KY', 'CK', 'CN', 'CW', 'CY', 'CX', 'CL', 'DO', 'KM', 'CG', 'CD', 'DM', 'GQ', 'CI', 'HR', 'CU', 'ER', 'CZ', 'DK', 'DJ', 'FJ', 'FO', 'SV', 'EG', 'TF', 'PF', 'EC', 'GH', 'EE', 'ET', 'DE', 'FK', 'FI', 'GD', 'FR', 'GP', 'GA', 'GF', 'GN', 'GM', 'GW', 'HN', 'GI', 'GE', 'GR', 'GL', 'VA', 'GT', 'ID', 'GG', 'IN', 'GU', 'IM', 'IL', 'GY', 'HK', 'HT', 'HM', 'JE', 'HU', 'IS', 'IR', 'IQ', 'IE', 'IT', 'JM', 'JP', 'KP', 'LV', 'LI', 'MG', 'MT', 'YT', 'MN', 'MM', 'NC', 'NU', 'JO', 'KR', 'LB', 'LT', 'MW', 'MH', 'KE', 'MX', 'KG', 'ME', 'KI', 'LR', 'LA', 'MO', 'LY', 'MV', 'MK', 'MR', 'ML', 'MU', 'NA', 'PK', 'MD', 'NZ', 'MA', 'NF', 'NP', 'PY', 'NE', 'MC', 'MZ', 'NL', 'NO', 'NG', 'PT', 'OM', 'RU', 'LC', 'SM', 'PW', 'SC', 'PE', 'SI', 'PR', 'SS', 'RW', 'SJ', 'MF', 'TW', 'ST', 'TG', 'SL', 'TR', 'SB', 'UA', 'ES', 'UY', 'SZ', 'VG', 'TJ', 'TK', 'TM', 'AE', 'UZ', 'VI', 'ZW', 'KZ', 'KW', 'LS', 'LU', 'MY', 'MQ', 'FM', 'MS', 'NR', 'NI', 'MP', 'PA', 'PN', 'RE', 'SH', 'VC', 'SN', 'SX', 'ZA', 'SD', 'CH', 'TH', 'TT', 'TV', 'US', 'VE', 'PG', 'PL', 'RO', 'KN', 'WS', 'RS', 'SK', 'GS', 'SR', 'SY', 'TL', 'TN', 'UG', 'UM', 'VN', 'PS', 'PH', 'QA', 'BL', 'PM', 'SA', 'SG', 'SO', 'LK', 'SE', 'TZ', 'TO', 'TC', 'GB', 'VU', 'WF', 'ZM', 'EH', 'YE']
     
     countrylist=set(countrylist)
     if request.method == 'POST':
-        sname = request.POST.get("searchstate")
+        code = request.POST.get("searchstate")
             
-        if sname in statelist:
-                return redirect('stateview',sname=sname)
-        elif sname in countrylist:
-                if sname == 'IN':
+        if code in state_list:
+                return redirect('stateview',sname=statelist[code], scode = code)
+        elif code in countrylist:
+                if code == 'IN':
                     return redirect('statewise')
                 else:
-                    return redirect('countryview',code=sname)
+                    return redirect('countryview',code=code)
         else:
                 messages.info(request, 'No search found.')
                 return redirect('api')

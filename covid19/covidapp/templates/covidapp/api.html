@@ -83,8 +83,8 @@ display: block;
     </div>
   </div>
   <datalist id="browsers"  style="background-color: #121212;">
-    {% for s in statelist %}
-    <option value='{{s}}' style="background-color: #121212;">
+    {% for key,value in statelist.items %}
+    <option value='{{value.statecode}}' style="background-color: #121212;">{{key}}</option>
     {% endfor %}
     {% for x in all_country %}
     <option value='{{x.code}}'>{{x.name}}</option>
@@ -423,4 +423,5 @@ maxZoom: 19
 </script>
 
 {% endblock script %}
-    {% endblock content %}
+
+{% endblock content %}

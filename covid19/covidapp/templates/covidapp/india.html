@@ -69,7 +69,7 @@
             {% for i in india %}
             
             <tr>
-              <td><a href="/india/{{i.state}}/"><p style="text-align: left;">{{i.state}}</p></a></td>
+              <td><a href="/india/{{i.state}}/{{i.statecode}}"><p style="text-align: left;">{{i.state}}</p></a></td>
               <td><p ><span style='color: rgba(93, 93, 255, 0.801);'>+ {{i.deltaconfirmed}}</span> {{i.confirmed}}</p></td>
               <td><p ><span style="color: red;">+ {{i.deltadeaths}}</span> {{i.deaths}}</p></td>
               <td><p><span style="color: green;">+ {{i.deltarecovered}}</span> {{i.recovered}}</p></td>
@@ -83,6 +83,7 @@
         
 
 </div><br>
+
 {% endblock content %}
 
 
