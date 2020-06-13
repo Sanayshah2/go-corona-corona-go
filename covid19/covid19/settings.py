@@ -25,7 +25,7 @@ SECRET_KEY = '7t=465@ur+x(99i8d)ju@qq9!(%%y5dgb*jx6lyf=it+38=!k*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://tracor.herokuapp.com/']
+ALLOWED_HOSTS = []
 
 
 # Application definition
