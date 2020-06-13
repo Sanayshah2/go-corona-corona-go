@@ -25,7 +25,7 @@ SECRET_KEY = '7t=465@ur+x(99i8d)ju@qq9!(%%y5dgb*jx6lyf=it+38=!k*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://tracor.herokuapp.com/']
 
 
 # Application definition
@@ -127,3 +127,4 @@ CRISPY_FORMS_TEMPLATE_PACK = 'bootstrap4'
 # Activate Django-Heroku.
 django_heroku.settings(locals())
 
+TIME_ZONE = 'Asia/Kolkata'

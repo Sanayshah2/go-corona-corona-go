@@ -117,7 +117,6 @@ def api(request):
         newstate[name] = entry
     # statelist=list(newstate)
     del newstate['Total']
-    print(newstate)
     data={
         'all_country':country_data ,
         '1':country_data[0],
