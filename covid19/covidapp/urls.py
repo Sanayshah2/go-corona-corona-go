@@ -18,6 +18,7 @@ urlpatterns = [
     path('wiki/', views.wiki, name='wiki'),
     path('india/<sname>/<dname>/', views.districtview, name='districtview'),
     path('essentials/<category69>', views.essentials, name='essentials'),
-    path('essential_category/<category>', views.essential_category, name='essential_category')
+    path('essential_category/<category>', views.essential_category, name='essential_category'),
+    path('sitemap.xml/', views.sitemap)
     
 ]
