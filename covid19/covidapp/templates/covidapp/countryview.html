@@ -1,5 +1,11 @@
 {% extends 'covidapp/base.html' %}
 
+
+{% block title %}
+TraCOR - Covid19 in {{info.name}} 
+{% endblock title %}
+
+
 {% block content %}
 <div class="container">
 <p class="animated animatedFadeInUp fadeInUp " style="font-weight: bold;font-size: 15px;padding: 15px;animation-delay: 0.3s;text-align: center;"><i class="fa fa-calendar" style="padding: 10px;"></i>{{d}}</p>

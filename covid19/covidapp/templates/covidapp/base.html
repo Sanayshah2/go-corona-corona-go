@@ -211,7 +211,10 @@ src: local('Archia Regular'), url('{% static "/covidapp/archia-medium-webfont.wo
   </style>
   {% block style %}
   {% endblock style %}
-  <title>TraCOR</title>
+  <title>
+    {% block title %}
+    {% endblock title %}
+  </title>
     </head>
 
 
@@ -276,7 +279,6 @@ src: local('Archia Regular'), url('{% static "/covidapp/archia-medium-webfont.wo
         darkmode.showWidget();
 
       </script> -->
-    </body>    
       {% block content %}
       {% endblock content %}
       <footer class="page-footer font-small cyan darken-3" style="text-align: center;margin-top: 30px;">
@@ -285,8 +287,8 @@ src: local('Archia Regular'), url('{% static "/covidapp/archia-medium-webfont.wo
         <div class="container" style="background-color: rgb(37, 37, 37);padding-top: 15px;">
       
       <div class="row " >
-        <div class="col-md-6 col-12">
-          <h7 style="color: rgb(41, 198, 209);font-weight: bold;padding: 10px;">Sanay Shah</h7>
+        <div class="col-md-6 col-6">
+          <h7 style="color: rgb(41, 198, 209);font-weight: bold;padding: 10px;">Sanay Shah</h7><br>
           <!-- Github -->
           <a class="tw-ic" href='https://github.com/Sanayshah2'  title="Github">
             <i class="fab fa-github" style="padding: 10px; color: lightgray;"> </i>
@@ -304,8 +306,8 @@ src: local('Archia Regular'), url('{% static "/covidapp/archia-medium-webfont.wo
             <i class="fab fa-instagram " style="padding: 10px;"> </i>
           </a>
       </div><br>
-        <div class="col-md-6 col-12" style="margin-bottom: ;">
-          <h7 style="color: rgb(41, 198, 209);font-weight: bold;padding: 10px;">Shivesh Jha</h7>        
+        <div class="col-md-6 col-6" style="margin-bottom: ;">
+          <h7 style="color: rgb(41, 198, 209);font-weight: bold;padding: 10px;">Shivesh Jha</h7><br>        
           <!-- Github -->
           <a class="tw-ic" href='https://github.com/ShiveshJha12' title="Github">
             <i class="fab fa-github " style="padding: 10px;color: lightgray;"> </i>
