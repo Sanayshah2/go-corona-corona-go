@@ -438,5 +438,3 @@ def essentials(request, category69):
 def essential_category(request, category):
     return redirect('essentials', category)
 
-def sitemap(request):
-    return render(request, 'covidapp/sitemap.xml')    
