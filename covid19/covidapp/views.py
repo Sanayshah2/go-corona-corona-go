@@ -430,11 +430,12 @@ def districtview(request,sname,dname):
 def wiki(request):
     return render(request, 'covidapp/wiki.html')
 
-def essentials(request, category69):
+def essentials(request):
     category_list = ['Fundraisers', 'Free Food', 'Mental well being and Emotional Support', 'Accommodation and Shelter Homes', 'Delivery [Vegetables, Fruits, Groceries, Medicines, etc.]','CoVID-19 Testing Lab'] 
     data = requests.get('https://api.covid19india.org/resources/resources.json').json()
     data = data['resources']
-    return render(request, 'covidapp/essentials.html', {'data':data, 'category69':category69, 'category_list':category_list})    
-
-def essential_category(request, category):
-    return redirect('essentials', category)
+    categorymake=request.GET.get('category')
+    
+    
+    print(categorymake)
+    return render(request, 'covidapp/essentials.html', {'data':data, 'category':categorymake, 'category_list':category_list})    
