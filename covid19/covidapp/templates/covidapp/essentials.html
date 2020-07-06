@@ -10,14 +10,14 @@ TraCOR - Essentials
 <div class="container">
 <br>
 <div id="extra" name="extra">
-    <label class="control-label" for="branches"><h4>Choose Category<sup>*</sup></h4></label>
+    <label class="control-label" for="branches"><h6 style="color: rgb(189, 255, 189);">Choose Category<sup>*</sup></h6></label>
     <select onchange='category()' class="form-control" type="text" id="branches" name="branches" style="background-color: rgb(58, 58, 58);color: white;" >
         {% for x in category_list %}
         <option  name='branch' value="{{x}}">{{x}}</option>
         {% endfor %}
 
     </select>    
-  </div><br>
+  </div><br><br>
   
   <div style="display: none;" id="Free Food">
     <h4>Free Food</h4>
