@@ -117,7 +117,6 @@ def api(request):
         newstate[name] = entry
     # statelist=list(newstate)
     del newstate['Total']
-    print(newstate)
     data={
         'all_country':country_data ,
         '1':country_data[0],
@@ -434,8 +433,16 @@ def essentials(request):
     category_list = ['Fundraisers', 'Free Food', 'Mental well being and Emotional Support', 'Accommodation and Shelter Homes', 'Delivery [Vegetables, Fruits, Groceries, Medicines, etc.]','CoVID-19 Testing Lab'] 
     data = requests.get('https://api.covid19india.org/resources/resources.json').json()
     data = data['resources']
+<<<<<<< HEAD
     categorymake=request.GET.get('category')
     
     
     print(categorymake)
     return render(request, 'covidapp/essentials.html', {'data':data, 'category':categorymake, 'category_list':category_list})    
+=======
+    return render(request, 'covidapp/essentials.html', {'data':data, 'category69':category69, 'category_list':category_list})    
+
+def essential_category(request, category):
+    return redirect('essentials', category)
+
+>>>>>>> 26d3ab8158fcd91a49e7602e5f2116e5942b2bd0

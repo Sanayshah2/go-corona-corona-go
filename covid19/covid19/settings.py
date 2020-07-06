@@ -127,3 +127,4 @@ CRISPY_FORMS_TEMPLATE_PACK = 'bootstrap4'
 # Activate Django-Heroku.
 django_heroku.settings(locals())
 
+TIME_ZONE = 'Asia/Kolkata'
