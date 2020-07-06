@@ -17,13 +17,7 @@ urlpatterns = [
     path('map/', views.map, name='map'),
     path('wiki/', views.wiki, name='wiki'),
     path('india/<sname>/<dname>/', views.districtview, name='districtview'),
-<<<<<<< HEAD
     path('essentials/', views.essentials, name='essentials'),
     
-=======
-    path('essentials/<category69>', views.essentials, name='essentials'),
-    path('essential_category/<category>', views.essential_category, name='essential_category'),
-   
->>>>>>> 26d3ab8158fcd91a49e7602e5f2116e5942b2bd0
     
 ]
